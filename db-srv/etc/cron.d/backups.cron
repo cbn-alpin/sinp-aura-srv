@@ -1,0 +1,17 @@
+# /etc/cron.d/backups: all backups
+# Copy this file into /etc/cron.d/ without .cron extension : cp backups.cron /etc/cron.d/backups
+# WARNING: not use "." or "-" in script filename. With this characters, the script will not be
+# executed by Cron !?
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+# MAILFROM doesn't work now, use alternative below
+#MAILTO=adminsys@biodiversite-aura.fr
+#MAILFROM=mailer@biodiversite-aura.fr
+
+# GeoNature DB - Each day at 00:10AM
+10 0 * * * admin /home/admin/bin/backup_gnatlas.sh
+# GeoNature-Atlas DB - Each day at 00:30AM
+20 0 * * * admin /home/admin/bin/backup_geonature2db.sh
+# System - Each day at 01:00AM
+00 1 * * * admin /home/admin/bin/backup_system.sh 2>&1 | mail -s "[Cron] Backups - System DB" -r "mailer@biodiversite-aura.fr" adminsys@biodiversite-aura.fr

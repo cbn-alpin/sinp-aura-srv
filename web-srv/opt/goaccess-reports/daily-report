@@ -1,0 +1,35 @@
+#!/bin/bash
+# Daily report
+# Parameter : date (format: '%Y-%m-%d) for the report (default : yesterday)
+# Run with cron.d (each day at 3:00am) with : 0 3 * * * admin /otp/goaccess-reports/daily-report
+DATE="yesterday"
+if [ -n "$1" ]; then # If first parameter passed
+    DATE="$1"
+fi
+YEAR=`date -d "$DATE 13:00" '+%Y'`
+MONTH=`date -d "$DATE 13:00" '+%m'`
+DAY=`date -d "$DATE 13:00" '+%d'`
+
+# Create directories structure
+docker exec web-log-analyser-goaccess mkdir -p /goaccess/reports/${YEAR}/${MONTH}/$DAY/
+
+# Test gzip file or not
+isGz="false"
+file="/goaccess/logs/access.log.${YEAR}-${MONTH}-${DAY}"
+result=`docker exec web-log-analyser-goaccess sh -c "test -f '${file}.gz' && echo 'pass' || echo 'fail'"`
+if [ "${result//[$'\r\n']}" = 'pass' ]; then
+    file="${file}.gz"
+    isGz="true"
+fi
+echo "$file"
+
+# Print URL
+echo "See report: https://web-log-analyser.biodiversite-aura.net/${YEAR}/${MONTH}/${DAY}/index.html"
+
+# Generate report
+echo "Log parsing:"
+if [ "$isGz" = 'true' ]; then
+    docker exec web-log-analyser-goaccess sh -c "zcat $file | goaccess --config-file=/goaccess/goaccess.cli.conf --output=/goaccess/reports/${YEAR}/${MONTH}/${DAY}/index.html -"
+else
+    docker exec web-log-analyser-goaccess sh -c "goaccess --log-file=$file --config-file=/goaccess/goaccess.cli.conf --output=/goaccess/reports/${YEAR}/${MONTH}/${DAY}/index.html"
+fi

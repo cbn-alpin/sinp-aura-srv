@@ -1,0 +1,7 @@
+*.conf
+!**/nginx/*.conf
+!*.sample.conf
+!*.default.conf
+!web-srv/etc/**/*.conf
+.env*
+!.env.sample
