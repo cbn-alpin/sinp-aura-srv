@@ -1,0 +1,81 @@
+/* GÉNÉRAL */
+:root {
+	--green: #97BF0D;
+	--blue: #30a5ff;
+	--cyan: #1ebfae;
+	--orange: #ffb53e;
+	--cyan: #30a5ff;
+	--red: red;
+	--main-color: #97BF0D;
+	--second-color: #A10D59;
+}
+a {
+	color: #97BF0D;
+}
+a:hover {
+	color: #A10D59;
+}
+a.btn.btn-default:hover{
+	background-color: #F7F9EC !important;
+}
+
+/* NAVBAR */
+.navbar {
+	background: #323233 !important;
+	border-bottom-color: #97BF0D;
+}
+.navbar-brand {
+	color: white !important;
+    /*font-family: 'Baloo Bhaina', cursive;*/
+}
+.navbar .navbar-brand .logoStructure {
+	height: 50px;
+	margin: -10px;
+}
+/* SIDEBAR */
+.sidebar {
+	background: #323233 !important;
+}
+#sidebar_menu li:hover {
+	background-color: #97BF0D;
+}
+
+/* INTRODUCTION */
+.textIntroduction h1 {
+    /*font-family: 'Arima Madurai', cursive;*/
+    color: #97BF0D;
+	line-height: 40px;
+}
+
+/* PRESENTATION */
+.presentation .panel.panel-default {
+	padding: 0 15px 15px 15px;
+}
+.presentation h2, .presentation h3 {
+    /*font-family: 'Arima Madurai', cursive;*/
+    color: #97BF0D;
+}
+
+/* FOOTER */
+.footer .logos .img-thumbnail {
+	margin: .25rem;
+}
+.footer .logos .img-thumbnail:hover {
+	border-color: #97BF0D;
+}
+.footer .text-muted {
+	text-transform: none !important;
+}
+
+/* FICHE ESPECE */
+
+/* Infobulles graphiques */
+.morris-hover-point {
+	color: #97BF0D !important;
+}
+.glossarizer_replaced {
+	color: #97BF0D;
+}
+.affix {
+    top: 60px; /* Set the top position of pinned element */
+}

@@ -1,0 +1,287 @@
+###############################################################################
+# NOTES : après toute modification dans ce fichier, il est nécessaire de
+#         mettre à jour GeoNature à l'aide de la commande :
+#         'geonature update_configuration'
+###############################################################################
+
+DEBUG = false
+
+#############################################
+# GeoNature backend global configuration file
+#############################################
+
+# Database
+SQLALCHEMY_DATABASE_URI = "postgresql://<user>:<password>@10.0.1.20:5432/geonature2db"
+URL_APPLICATION = "https://donnees.biodiversite-auvergne-rhone-alpes.fr"
+API_ENDPOINT = "https://donnees.biodiversite-auvergne-rhone-alpes.fr/api"
+API_TAXHUB = "https://taxons.biodiversite-aura.fr/api"
+
+# Remplacer par une clé alétoire complexe
+SECRET_KEY = "<secret-key>"
+
+# Code EPSG des geométries dans la BDD
+LOCAL_SRID = "2154"
+
+# Langue principale par défaut
+DEFAULT_LANGUAGE = "fr"
+
+# Enable logging email error (must fill the mail config section bellow if true)
+MAIL_ON_ERROR = true
+
+# Nom de l'application dans la page d'accueil.
+appName = "Données - Biodiversite-Auvergne-Rhône-Alpes"
+
+#######################################################################################
+###### Si vous souhaitez surcoucher certains paramètres,
+###### compléter les sections ci-dessous à partir du modèle default_config.toml.example
+#######################################################################################
+
+# Configuration liée aux ID de BDD
+#[BDD]
+
+# Configuration de l'envoie d'emails
+# TODO: revoir la config pour utiliser le serveur Postfix local
+[MAIL_CONFIG]
+    MAIL_SERVER = "ssl0.ovh.net"
+    MAIL_PORT = 587
+    MAIL_USE_TLS = true
+    MAIL_USE_SSL = false
+    MAIL_USERNAME = "<email-username>"
+    MAIL_PASSWORD = "<email-password>"
+    MAIL_DEFAULT_SENDER = "<email-default-sender>"
+    MAIL_ASCII_ATTACHMENTS = false
+    # email(s) to the administrator for the email logging
+    ERROR_MAIL_TO = ["<email-error>"]
+
+# Configuration de l'accès distant à UsersHub (API)
+[USERSHUB]
+    URL_USERSHUB = "https://gestion.biodiversite-aura.fr" # sans slash final
+    # Administrateur de mon application
+    ADMIN_APPLICATION_LOGIN = "<user-admin-login>"
+    ADMIN_APPLICATION_PASSWORD = "<user-admin-password>"
+
+# Gestion des demandes d'inscription
+[ACCOUNT_MANAGEMENT]
+    ENABLE_SIGN_UP = true
+    AUTO_ACCOUNT_CREATION = false
+    VALIDATOR_EMAIL = [
+            "webmaster@biodiversite-aura.fr",
+        ]
+	AUTO_DATASET_CREATION = false
+    ENABLE_USER_MANAGEMENT = true
+    ADDON_USER_EMAIL = """<p>
+        TODO : Ajouter ici un texte personnalisé !
+        </p>"""
+    # Gestion du formulaire de demande d'inscription
+    [[ACCOUNT_MANAGEMENT.ACCOUNT_FORM]]
+        type_widget = "checkbox"
+        attribut_label = """<a target="_blank" href="https://www.biodiversite-auvergne-rhone-alpes.fr/">
+                J'accepte les conditions d'utilisation et la charte
+            </a>"""
+        attribut_name = "validate_charte"
+        values = [true]
+        required = true
+    [[ACCOUNT_MANAGEMENT.ACCOUNT_FORM]]
+        type_widget = "html"
+        attribut_name = "conditions"
+        class = "alert alert-primary"
+        html = """
+            <p>Merci pour votre demande d’inscription. Après validation par l’administrateur, vous
+			pourrez accéder à l'ensemble des données à l'échelle de la maille 5x5km.</p>
+            <p>L'accès aux données avec leur précision maximale nécessite, de compléter
+            un « formulaire de demande d’accès aux données précises ».
+            L'accord sera formalisé par l’acceptation d'une convention « droit d'accès aux données
+            précises » et donnera lieu à l'attribution d'un accès direct à ces données.</p>
+            """
+        required = false
+
+# Configuration générale du frontend
+[FRONTEND]
+    # Affiche la carte des 100 obs sur la page d'accueil
+    DISPLAY_MAP_LAST_OBS = false
+
+    # Affiche le composant 'custom/components/footer' sur la page d'accueil
+    DISPLAY_FOOTER = true
+
+# Configuration cartographique
+[MAPCONFIG]
+    BASEMAP = [
+        {"name" = "OpenStreetMap", "layer" = "//{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", "attribution" = "&copy OpenStreetMap"},
+        {"name" = "OpenTopoMap", "layer" = "//a.tile.opentopomap.org/{z}/{x}/{y}.png", "attribution" = "© OpenTopoMap"},
+        {"name" = "GoogleSatellite", "layer" = "//{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", "subdomains" = ["mt0", "mt1", "mt2", "mt3"], "attribution" = "© GoogleMap"}
+    ]
+    # Attention : les coordonnées sont au format [Y, X]
+    # Cf leaflet configuration (https://leafletjs.com/reference-1.4.0.html#latlng-l-latlng)
+    CENTER = [43.96387, 6.06216]
+    # Zoom par défaut
+    ZOOM_LEVEL = 8
+    # Zoom à partir duquel on peut pointer un relevé
+    ZOOM_LEVEL_RELEVE = 15
+    # Zoom appliqué sur la carte lorsque l'on clique sur une liste
+    ZOOM_ON_CLICK = 16
+
+# CRITICAL: 50 ; ERROR: 40 ; WARNING: 30 ; INFO: 20 ; DEBUG: 10 ; NOTSET: 0
+[SERVER]
+    LOG_LEVEL = 20
+
+# Configuration de la Synthese
+[SYNTHESE]
+    # Nombre d'observation maximum à afficher sur la carte après une recherche
+    NB_MAX_OBS_MAP = 100000
+    # Nombre des dernières observations affichées par défaut quand on arrive sur la synthese
+    NB_LAST_OBS = 0
+    # Colonne à afficher par défaut sur la liste des résultats de la synthese
+    # Choisir le champ 'prop' parmis les colonnes suivante
+    # (id_synthese, date_min, cd_nom, lb_nom, nom_vern_or_lb_nom, st_asgeojson, observers, dataset_name, url_source)
+    LIST_COLUMNS_FRONTEND = [
+        { prop = "lb_nom", name = "Taxon" },
+        { prop = "date_min", name = "Date début" },
+        { prop = "observers", name = "Observateurs" },
+        { prop = "dataset_name", name = "Jeu de données" }
+    ]
+    # Affiche (=true) ou masque (=false) l'arbre de recherche taxonomique
+    # dans la recherche taxonomique avancée.
+    DISPLAY_TAXON_TREE = false
+
+    # Nombre max d'observation dans les exports
+    # WARNING : Au 2020-11-12, un bug empêche d'avoir une valeur différente pour les export.
+    NB_MAX_OBS_EXPORT = 100000
+
+    # Noms des colonnes obligatoires de la vue ``gn_synthese.v_synthese_for_export``
+    EXPORT_ID_SYNTHESE_COL = "id_synthese"
+    EXPORT_ID_DATASET_COL = "jdd_id"
+    EXPORT_ID_DIGITISER_COL = "id_digitiser"
+    EXPORT_OBSERVERS_COL = "observateurs"
+    EXPORT_GEOJSON_4326_COL = "geojson_4326"
+    EXPORT_GEOJSON_LOCAL_COL = "geojson_local"
+
+    # Noms des colonnes obligatoires de la vue ``gn_synthese.v_metadata_for_export``
+    EXPORT_METADATA_ID_DATASET_COL = "jdd_id"
+    EXPORT_METADATA_ACTOR_COL = "acteurs"
+
+    # Champs à afficher dans l'export
+    # Voir les noms des champs de la ``vue gn_synthese.v_synthese_for_export``
+    EXPORT_COLUMNS = [
+        "uuid_perm_sinp",
+        "uuid_perm_grp_sinp",
+		"ca_nom",
+        "jdd_nom",
+        "jdd_uuid",
+        "niveau_validation",
+        "validateur",
+        "observateurs",
+        "cd_ref",
+        "nom_valide",
+        "nombre_min",
+        "nombre_max",
+        "date_debut",
+        "date_fin",
+        "geojson_4326",
+        "precision_geographique",
+        "niveau_precision_diffusion",
+    ]
+
+[PERMISSION_MANAGEMENT]
+    # Activer (=true) l'affichage du lien vers le formulaire de demande
+    # de permissions. Par défaut : désactivé (=false).
+    ENABLE_ACCESS_REQUEST = true
+    # Lien vers les règles d'accès aux observations sensibles propres à
+    # cette instance de GeoNature
+    DATA_ACCESS_RULES_LINK = "https://biodiversite-aura.fr/"
+    # Types zones géo formulaire de demande d'accès.
+    AREA_TYPES = [25, 26, 34]
+    # Durée minimum en jour pendant laquelle l'accès est autorisé.
+    DEFAULT_ACCESS_DURATION = 30
+    # Durée maximum en jour pendant laquelle l'accès peut être autorisé.
+    MAX_ACCESS_DURATION = 1095
+    # Email du validateur des permissions d'accès.
+    VALIDATOR_EMAIL = [
+            "webmaster@biodiversite-aura.fr",
+        ]
+
+    # Activer la validation de la convention suite à une demande d'accès
+    ENABLE_CONVENTION = true
+    # Titre de la fenêtre modale affichant la convention
+    CONVENTION_TITLE = "Convention « Droit d'accès ponctuel aux données confidentielles »"
+    # Libellé du bouton permettant d'accepter la convention
+    CONVENTION_VALIDATE = "J'accepte les termes de la convention « droit d'accès »."
+
+    # Titre de la section personnalisable du formulaire de demande d'accès
+    REQUEST_FORM_TITLE = "Motivations de la demande"
+    # Définition de la section personnalisable du formulaire de demande
+    # de permission d'accès.
+    [[PERMISSION_MANAGEMENT.REQUEST_FORM]]
+        type_widget = "select"
+        attribut_label = "Règne concerné"
+        attribut_name = "kingdom"
+        icon = "fa-sitemap"
+        icon_set = "fa"
+        values = [
+            "Végétal",
+            "Animal",
+            "Végétal et Animal"]
+        required = true
+    [[PERMISSION_MANAGEMENT.REQUEST_FORM]]
+        type_widget = "html"
+        attribut_name = "motivationIntro"
+        html = """
+            <small class="form-text text-muted">
+                Veuillez décrire ci-dessous les motivations à l'origine
+                de votre demande.
+            </small>"""
+    [[PERMISSION_MANAGEMENT.REQUEST_FORM]]
+        type_widget = "select"
+        attribut_label = "Type d'étude ou de projet"
+        attribut_name = "projectType"
+        icon = "fa-tag"
+        icon_set = "fa"
+        values = [
+            "Plan de gestion",
+            "DOCOB Natura 2000",
+            "Inventaire scientifique",
+            "Expertise écologique réglementaire",
+            "Étude trame verte et bleue",
+            "PLU / SCOT",
+            "Autre (à préciser dans description)"]
+        required = true
+    [[PERMISSION_MANAGEMENT.REQUEST_FORM]]
+        type_widget = "textarea"
+        attribut_label = "Commanditaire"
+        attribut_name = "projectSponsor"
+        icon = "request_quote"
+        required = true
+        rows = 4
+        help = """Veuillez indiquer le nom du commanditaire de l’étude ou
+            l’organisme à l’origine du projet."""
+    [[PERMISSION_MANAGEMENT.REQUEST_FORM]]
+        type_widget = "textarea"
+        attribut_label = "Description"
+        attribut_name = "projectDescription"
+        icon = "text_snippet"
+        required = false
+        rows = 10
+        help = """Précisez le calendrier, la finalité, l'objet de l’étude
+            scientifique et le cadre réglementaire dans lequel s’inscrit
+            la demande (Étude d'impact, étude d'incidence Natura 2000,
+            étude d'incidence Eau, demande d'autorisation au titre de la
+            loi sur l'eau, demande d'autorisation au titre des ICPE,
+            demande d'autorisation de destruction d'espèces protégées)."""
+
+[DATA_BLURRING]
+    # Activer (=true) l'affichage du floutage des données.
+    ENABLE_DATA_BLURRING = true
+    # Correspondance entre les niveau de diffusion (nomenclaure NIV_PRECIS)
+    # et un type de zone géographique utilisée pour le rendu sur les cartes.
+    AREA_TYPE_FOR_DIFFUSION_LEVELS = [
+            {level = "0", area = "M5"},# Standard
+            {level = "1", area = "M5"},# Commune
+            {level = "2", area = "M5"},# Maille
+            {level = "3", area = "M5"},# Département
+        ]
+    # Correspondance entre les niveau de sensibilité (nomenclaure SENSIBILITE)
+    # et un type de zone géographique utilisée pour le rendu sur les cartes.
+    AREA_TYPE_FOR_SENSITIVITY_LEVELS = [
+            {level = "1", area = "M10"},# Commune
+            {level = "2", area = "M10"},# Maille
+            {level = "3", area = "M10"},# Département
+        ]

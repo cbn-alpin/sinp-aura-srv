@@ -1,0 +1,12 @@
+# /etc/cron.d/goaccess-reports: crontab entries for the goaccess-reports script
+# Copy this file into /etc/cron.d/ without .cron extension : cp goaccess-reports.cron /etc/cron.d/goaccess-reports
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+# MAILFROM doesn't work now, use alternative below
+#MAILTO=adminsys@biodiversite-aura.fr
+#MAILFROM=mailer@biodiversite-aura.fr
+
+0 3 * * * admin /opt/goaccess-reports/daily-report 2>&1 | mail -s "[Cron] <admin@sinp-aura-web> /opt/goaccess-reports/daily-report" -r "mailer@biodiversite-aura.fr" adminsys@biodiversite-aura.fr
+0 4 * * 1 admin /opt/goaccess-reports/weekly-report 2>&1 | mail -s "[Cron] <admin@sinp-aura-web> /opt/goaccess-reports/weekly-report" -r "mailer@biodiversite-aura.fr" adminsys@biodiversite-aura.fr
+0 5 * * * admin /opt/goaccess-reports/monthly-report 2>&1 | mail -s "[Cron] <admin@sinp-aura-web> /opt/goaccess-reports/monthly-report" -r "mailer@biodiversite-aura.fr" adminsys@biodiversite-aura.fr

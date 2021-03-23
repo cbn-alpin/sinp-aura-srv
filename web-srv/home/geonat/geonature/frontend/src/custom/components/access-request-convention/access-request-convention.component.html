@@ -1,0 +1,38 @@
+<!--<h2>Convention « Droit d'accès ponctuel aux données géoconfidentielles / Silene »</h2>-->
+
+<p>
+  <i>{{customData.userOrganism}}</i> représenté par <i>{{user.firstname}} {{user.lastname}}</i>
+  désigné sous le terme « l’utilisateur identifié » s’engage à respecter les termes suivants
+</p>
+
+<p>
+  L’accès est accordé à <i>{{user.firstname}} {{user.lastname}}</i> - <i>{{customData.userOrganism}}</i>
+  sur une demande motivée pour l’objet suivant : <i>{{customData.projectType}}</i>
+</p>
+
+<pre *ngIf="customData.projectDescription"> {{customData.projectDescription}} </pre>
+
+<p>
+  <i>{{user.firstname}} {{user.lastname}}</i> a reçu lors de son inscription un identifiant
+  et un mot de passe personnel lui permettant l’accès.
+</p>
+
+<p>
+  « l’utilisateur identifié » signataire de la présente convention déclare avoir pris connaissance et
+  approuver la charte. Mise à disposition l'ensemble des données validées pour les droits de
+  consultation suivants :
+</p>
+<ul>
+    <li>délimitation géographique : {{accessRequest.areas}}</li>
+    <li>
+      groupes systématiques :
+      <span *ngIf="accessRequest.taxa ; else allTaxa" [innerHtml]="accessRequest.taxa | safeHTML"></span>
+      <ng-template #allTaxa><i>tous</i></ng-template>
+    </li>
+    <li *ngIf="accessRequest.sensitiveAccess">accés données sensibles : <i>oui</i></li>
+    <li>
+      durée de mise à disposition :
+      <span *ngIf="accessRequest.endAccessDate ; else unlimitedAccess">{{accessRequest.endAccessDate}}</span>
+      <ng-template #unlimitedAccess><i>illimitée</i></ng-template>
+    </li>
+</ul>

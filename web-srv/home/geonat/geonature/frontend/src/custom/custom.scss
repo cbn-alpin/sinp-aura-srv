@@ -1,0 +1,35 @@
+/* GÉNÉRAL */
+:root {
+	--primary: #A10D59;
+	--secondary: #99B931;
+}
+a {
+	color: #A10D59;
+}
+a:hover {
+	color: #99B931;
+}
+a.btn.btn-default:hover{
+	background-color: #EFE0E9;
+}
+
+/* TOOLBAR */
+#app-toolbar {
+	background:
+		linear-gradient(
+			to right,
+			rgba(139, 21, 88, 0.4) 0%,
+			whitesmoke 50%,
+			rgba(255, 255, 255, 0) 100%),
+		url('custom/images/toolbar-bg.webp') right bottom/702px 64px no-repeat !important;
+}
+mat-toolbar#app-toolbar .mat-raised-button,
+mat-toolbar#app-toolbar .mat-icon-button {
+ 	background-color: transparent !important;
+}
+#appName h3 {
+	color: #A10D59;
+	font-weight: 900;
+	font-size: 30px;
+	line-height: 48px;
+}
