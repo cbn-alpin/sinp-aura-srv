@@ -18,11 +18,11 @@ database_connection = "postgresql://<user>:<password>@10.0.1.20:5432/gnatlas"
 STRUCTURE = "SINP AURA"
 
 # Nom de l'application
-NOM_APPLICATION = "Atlas - Biodiversité-Auvergne-Rhône-Alpes"
+NOM_APPLICATION = "Biodiv'AURA Atlas"
 
 # URL de l'application depuis la racine du domaine
 # ex "/atlas" pour une URL: http://mon-domaine/atlas OU "" si l'application est accessible à la racine du domaine
-URL_APPLICATION = ""
+URL_APPLICATION = "http://atlas.biodiversite-auvergne-rhone-alpes.fr/"
 
 
 ###########################
@@ -34,7 +34,7 @@ URL_APPLICATION = ""
 
 # Configuration des cartes (centre du territoire, couches CARTE et ORTHO, échelle par défaut...)
 MAP = {
-    'LAT_LONG': [43.96387, 6.06216],
+    'LAT_LONG': [45.29619, 4.66072],
     'FIRST_MAP': {
             'url' : '//{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
             'attribution' : '&copy OpenStreetMap',
@@ -48,7 +48,7 @@ MAP = {
     #        'attribution' : '&copy; <a href="http://www.ign.fr/">IGN</a>',
     #        'tileName' : 'Ortho IGN'
     #},
-    'ZOOM' : 8,
+    'ZOOM' : 7,
     # Pas du slider sur les annees d'observations: 1 = pas de 1 an sur le slider
     'STEP': 1,
     # Couleur et épaisseur des limites du territoire

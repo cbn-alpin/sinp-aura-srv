@@ -1,0 +1,12 @@
+# /etc/cron.d/srvstatus: crontab entries for the srvstatus script 
+# Copy this file into /etc/cron.d/ without .cron extension : cp srvstatus.cron /etc/cron.d/srvstatus
+
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+* * * * * root (sleep 10 ; /opt/srvstatus/venv/bin/python /opt/srvstatus/service.py > /opt/srvstatus/status.json)
+* * * * * root (sleep 20 ; /opt/srvstatus/venv/bin/python /opt/srvstatus/service.py > /opt/srvstatus/status.json)
+* * * * * root (sleep 30 ; /opt/srvstatus/venv/bin/python /opt/srvstatus/service.py > /opt/srvstatus/status.json)
+* * * * * root (sleep 40 ; /opt/srvstatus/venv/bin/python /opt/srvstatus/service.py > /opt/srvstatus/status.json)
+* * * * * root (sleep 50 ; /opt/srvstatus/venv/bin/python /opt/srvstatus/service.py > /opt/srvstatus/status.json)
+* * * * * root (sleep 60 ; /opt/srvstatus/venv/bin/python /opt/srvstatus/service.py > /opt/srvstatus/status.json)

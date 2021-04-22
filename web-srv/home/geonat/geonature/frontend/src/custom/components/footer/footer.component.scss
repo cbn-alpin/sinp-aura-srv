@@ -2,12 +2,52 @@ footer.footer {
 	background-color: #dce3e7;
 	border-top: none;
 }
-footer .panel-body {
-	text-align: center;
-}
-.logos .img-thumbnail {
-	margin: .25rem;
-}
-.logos .img-thumbnail:hover {
-	border-color: #A10D59;
+footer {
+	.panel-body {
+		text-align: center;
+	}
+	.img-thumbnail {
+		margin: .25rem;
+	}
+	.img-thumbnail:hover {
+		border-color: #8031A7;
+	}
+	.text-muted {
+		text-transform: none !important;
+	}
+	.pole-panel.col-md-4 {
+		flex: 0 0 32%;
+	}
+	.pole-panel {
+		box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+		margin: 5px;
+		border-radius: 5px;
+		padding: 10px;
+		background-color: white;
+		height: 466px;
+		max-width: 350px;
+	}
+	.pole-organism a {
+		display: inline-block;
+		min-height: 146px;
+		padding: .25rem;
+	}
+	.pole-panel-invertebre .pole-organism a {
+		max-width: 75%;
+	}
+	.pole-organism, .pole-contact {
+		margin-top: 20px;
+	}
+	.pole-contact {
+		.icon-circle {
+			display: inline-block;
+			border: 3px solid #8031A7;
+			border-radius: 50%;
+			padding: .4rem;
+			font-size: 10px;
+		}
+		a:hover {
+			border-color: #CC1FD3 !important;
+		}
+	}
 }

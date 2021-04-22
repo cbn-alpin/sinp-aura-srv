@@ -1,0 +1,92 @@
+version: "3.7"
+
+services:
+  monitor-influxdb:
+    image: influxdb:1.8.4
+    # https://hub.docker.com/_/influxdb
+    container_name: monitor-influxdb
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+      - "8089:8089/udp"
+    hostname: ${HOSTNAME_INFLUXDB:-influxdb-aura-sinp}
+    env_file:
+      - ./influxdb/.env.influxdb
+    networks:
+      - nginx-proxy
+    volumes:
+      - influxdb-storage:/var/lib/influxdb/data
+
+  monitor-telegraf:
+    image: telegraf:1.18.1
+    # https://hub.docker.com/_/telegraf
+    container_name: monitor-telegraf
+    restart: unless-stopped
+    depends_on:
+      - monitor-influxdb
+    hostname: ${HOSTNAME:-bkp-aura-sinp}
+    environment:
+      HOST_MOUNT_PREFIX: /host
+      HOST_ETC: /host/etc
+      HOST_PROC: /host/proc
+      HOST_SYS: /host/sys
+      HOST_VAR: /host/var
+      HOST_RUN: /host/run
+    networks:
+      - nginx-proxy
+    volumes:
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - /:/host:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /opt/srvstatus/status.json:/opt/srvstatus/status.json
+
+  monitor-grafana:
+    image: grafana/grafana:7.5.4
+    # https://hub.docker.com/r/grafana/grafana
+    container_name: monitor-grafana
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    env_file:
+      - ./grafana/.env.grafana
+    depends_on:
+      - monitor-influxdb
+    networks:
+      - nginx-proxy
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+  monitor-grafana-renderer:
+    image: grafana/grafana-image-renderer:2.0.1
+    # https://hub.docker.com/r/grafana/grafana-image-renderer
+    container_name: monitor-grafana-renderer
+    restart: unless-stopped
+    ports:
+      - 8081
+    environment:
+      ENABLE_METRICS: 'true'
+    networks:
+      - nginx-proxy
+
+  monitor-grafana-backup:
+    image: ysde/docker-grafana-backup-tool:latest
+    # https://hub.docker.com/r/ysde/docker-grafana-backup-tool
+    container_name: monitor-grafana-backup
+    restart: "no"
+    depends_on:
+      - monitor-grafana
+    networks:
+      - nginx-proxy
+    environment:
+      - GRAFANA_TOKEN=${GRAFANA_TOKEN}
+      - GRAFANA_URL=http://monitor-grafana:3000
+    volumes:
+       - ./grafana/backup:/opt/grafana-backup-tool/_OUTPUT_
+
+volumes:
+  grafana-storage:
+  influxdb-storage:
+
+networks:
+  nginx-proxy:
+    external: true

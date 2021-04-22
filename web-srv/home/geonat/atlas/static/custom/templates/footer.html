@@ -1,95 +1,231 @@
-    <footer class="footer">
-        <p>
-            <a href="{{url_for('main.index')}}">
-				Accueil
-			</a> |
-			<a href="https://biodiversite-auvergne-rhone-alpes.fr/" target="_blank">
-				Site du {{configuration.STRUCTURE}}
-			</a> |
-			<a data-toggle="modal"
-				href="{{url_for('static', filename='custom/templates/credits.html') }}"
-				data-target="#modalCredits">
-				Conception et crédits
-			</a> |
-			<a data-toggle="modal"
-				href="{{url_for('static', filename='custom/templates/mentions-legales.html') }}"
-				data-target="#modalMentions">
-				Mentions légales
-			</a>
-        <p>
+<footer class="footer">
+	<p>
+		<a href="{{url_for('main.index')}}">
+			Accueil
+		</a> |
+		<a href="https://www.biodiversite-auvergne-rhone-alpes.fr/" target="_blank">
+			Site du {{configuration.STRUCTURE}}
+		</a> |
+		<a data-toggle="modal"
+			href="{{url_for('static', filename='custom/templates/credits.html') }}"
+			data-target="#modalCredits">
+			Conception et crédits
+		</a> |
+		<a data-toggle="modal"
+			href="{{url_for('static', filename='custom/templates/mentions-legales.html') }}"
+			data-target="#modalMentions">
+			Mentions légales
+		</a>
+	</p>
 
-		<p class="logos">
-			<a href="https://cbn-alpin.fr/"
-				target="_blank"
-				title="Accéder au site du CBN Alpin">
-				<img class="img-thumbnail"
-					src="{{url_for('static', filename='custom/images/logo-cbna.png') }}"
-					alt="Logo CBN Alpin" />
-			</a>
+	<p>Animateurs des pôles thématiques :</p>
+
+	<div class="row">
+		<div class="col-xs-12 col-md-4 pole-panel">
+			<div class="row pole-logo">
+				<div class="col-xs-12">
+					<a href="https://pifh.fr/"
+						target="_blank"
+						title="Accéder au site du Pôle Flore">
+						<img class="img-thumbnail"
+							src="{{url_for('static', filename='custom/images/logo-pole-flore.png') }}"
+							alt="Logo Pôle Flore" />
+					</a>
+				</div>
+			</div>
+			<div class="row pole-organism">
+				<div class="col-xs-6">
+					<a href="https://cbn-alpin.fr/"
+						target="_blank"
+						title="Accéder au site du CBN Alpin">
+						<img class="img-thumbnail"
+							src="{{url_for('static', filename='custom/images/logo-cbna.png') }}"
+							alt="Logo CBN Alpin" />
+					</a>
+				</div>
+				<div class="col-xs-6">
+					<a href="https://www.cbnmc.fr/"
+						target="_blank"
+						title="Accéder au site du CBN du Massif Central">
+						<img class="img-thumbnail"
+							src="{{url_for('static', filename='custom/images/logo-cbnmc.png') }}"
+							alt="Logo CBN du Massif Central" />
+					</a>
+				</div>
+			</div>
+			<div class="row pole-contact">
+				<p class="col-xs-12">
+					<a href="mailto:pole-flore@biodiversite-aura.fr">
+						<span class="icon-circle">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+						Contacter l'animateur
+					</a>
+				</p>
+			</div>
+		</div>
+
+		<div class="col-xs-12 col-md-4 pole-panel">
+			<div class="row pole-logo">
+				<div class="col-xs-12">
+					<a href="https://www.pole-invertebres.fr/"
+						target="_blank"
+						title="Accéder au site du Pôle Invertébrés">
+						<img class="img-thumbnail"
+							src="{{url_for('static', filename='custom/images/logo-pole-invertebres.png') }}"
+							alt="Logo Pôle Invertébrés" />
+					</a>
+				</div>
+			</div>
+			<div class="row pole-organism">
+				<div class="col-xs-6 col-xs-offset-3">
+					<a href="http://www.flavia-ape.fr/"
+						target="_blank"
+						title="Accéder au site de Flavia APE">
+						<img class="img-thumbnail"
+							src="{{url_for('static', filename='custom/images/logo-flavia.png') }}"
+							alt="Logo Flavia APE" />
+					</a>
+				</div>
+			</div>
+			<div class="row pole-contact">
+				<p class="col-xs-12">
+					<a href="mailto:pole.invertebres@gmail.com">
+						<span class="icon-circle">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+						Contacter l'animateur
+					</a>
+				</p>
+			</div>
+		</div>
+
+		<div class="col-xs-12 col-md-4 pole-panel">
+			<div class="row pole-logo">
+				<div class="col-xs-12">
+					<a href="https://www.biodiversite-auvergne-rhone-alpes.fr/le-pole-vertebres/"
+						target="_blank"
+						title="Accéder au site du Pôle Vertébrés">
+						<img class="img-thumbnail"
+							src="{{url_for('static', filename='custom/images/logo-pole-vertebres.png') }}"
+							alt="Logo Pôle Vertébrés" />
+					</a>
+				</div>
+			</div>
+			<div class="row pole-organism">
+				<div class="col-xs-6">
+					<a href="http://www.chasseauvergnerhonealpes.com/"
+						target="_blank"
+						title="Accéder au site de la FRC Auvergne-Rhône-Alpes">
+						<img class="img-thumbnail"
+							src="{{url_for('static', filename='custom/images/logo-frc.png') }}"
+							alt="Logo FRC AURA" />
+					</a>
+				</div>
+				<div class="col-xs-6">
+					<a href="https://auvergne-rhone-alpes.lpo.fr/"
+						target="_blank"
+						title="Accéder au site de la LPO Auvergne-Rhône-Alpes">
+						<img class="img-thumbnail"
+							src="{{url_for('static', filename='custom/images/logo-lpo.png') }}"
+							alt="Logo LPO AURA" />
+					</a>
+				</div>
+			</div>
+			<div class="row pole-contact">
+				<p class="col-xs-12">
+					<a href="mailto:pole-vertebres@biodiversite-aura.fr">
+						<span class="icon-circle">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+						Contacter l'animateur
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<p>
+		Pilotes de l’Observatoire régional de la biodiversité :
+	</p>
+
+	<p class="logos">
+		<a	href="http://www.auvergne-rhone-alpes.developpement-durable.gouv.fr/"
+			target="_blank"
+			title="Accéder au site de la DREAL Auvergne-Rhône-Alpes">
+			<img class="img-thumbnail"
+				src="{{url_for('static', filename='custom/images/logo-dreal.png') }}"
+				alt="Logo DREAL Auvergne-Rhône-Alpes" />
+		</a>
+
+		<a	href="https://www.auvergnerhonealpes.fr/"
+			target="_blank"
+			title="Accéder au site de la Région Auvergne-Rhône-Alpes">
+			<img class="img-thumbnail"
+				src="{{url_for('static', filename='custom/images/logo-aura.png') }}"
+				alt="Logo AURA" />
+		</a>
+
+		<a	href="https://ofb.gouv.fr/"
+			target="_blank"
+			title="Accéder au site de l'Office Français de la Biodiversité">
+			<img class="img-thumbnail"
+				src="{{url_for('static', filename='custom/images/logo-ofb.png') }}"
+				alt="Logo OFB" />
+		</a>
+	</p>
+
+	<div id="clear">
+		<p class="text-muted">
+			{{configuration.NOM_APPLICATION}} - {{configuration.STRUCTURE}}, 2019-2021
+			<br/>
+			Réalisé avec
+			<a href="https://github.com/PnX-SI/GeoNature-atlas" target="_blank">GeoNature-atlas</a>,
+			déployé par le
+			<a href="https://cbn-alpin.fr/" target="_blank">Conservatoire Botanique National Alpin (CBNA)</a>
 		</p>
+	</div>
+</footer>
 
-		<p>
-			Autres administrateurs de Silene :
-		</p>
-		<p class="logos">
-			<a	href="https://ofb.gouv.fr/"
-				target="_blank"
-				title="Accéder au site de l'Office Français de la Biodiversité">
-				<img class="img-thumbnail"
-					src="{{url_for('static', filename='custom/images/logo-ofb.png') }}"
-					alt="Logo OFB" />
-			</a>
-		</p>
+<div class="modal fade text-center" id="modalCredits">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		</div>
+	</div>
+</div>
 
-        <div id="clear">
-            <p class="text-muted">
-                {{configuration.NOM_APPLICATION}} - {{configuration.STRUCTURE}}, 2019-2021
-                <br/>
-				Réalisé avec <a href="https://github.com/PnX-SI/GeoNature-atlas" target="_blank">GeoNature-atlas</a>,
-				déployé par le <a href="https://cbn-alpin.fr/" target="_blank">Conservatoire Botanique National Alpin (CBNA)</a>
-            </p>
-        </div>
-    </footer>
+<div class="modal fade text-center" id="modalMentions">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		</div>
+	</div>
+</div>
 
-    <div class="modal fade text-center" id="modalCredits">
-      <div class="modal-dialog">
-        <div class="modal-content">
-        </div>
-      </div>
-    </div>
+{% if configuration.ID_GOOGLE_ANALYTICS != "UA-xxxxxxx-xx" %}
+<!-- Script Google Analytics -->
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-    <div class="modal fade text-center" id="modalMentions">
-      <div class="modal-dialog">
-        <div class="modal-content">
-        </div>
-      </div>
-    </div>
+	ga('create', '{{configuration.ID_GOOGLE_ANALYTICS}}', 'auto');
+	ga('send', 'pageview');
+</script>
+{% endif %}
 
-    {% if configuration.ID_GOOGLE_ANALYTICS != "UA-xxxxxxx-xx" %}
-    <!-- Script Google Analytics -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', '{{configuration.ID_GOOGLE_ANALYTICS}}', 'auto');
-      ga('send', 'pageview');
-    </script>
-    {% endif %}
-
-	<!-- Matomo -->
-	<script type="text/javascript">
-		var _paq = window._paq = window._paq || [];
-		/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-		_paq.push(['trackPageView']);
-		_paq.push(['enableLinkTracking']);
-		(function() {
-		var u="//analytics.biodiversite-aura.net:443/";
-		_paq.push(['setTrackerUrl', u+'matomo.php']);
-		_paq.push(['setSiteId', '1']);
-		var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-		g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-		})();
-	</script>
-	<!-- End Matomo Code -->
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//analytics.biodiversite-aura.net:443/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
