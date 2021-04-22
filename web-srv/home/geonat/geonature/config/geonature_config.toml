@@ -29,25 +29,30 @@ DEFAULT_LANGUAGE = "fr"
 MAIL_ON_ERROR = true
 
 # Nom de l'application dans la page d'accueil.
-appName = "Données - Biodiversite-Auvergne-Rhône-Alpes"
+appName = "Biodiv'AURA Expert"
 
 #######################################################################################
 ###### Si vous souhaitez surcoucher certains paramètres,
 ###### compléter les sections ci-dessous à partir du modèle default_config.toml.example
 #######################################################################################
 
-# Configuration liée aux ID de BDD
-#[BDD]
-
 # Configuration de l'envoie d'emails
 # TODO: revoir la config pour utiliser le serveur Postfix local
 [MAIL_CONFIG]
-    MAIL_SERVER = "ssl0.ovh.net"
-    MAIL_PORT = 587
-    MAIL_USE_TLS = true
+    # COnfig with local Postfix SMTP relay to OVH:
+	MAIL_SERVER = "localhost"
+    MAIL_PORT = 25
+    MAIL_USE_TLS = false
     MAIL_USE_SSL = false
-    MAIL_USERNAME = "<email-username>"
-    MAIL_PASSWORD = "<email-password>"
+    MAIL_USERNAME = ""
+    MAIL_PASSWORD = ""
+	# Config with OVH SMTP:
+    # MAIL_SERVER = "ssl0.ovh.net"
+    # MAIL_PORT = 587
+    # MAIL_USE_TLS = true
+    # MAIL_USE_SSL = false
+    # MAIL_USERNAME = "<email-username>"
+    # MAIL_PASSWORD = "<email-password>"
     MAIL_DEFAULT_SENDER = "<email-default-sender>"
     MAIL_ASCII_ATTACHMENTS = false
     # email(s) to the administrator for the email logging
@@ -65,18 +70,31 @@ appName = "Données - Biodiversite-Auvergne-Rhône-Alpes"
     ENABLE_SIGN_UP = true
     AUTO_ACCOUNT_CREATION = false
     VALIDATOR_EMAIL = [
+            "Ornella KRISTO <o.kristo@cbn-alpin.fr>",
             "webmaster@biodiversite-aura.fr",
         ]
 	AUTO_DATASET_CREATION = false
     ENABLE_USER_MANAGEMENT = true
     ADDON_USER_EMAIL = """<p>
-        TODO : Ajouter ici un texte personnalisé !
+        Nous vous rappelons que cette inscription vous donne accès à la consultation
+        des données versées dans Biodiv'AURA Expert à l'échelle de la maille 5x5km.</br>
+        L'accès aux données précises nécessite de compléter un «
+        <a href="https://donnees.biodiversite-auvergne-rhone-alpes.fr/\u0023/permissions/requests/add">
+            formulaire de demande d'accès aux données précises
+        </a> ».<br/>
+        L'accord sera formalisé par l'acceptation d'
+        <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/">
+            une convention « droit d'accès aux données précises »
+        </a>
+        et donnera lieu à l'attribution d'un accès direct à ces données.</br>
+        La convention engage le titulaire au bon usage des données et à l'alimentation
+        de Bioviv'AURA Expert en retour.
         </p>"""
     # Gestion du formulaire de demande d'inscription
     [[ACCOUNT_MANAGEMENT.ACCOUNT_FORM]]
         type_widget = "checkbox"
         attribut_label = """<a target="_blank" href="https://www.biodiversite-auvergne-rhone-alpes.fr/">
-                J'accepte les conditions d'utilisation et la charte
+                J'accepte les conditions d'utilisation et les chartes des Pôles thématiques
             </a>"""
         attribut_name = "validate_charte"
         values = [true]
@@ -86,13 +104,33 @@ appName = "Données - Biodiversite-Auvergne-Rhône-Alpes"
         attribut_name = "conditions"
         class = "alert alert-primary"
         html = """
-            <p>Merci pour votre demande d’inscription. Après validation par l’administrateur, vous
-			pourrez accéder à l'ensemble des données à l'échelle de la maille 5x5km.</p>
-            <p>L'accès aux données avec leur précision maximale nécessite, de compléter
-            un « formulaire de demande d’accès aux données précises ».
-            L'accord sera formalisé par l’acceptation d'une convention « droit d'accès aux données
-            précises » et donnera lieu à l'attribution d'un accès direct à ces données.</p>
-            """
+            <p>
+                Merci pour votre demande d'inscription. Après validation par l'administrateur,
+                vous pourrez accéder à l'ensemble des données à l'échelle de la maille 5x5km.
+            </p>
+            <p>
+                L'accès aux données avec leur précision maximale nécessite, dans Biodiv'AURA Expert,
+                de compléter un « formulaire de demande d'accès aux données précises ».
+                L'accord sera formalisé par l’acceptation d'
+                <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/" target="_blank">
+                    une convention « droit d'accès aux données précises »
+                </a>
+                et donnera lieu à l'attribution d'un accès direct à ces données.
+                La convention engage le titulaire à un bon usage des données et à
+                <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/" target="_blank">
+                    une alimentation de Biodiv'AURA Expert en retour
+                </a>.
+            </p>
+            <p>
+                Les autorisations d'accès sont gérées par les animateurs des Pôles thématiques
+                s'appuyant sur le Comité de pilotage de l'ORB (ou de nom SINP AURA).
+            </p>
+            <p>
+                Les données et informations qui vous sont fournies dans le cadre de Biodiv'AURA Expert
+                ne sont pas exhaustives et peuvent donc s'avérer insuffisantes pour les besoins
+                spécifiques de votre étude. Une réactualisation de ces données dans le cadre
+                d'inventaires complémentaires est nécessaire.
+            <p>"""
         required = false
 
 # Configuration générale du frontend
@@ -112,7 +150,7 @@ appName = "Données - Biodiversite-Auvergne-Rhône-Alpes"
     ]
     # Attention : les coordonnées sont au format [Y, X]
     # Cf leaflet configuration (https://leafletjs.com/reference-1.4.0.html#latlng-l-latlng)
-    CENTER = [43.96387, 6.06216]
+    CENTER = [45.29619, 4.66072]
     # Zoom par défaut
     ZOOM_LEVEL = 8
     # Zoom à partir duquel on peut pointer un relevé
@@ -164,7 +202,7 @@ appName = "Données - Biodiversite-Auvergne-Rhône-Alpes"
     EXPORT_COLUMNS = [
         "uuid_perm_sinp",
         "uuid_perm_grp_sinp",
-		"ca_nom",
+        "ca_nom",
         "jdd_nom",
         "jdd_uuid",
         "niveau_validation",
@@ -185,6 +223,8 @@ appName = "Données - Biodiversite-Auvergne-Rhône-Alpes"
     # Activer (=true) l'affichage du lien vers le formulaire de demande
     # de permissions. Par défaut : désactivé (=false).
     ENABLE_ACCESS_REQUEST = true
+    # Activer la possibilité de demander l'accès aux données sensibles.
+    ENABLE_SENSITIVE_ACCESS = true
     # Lien vers les règles d'accès aux observations sensibles propres à
     # cette instance de GeoNature
     DATA_ACCESS_RULES_LINK = "https://biodiversite-aura.fr/"
@@ -196,6 +236,7 @@ appName = "Données - Biodiversite-Auvergne-Rhône-Alpes"
     MAX_ACCESS_DURATION = 1095
     # Email du validateur des permissions d'accès.
     VALIDATOR_EMAIL = [
+            "Ornella KRISTO <o.kristo@cbn-alpin.fr>",
             "webmaster@biodiversite-aura.fr",
         ]
 
@@ -211,17 +252,6 @@ appName = "Données - Biodiversite-Auvergne-Rhône-Alpes"
     # Définition de la section personnalisable du formulaire de demande
     # de permission d'accès.
     [[PERMISSION_MANAGEMENT.REQUEST_FORM]]
-        type_widget = "select"
-        attribut_label = "Règne concerné"
-        attribut_name = "kingdom"
-        icon = "fa-sitemap"
-        icon_set = "fa"
-        values = [
-            "Végétal",
-            "Animal",
-            "Végétal et Animal"]
-        required = true
-    [[PERMISSION_MANAGEMENT.REQUEST_FORM]]
         type_widget = "html"
         attribut_name = "motivationIntro"
         html = """
@@ -229,6 +259,31 @@ appName = "Données - Biodiversite-Auvergne-Rhône-Alpes"
                 Veuillez décrire ci-dessous les motivations à l'origine
                 de votre demande.
             </small>"""
+    [[PERMISSION_MANAGEMENT.REQUEST_FORM]]
+        type_widget = "select"
+        attribut_label = "Règne concerné"
+        attribut_name = "kingdom"
+        icon = "fa-sitemap"
+        icon_set = "fa"
+        values = [
+                "Végétal",
+                "Animal (Vertébrés et Invertébrés)",
+                "Animal (Vertébrés)",
+                "Animal (Invertébrés)",
+                "Végétal et Animal",
+            ]
+        required = true
+        help = """Veuillez indiquer le règne des taxons
+            concernés par votre étude et pour lesquels vous demandez
+            un accès précis."""
+    [[PERMISSION_MANAGEMENT.REQUEST_FORM]]
+        type_widget = "text"
+        attribut_label = "Organisme"
+        attribut_name = "userOrganism"
+        icon = "business"
+        required = true
+        help = """Veuillez indiquer le nom de l'organisme auquel vous
+            appartenez."""
     [[PERMISSION_MANAGEMENT.REQUEST_FORM]]
         type_widget = "select"
         attribut_label = "Type d'étude ou de projet"
@@ -251,8 +306,8 @@ appName = "Données - Biodiversite-Auvergne-Rhône-Alpes"
         icon = "request_quote"
         required = true
         rows = 4
-        help = """Veuillez indiquer le nom du commanditaire de l’étude ou
-            l’organisme à l’origine du projet."""
+        help = """Veuillez indiquer le nom du commanditaire de l'étude ou
+            l'organisme à l'origine du projet."""
     [[PERMISSION_MANAGEMENT.REQUEST_FORM]]
         type_widget = "textarea"
         attribut_label = "Description"
@@ -260,8 +315,9 @@ appName = "Données - Biodiversite-Auvergne-Rhône-Alpes"
         icon = "text_snippet"
         required = false
         rows = 10
-        help = """Précisez le calendrier, la finalité, l'objet de l’étude
-            scientifique et le cadre réglementaire dans lequel s’inscrit
+        help = """Précisez si vous êtes adhérents à l'un au moins des Pôles thématiques.<br/>
+            Précisez le calendrier, la finalité, l'objet de l'étude
+            scientifique et le cadre réglementaire dans lequel s'inscrit
             la demande (Étude d'impact, étude d'incidence Natura 2000,
             étude d'incidence Eau, demande d'autorisation au titre de la
             loi sur l'eau, demande d'autorisation au titre des ICPE,

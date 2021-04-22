@@ -6,14 +6,14 @@
 	--orange: #ffb53e;
 	--cyan: #30a5ff;
 	--red: red;
-	--main-color: #97BF0D;
-	--second-color: #A10D59;
+	--main-color: #8031A7;
+	--second-color: #CC1FD3;
 }
 a {
-	color: #97BF0D;
+	color: #8031A7;
 }
 a:hover {
-	color: #A10D59;
+	color: #CC1FD3;
 }
 a.btn.btn-default:hover{
 	background-color: #F7F9EC !important;
@@ -22,7 +22,7 @@ a.btn.btn-default:hover{
 /* NAVBAR */
 .navbar {
 	background: #323233 !important;
-	border-bottom-color: #97BF0D;
+	border-bottom-color: #8031A7;
 }
 .navbar-brand {
 	color: white !important;
@@ -37,13 +37,13 @@ a.btn.btn-default:hover{
 	background: #323233 !important;
 }
 #sidebar_menu li:hover {
-	background-color: #97BF0D;
+	background-color: #8031A7;
 }
 
 /* INTRODUCTION */
 .textIntroduction h1 {
     /*font-family: 'Arima Madurai', cursive;*/
-    color: #97BF0D;
+    color: #8031A7;
 	line-height: 40px;
 }
 
@@ -53,28 +53,53 @@ a.btn.btn-default:hover{
 }
 .presentation h2, .presentation h3 {
     /*font-family: 'Arima Madurai', cursive;*/
-    color: #97BF0D;
+    color: #8031A7;
 }
 
 /* FOOTER */
-.footer .logos .img-thumbnail {
+.footer .img-thumbnail {
 	margin: .25rem;
 }
-.footer .logos .img-thumbnail:hover {
-	border-color: #97BF0D;
+.footer .img-thumbnail:hover {
+	border-color: #8031A7;
 }
 .footer .text-muted {
 	text-transform: none !important;
 }
+.footer .pole-panel.col-md-4 {
+	width: 32%;
+}
+.pole-panel {
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+	margin: 5px;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: white;
+	height: 450px;
+}
+.footer .pole-organism, .footer .pole-contact {
+	margin-top: 20px;
+}
+.footer .pole-contact .icon-circle {
+	display: inline-block;
+	border: 3px solid #8031A7;
+	border-radius: 50%;
+	padding: .4rem;
+	font-size: 10px;
+}
+.footer .pole-contact a:hover {
+	border-color: #CC1FD3 !important;
+}
+
 
 /* FICHE ESPECE */
 
 /* Infobulles graphiques */
 .morris-hover-point {
-	color: #97BF0D !important;
+	color: #8031A7 !important;
 }
 .glossarizer_replaced {
-	color: #97BF0D;
+	color: #8031A7;
 }
 .affix {
     top: 60px; /* Set the top position of pinned element */

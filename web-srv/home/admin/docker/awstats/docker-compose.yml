@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  awstats:
+    build:
+      context: ./build
+      dockerfile: Dockerfile
+    image: justb4/awstats:7.6-2
+    # https://hub.docker.com/r/justb4/awstats/dockerfile
+    container_name: awstats
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:50083:80"
+    environment:
+      LANG: fr
+      TZ: "Europe/Paris"
+    volumes:
+      - /var/log/nginx:/var/local/log:ro
+      - ./sites:/etc/awstats/sites:ro
+      - awstats-report-storage:/var/lib/awstats
+
+volumes:
+  awstats-report-storage:
+
+networks:
+  default:
+    external:
+      name: nginx-proxy

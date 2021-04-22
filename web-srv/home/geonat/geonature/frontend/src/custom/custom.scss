@@ -1,16 +1,16 @@
 /* GÉNÉRAL */
 :root {
-	--primary: #A10D59;
-	--secondary: #99B931;
+	--primary: #8031A7;
+	--secondary: #CC1FD3;
 }
 a {
-	color: #A10D59;
+	color: #8031A7;
 }
 a:hover {
-	color: #99B931;
+	color: #CC1FD3;
 }
 a.btn.btn-default:hover{
-	background-color: #EFE0E9;
+	background-color: #CC1FD3;
 }
 
 /* TOOLBAR */
@@ -18,17 +18,18 @@ a.btn.btn-default:hover{
 	background:
 		linear-gradient(
 			to right,
-			rgba(139, 21, 88, 0.4) 0%,
+			rgba(128, 49, 167, 0.4) 0%,
 			whitesmoke 50%,
-			rgba(255, 255, 255, 0) 100%),
-		url('custom/images/toolbar-bg.webp') right bottom/702px 64px no-repeat !important;
+			whitesmoke 65%,
+			rgba(204, 31, 211, 0.4) 100%
+		);
 }
 mat-toolbar#app-toolbar .mat-raised-button,
 mat-toolbar#app-toolbar .mat-icon-button {
  	background-color: transparent !important;
 }
 #appName h3 {
-	color: #A10D59;
+	color: #8031A7;
 	font-weight: 900;
 	font-size: 30px;
 	line-height: 48px;
