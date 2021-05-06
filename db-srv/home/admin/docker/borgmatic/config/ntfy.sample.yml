@@ -1,0 +1,13 @@
+# Set your configuration in ntfy.yml : cp ntfy.sample.yml ntfy.yml
+# To configure Ntfy see: https://github.com/dschep/ntfy
+# This file (ntfy.yml) must be mounted to /root/.config/ntfy/ntfy.yml container location.
+# Exemple to use in borgmatic.yml:
+# hooks:
+#     before_backup:
+#         - ntfy -b pushover -t Borgmatic send "Borgmatic: Backup Starting"
+#     after_backup:
+#         - ntfy -b pushover -t Borgmatic send "Borgmatic: Backup Finished"
+#     on_error:
+#         - ntfy -b pushover -t Borgmatic send "Borgmatic: Backup Error!"
+backends:
+  - telegram

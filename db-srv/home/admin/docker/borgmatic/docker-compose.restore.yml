@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  borgmatic:
+    container_name: borg-restore
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+      - label:disable
+    devices:
+      - /dev/fuse:/dev/fuse
+    command: /bin/sh
