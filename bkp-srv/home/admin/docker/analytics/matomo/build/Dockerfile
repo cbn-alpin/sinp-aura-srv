@@ -1,5 +1,6 @@
 FROM matomo:4.2.1-fpm
 # See : https://github.com/matomo-org/docker/blob/master/fpm/Dockerfile
+# Also see : https://github.com/crazy-max/docker-matomo
 
 ARG MSMTP_OVH_PWD
 
@@ -21,17 +22,19 @@ COPY docker-entrypoint.sh /entrypoint.sh
 COPY matomo_archive.cron /etc/cron.d/matomo_archive
 RUN  chmod 0644 /etc/cron.d/matomo_archive \
 	&& chown root: /etc/cron.d/matomo_archive \
-	&& crontab /etc/cron.d/matomo_archive \
+	&& crontab -u www-data /etc/cron.d/matomo_archive \
+	&& chmod u+s /usr/sbin/cron \
 	&& mkdir -p /var/www/html/tmp/logs/ \
+	&& touch /var/log/cron.log \
 	&& touch /var/www/html/tmp/logs/matomo-archive.log \
 	&& touch /var/www/html/tmp/logs/matomo-archive-errors.log \
 	&& chown www-data: /var/www/html/tmp/logs/matomo-archive*
 
 # Create Msmtp config file
-COPY msmtprc.conf /etc/msmtprc
-RUN sed -i "s/\$MSMTP_OVH_PWD/${MSMTP_OVH_PWD}/g" /etc/msmtprc && \
-	chmod 600 /etc/msmtprc && \
-	chown www-data:www-data /etc/msmtprc
+COPY msmtprc.sample.conf /etc/msmtprc
+RUN sed -i "s/\$MSMTP_OVH_PWD/${MSMTP_OVH_PWD}/g" /etc/msmtprc \
+	&& chmod 600 /etc/msmtprc \
+	&& chown www-data:www-data /etc/msmtprc
 
 # Add /etc/vim/vimrc.local
 RUN echo "runtime! defaults.vim" > /etc/vim/vimrc.local \
