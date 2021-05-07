@@ -21,7 +21,7 @@ services:
       - ${VOLUME_SOURCE}:/mnt/source:ro                         # backup source
       - ${VOLUME_TARGET}:/mnt/borg-repository                   # backup target
       - ${VOLUME_BORG_CONFIG}:/root/.config/borg                # config and keyfiles
-      - ${VOLUME_SSH}:/root/.ssh:ro                             # ssh key for remote repositories
+      - ${VOLUME_SSH}:/root/.ssh                                # ssh key for remote repositories
       - ${VOLUME_BORG_CACHE}:/root/.cache/borg                  # checksums used for deduplication
       - ./config/aliases.txt:/etc/aliases:ro                    # Email aliases for container users (used by Msmtp)
       - ./config/borgmatic.yml:/etc/borgmatic.d/config.yaml     # borgmatic config file
