@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.9"
 
 services:
   manager-portainer:
@@ -14,6 +14,10 @@ services:
     command: --admin-password ${ENCRYPTED_PASSWORD}
     command: -H unix:///var/run/docker.sock
     volumes:
+      # Try to change timezone for "Display timestamps" in log view => but don't work !
+      # See: https://github.com/portainer/portainer/issues/913
+      - /usr/share/zoneinfo/Europe/Paris:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer-storage:/data
 
