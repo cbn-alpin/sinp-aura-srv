@@ -78,11 +78,11 @@ RUN chmod 755 /etc/borgmatic.d/msmtprc.sh \
 
 # Set Cron for borgmatic
 # DON'T USE dot or dash in cron.d script file name howerer the script will never execute.
+# DON'T add this cron file to crontab ! Crontab and /etc/cron.d are distinct ! Run two process !
 COPY ./borgmatic.cron /etc/cron.d/borgmatic
 RUN  chmod 0644 /etc/cron.d/borgmatic \
 	&& chown root: /etc/cron.d/borgmatic \
 	&& sed -i  "s/\${MAILTO}/${MAILTO}/" /etc/cron.d/borgmatic \
-	&& crontab -u root /etc/cron.d/borgmatic \
 	&& chmod u+s /usr/sbin/cron \
 	&& touch /var/log/cron.log
 
