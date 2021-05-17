@@ -1,0 +1,158 @@
+# Set your configuration in borgmatic.yml : cp borgmatic.sample.conf borgmatic.yml
+# Do not forget to set secure permissions on this file as well as on any script listed in hooks section:
+# chmod 0700 borgmatic.yml
+
+
+# Where to look for files to backup, and where to store those backups. See
+# https://borgbackup.readthedocs.io/en/stable/quickstart.html and
+# https://borgbackup.readthedocs.io/en/stable/usage.html#borg-create for details.
+location:
+  # List of source directories to backup (required). Globs and tildes are expanded.
+  source_directories:
+    - /mnt/source/etc
+    - /mnt/source/home
+    - /mnt/source/opt
+    - /mnt/source/root
+    - /mnt/source/usr/local
+  # Stay in same file system (do not cross mount points).
+  one_file_system: true
+  # Mode in which to operate the files cache.
+  # For details, see: https://borgbackup.readthedocs.io/en/stable/usage/create.html#description
+  files_cache: ctime,size,inode
+  # Paths to local or remote repositories (required). Tildes are expanded. Multiple
+  # repositories are backed up to in sequence. See ssh_command for SSH options like
+  # identity file or port.
+  repositories:
+    - ssh://<backup-user>@<bkp-server-private-ip>:<bkp-srv-ssh-port>/path/to/repo/on/bkp/server/
+    - /mnt/borg-repository
+  # Any paths matching these patterns are excluded from backups. Globs and tildes are expanded.
+  # See the output of "borg help patterns" for more details.
+  exclude_patterns:
+    - /mnt/source/home/admin/docker/borgmatic/data/
+    - /mnt/source/root/.borgmatic/
+    - /mnt/source/root/.config/borg
+    - /mnt/source/root/.config/borgmatic
+    - /mnt/source/*/.cache/
+  # Exclude directories that contain a CACHEDIR.TAG file. See
+  # http://www.brynosaurus.com/cachedir/spec.html for details.
+  exclude_caches: true
+  # Exclude directories that contain a file with the given filename.
+  exclude_if_present: .nobackup
+
+
+# Repository storage options. See
+# https://borgbackup.readthedocs.io/en/stable/usage.html#borg-create and
+# https://borgbackup.readthedocs.io/en/stable/usage/general.html#environment-variables for
+# details.
+storage:
+#   Passphase is set in environment variable $BORG_PASSPHRASE
+#   Use .env to set BORG_PASSPHRASE !
+    # Type of compression to use when creating archives. See
+    # https://borgbackup.readthedocs.org/en/stable/usage.html#borg-create for details.
+    # Defaults to no compression.
+    compression: zstd,15
+    # Name of the archive. Borg placeholders can be used. See the output of
+    # "borg help placeholders" for details. Default is
+    # "{hostname}-{now:%Y-%m-%dT%H:%M:%S.%f}". If you specify this option, you must
+    # also specify a prefix in the retention section to avoid accidental pruning of
+    # archives with a different archive name format.
+    archive_name_format: '<instance>-srv-{now}'
+
+# Retention policy for how many backups to keep in each category. See
+# https://borgbackup.readthedocs.org/en/stable/usage.html#borg-prune for details.
+# At least one of the "keep" options is required for pruning to work.
+retention:
+    # Number of hourly archives to keep.
+    keep_hourly: 0
+    # Number of daily archives to keep.
+    keep_daily: 7
+    # Number of weekly archives to keep.
+    keep_weekly: 4
+    # Number of monthly archives to keep.
+    keep_monthly: 6
+    # Number of yearly archives to keep.
+    keep_yearly: 3
+    # When pruning, only consider archive names starting with this prefix.
+    # Borg placeholders can be used. See the output of "borg help placeholders" for
+    # details. Default is "{hostname}-".
+    prefix: '<instance>-srv-'
+
+
+# Consistency checks to run after backups. See
+# https://borgbackup.readthedocs.org/en/stable/usage.html#borg-check and
+# https://borgbackup.readthedocs.org/en/stable/usage.html#borg-extract for details.
+consistency:
+    # List of one or more consistency checks to run: "repository", "archives", and/or
+    # "extract". Defaults to "repository" and "archives". Set to "disabled" to disable
+    # all consistency checks. "repository" checks the consistency of the repository,
+    # "archive" checks all of the archives, and "extract" does an extraction dry-run
+    # of just the most recent archive.
+    checks:
+        - repository
+        - archives
+    # Restrict the number of checked archives to the last n. Applies only to the "archives" check.
+    check_last: 3
+    # When performing the "archives" check, only consider archive names starting with this prefix.
+    # Borg placeholders can be used. See the output of "borg help placeholders" for details.
+    prefix: '<instance>-srv-'
+
+
+# Shell commands or scripts to execute before and after a backup or if an error has occurred.
+# IMPORTANT: All provided commands and scripts are executed with user permissions of borgmatic.
+# Do not forget to set secure permissions on this file as well as on any script listed (chmod 0700) to
+# prevent potential shell injection or privilege escalation.
+hooks:
+    # List of one or more PostgreSQL databases to dump before creating a backup,
+    # run once per configuration file. The database dumps are added to your source directories at
+    # runtime, backed up, and removed afterwards.
+    # Requires pg_dump/pg_dumpall/pg_restore commands.
+    # For details, see:
+    # https://www.postgresql.org/docs/current/app-pgdump.html
+    # https://www.postgresql.org/docs/current/libpq-ssl.html
+    postgresql_databases:
+      # Database name (required if using this hook). Or "all" to dump all databases on the host.
+      # Note that using this database hook implicitly enables both read_special and one_file_system (see
+      # above) to support dump and restore streaming.
+      - name: geonature2db
+        # Database hostname to connect to. Defaults to connecting via local Unix socket.
+        # In Docker container, use host IP (gateway).
+        hostname: 172.18.0.1
+        # Port to connect to. Defaults to 5432.
+        port: 5432
+        # Username with which to connect to the database. Defaults to the username of the current user.
+        username: geonatadmin
+        # Password with which to connect to the database. Omitting a password will only work if PostgreSQL
+        # is configured to trust the configured username without a password, or you create a ~/.pgpass file.
+        password: <db-user-pwd>
+        # Database dump output format. One of "plain", "custom", "directory", or "tar".
+        # Defaults to "custom" (unlike raw pg_dump). See pg_dump documentation for details.
+        # Note that format is ignored when the database name is "all".
+        format: directory
+        # Additional pg_dump/pg_dumpall options to pass directly to the dump command, without performing
+        # any validation on them. See pg_dump documentation for details.
+        options: "--compress 9 --jobs=4"
+      - name: gnatlas
+        hostname: 172.18.0.1
+        port: 5432
+        username: geonatatlas
+        password: <db-user-pwd>
+        format: tar
+    # List of one or more shell commands or scripts to execute before creating a backup.
+    before_backup:
+        # Ping the distant backup repo to check availability
+        - ping -q -c 1 <bkp-server-private-ip> > /dev/null || exit 75
+        # Use of Ntfy with Telegram example.
+        # WARNING: you must configure manually your bot after each container buil/start with:
+        # ntfy -b telegram send "Borgmatic ${HOSTNAME}: test at `date` !"
+        #- "/usr/local/bin/ntfy -b telegram send \"Borgmatic ${HOSTNAME}: starting a backup job at `date` !\""
+        - "/usr/local/bin/telegram-send \"Borgmatic ${HOSTNAME}: starting a backup job at `date` !\""
+    # List of one or more shell commands or scripts to execute after creating a backup.
+    after_backup:
+        # Use of Ntfy with Telegram example.
+        #- "/usr/local/bin/ntfy -b telegram send \"Borgmatic ${HOSTNAME}: backup created at `date` !\""
+        - "/usr/local/bin/telegram-send \"Borgmatic ${HOSTNAME}: backup created at `date` !\""
+    # List of one or more shell commands or scripts to execute in case an exception has occurred.
+    on_error:
+        # Use of Ntfy with Telegram example.
+        #- "/usr/local/bin/ntfy -b telegram send \"Borgmatic ${HOSTNAME}: error while creating a backup at `date` !\""
+        - "/usr/local/bin/telegram-send \"Borgmatic ${HOSTNAME}: error while creating a backup at `date` !\""

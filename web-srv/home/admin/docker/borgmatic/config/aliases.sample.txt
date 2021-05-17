@@ -1,0 +1,2 @@
+root: adminsys@<domaine-sinp>
+default: adminsys@<domaine-sinp>

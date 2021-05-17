@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  borgmatic:
+    container_name: borg-restore
+    restart: "no"
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
+      - label:disable
+    devices:
+      - /dev/fuse:/dev/fuse
+    #volumes:
+    #  - ${VOLUME_SOURCE}:/mnt/source
+    command: /bin/bash

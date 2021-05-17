@@ -1,0 +1,11 @@
+# /etc/cron.d/borgmatic: run directories/databases backups
+# Copy this file into /etc/cron.d/ without .cron extension
+# WARNING: not use "." or "-" in script filename.
+# With this characters, the script will not be executed by Cron !?
+#
+#MAILTO=${MAILTO}
+
+# m h dom mon dow user  command
+# Run borgmatic all days at 1 AM as root user.
+0 2 * * * root . /etc/environment; PATH=$PATH:/usr/bin:/usr/local/bin /usr/local/bin/borgmatic --verbosity 2 --files > /proc/1/fd/1 2>/proc/1/fd/2
+# An empty line is required at the end of this file for a valid cron file.
