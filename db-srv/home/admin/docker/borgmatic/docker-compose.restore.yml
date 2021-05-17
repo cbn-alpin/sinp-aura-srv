@@ -3,6 +3,7 @@ version: "3.9"
 services:
   borgmatic:
     container_name: borg-restore
+    restart: "no"
     cap_add:
       - SYS_ADMIN
     security_opt:
@@ -10,4 +11,6 @@ services:
       - label:disable
     devices:
       - /dev/fuse:/dev/fuse
-    command: /bin/sh
+    #volumes:
+    #  - ${VOLUME_SOURCE}:/mnt/source
+    command: /bin/bash
