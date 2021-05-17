@@ -1,0 +1,8 @@
+data/.cache/
+data/.config/
+data/.ssh/
+data/repository/
+msmtp.env
+config/aliases.txt
+config/borgmatic.yml
+config/ntfy.yml
