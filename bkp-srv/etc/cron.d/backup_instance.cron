@@ -5,11 +5,11 @@
 
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-# MAILFROM doesn't work now, use alternative below
+# MAILFROM doesn't work now => so sending email in script.
 #MAILTO=adminsys@biodiversite-aura.fr
 #MAILFROM=mailer@biodiversite-aura.fr
 
 # Backups instance - Each day at 22:00PM
-0 22 * * * backups /home/backups/bin/backup_instance.sh 2>&1 | mail -s "[Cron] Backups - Instances images" -r "mailer@biodiversite-aura.fr" adminsys@biodiversite-aura.fr
+0 22 * * * backups /home/backups/bin/backup_instance.sh -v > /dev/null 2>&1
 
 # An empty line is required at the end of this file for a valid cron file.
