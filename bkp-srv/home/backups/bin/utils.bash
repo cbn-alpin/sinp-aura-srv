@@ -216,7 +216,15 @@ redirectOutput() {
         mkdir -p "${log_file_dir}"
     fi
 
-    exec 3>&1 4>&2 1>&>(sed -r "s/--> //g") 1>&2>&>(tee -a >(grep -v $'\r' | sed -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g' | sed -r "s/--> /${sep}/g" > "$1"))
+    exec 3>&1 4>&2 1>&>(sed -r "s/--> //g") 1>&2>&>(tee -a >(grep -v $'\r' | sed -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g' | sed -r "s/--> /${sep}/g" > "${log_file}"))
+}
+
+# DESC: Stop redirect output (stdout & stderr) in Terminal and a log file
+#		Restore default outputs.
+# ARGS: None
+# OUTS: None
+stopRedirectOutput() {
+	exec 1>&3 2>&4
 }
 
 # DESC: Check a binary exists in the search path
