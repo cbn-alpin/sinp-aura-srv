@@ -175,15 +175,20 @@ function uploadAllSrvBkpImg() {
 		local image_file_name="${img_file_path##*/}"
 		local image_upload_name="${image_file_name%.*}"
 		local image_srv="${image_upload_name##*_}"
-		printVerbose "\tUpload to ${OS_REGION_NAME} image ${img_file_path} with name ${image_upload_name} and tag ${image_srv}"
-		if [[ -z ${stop_all-} ]] && [[ -z ${stop_upload-} ]]; then
-			openstack image create \
-				--private \
-				--disk-format "${bsi_img_ext}" \
-				--container-format bare \
-				--tag "${image_srv}" \
-				--file "${img_file_path}" \
-				"${image_upload_name}"
+		local found_img_id=$(openstack image list --name "${image_upload_name}" -c ID -f value | tr -d '\n')
+		if [[ -z ${found_img_id-} ]]; then
+			printVerbose "\tUpload to ${OS_REGION_NAME} image ${img_file_path} with name ${image_upload_name} and tag ${image_srv}"
+			if [[ -z ${stop_all-} ]] && [[ -z ${stop_upload-} ]]; then
+				openstack image create \
+					--private \
+					--disk-format "${bsi_img_ext}" \
+					--container-format bare \
+					--tag "${image_srv}" \
+					--file "${img_file_path}" \
+					"${image_upload_name}"
+			fi
+		else
+			printVerbose "\t${image_upload_name} already exist with id ${found_img_id} (nothing to do)"
 		fi
 	done
 }
