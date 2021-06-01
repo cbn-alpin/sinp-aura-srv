@@ -71,6 +71,11 @@ appName = "Biodiv'AURA Expert"
     AUTO_ACCOUNT_CREATION = false
     VALIDATOR_EMAIL = [
             "Ornella KRISTO <o.kristo@cbn-alpin.fr>",
+            "Lucile VAHE <l.vahe@cbn-alpin.fr>",
+            "Carole HEYD <carole.heyd@cbnmc.fr>",
+            "Donovan MAILLARD <donovan.maillard@flavia-ape.fr>",
+            "Julien GIRARD-CLAUDON <julien.girard-claudon@lpo.fr>",
+            "M. CHAUTAN <m.chautan@chasseauvergnerhonealpes.com>",
             "webmaster@biodiversite-aura.fr",
         ]
 	AUTO_DATASET_CREATION = false
@@ -229,7 +234,7 @@ appName = "Biodiv'AURA Expert"
     # cette instance de GeoNature
     DATA_ACCESS_RULES_LINK = "https://biodiversite-aura.fr/"
     # Types zones géo formulaire de demande d'accès.
-    AREA_TYPES = [25, 26, 34]
+    AREA_TYPES = [25, 26, 39]
     # Durée minimum en jour pendant laquelle l'accès est autorisé.
     DEFAULT_ACCESS_DURATION = 30
     # Durée maximum en jour pendant laquelle l'accès peut être autorisé.
@@ -237,13 +242,18 @@ appName = "Biodiv'AURA Expert"
     # Email du validateur des permissions d'accès.
     VALIDATOR_EMAIL = [
             "Ornella KRISTO <o.kristo@cbn-alpin.fr>",
+            "Lucile VAHE <l.vahe@cbn-alpin.fr>",
+            "Carole HEYD <carole.heyd@cbnmc.fr>",
+            "Donovan MAILLARD <donovan.maillard@flavia-ape.fr>",
+            "Julien GIRARD-CLAUDON <julien.girard-claudon@lpo.fr>",
+            "M. CHAUTAN <m.chautan@chasseauvergnerhonealpes.com>",
             "webmaster@biodiversite-aura.fr",
         ]
 
     # Activer la validation de la convention suite à une demande d'accès
     ENABLE_CONVENTION = true
     # Titre de la fenêtre modale affichant la convention
-    CONVENTION_TITLE = "Convention « Droit d'accès ponctuel aux données confidentielles »"
+    CONVENTION_TITLE = "Convention « Droit d'accès ponctuel aux données précises de Biodiv’AURA Expert »"
     # Libellé du bouton permettant d'accepter la convention
     CONVENTION_VALIDATE = "J'accepte les termes de la convention « droit d'accès »."
 
@@ -267,15 +277,14 @@ appName = "Biodiv'AURA Expert"
         icon_set = "fa"
         values = [
                 "Végétal",
-                "Animal (Vertébrés et Invertébrés)",
-                "Animal (Vertébrés)",
                 "Animal (Invertébrés)",
-                "Végétal et Animal",
+                "Végétal et Animal (Invertébrés)",
             ]
         required = true
         help = """Veuillez indiquer le règne des taxons
             concernés par votre étude et pour lesquels vous demandez
-            un accès précis."""
+            un accès précis. Pour rappel, les données de faune vertébrée
+            sont accessibles à la précision maximale sans demande d'accès."""
     [[PERMISSION_MANAGEMENT.REQUEST_FORM]]
         type_widget = "text"
         attribut_label = "Organisme"
