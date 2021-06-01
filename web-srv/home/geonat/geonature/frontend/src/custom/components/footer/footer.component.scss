@@ -1,13 +1,20 @@
 footer.footer {
 	background-color: #dce3e7;
 	border-top: none;
+  margin: 0 0 20px 0;
 }
 footer {
 	.panel-body {
 		text-align: center;
 	}
+  .logo-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #54595F;
+  }
 	.img-thumbnail {
 		margin: .25rem;
+    border-color: white;
 	}
 	.img-thumbnail:hover {
 		border-color: #8031A7;
@@ -15,39 +22,47 @@ footer {
 	.text-muted {
 		text-transform: none !important;
 	}
-	.pole-panel.col-md-4 {
-		flex: 0 0 32%;
-	}
-	.pole-panel {
-		box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
-		margin: 5px;
-		border-radius: 5px;
-		padding: 10px;
-		background-color: white;
-		height: 466px;
-		max-width: 350px;
-	}
-	.pole-organism a {
-		display: inline-block;
-		min-height: 146px;
-		padding: .25rem;
-	}
-	.pole-panel-invertebre .pole-organism a {
-		max-width: 75%;
-	}
-	.pole-organism, .pole-contact {
-		margin-top: 20px;
-	}
-	.pole-contact {
-		.icon-circle {
-			display: inline-block;
-			border: 3px solid #8031A7;
-			border-radius: 50%;
-			padding: .4rem;
-			font-size: 10px;
-		}
-		a:hover {
-			border-color: #CC1FD3 !important;
-		}
-	}
+  .col-logos {
+    padding: 15px;
+  }
+  .col-pilots .logo-title {
+    padding: 0 5px;
+  }
+  // Medium devices (desktops, 992px and up) = @screen-md-min
+  @media (min-width: 992px) {
+    .col-pilots {
+      border-left: #8031A7 1px solid;
+      border-right: #8031A7 1px solid;
+    }
+  }
+  // Smal devices
+  @media (min-width: 768px) {
+    .logos-pilots .col-md-4 {
+      padding-right: 5px !important;
+      padding-left: 5px !important;
+    }
+    .logos-operators .col-md-2 {
+      padding-right: 5px !important;
+      padding-left: 5px !important;
+      flex: 0 0 20%;
+      max-width: 20%;
+    }
+  }
+}
+
+.modal-body {
+  address {
+    border: 1px solid #ddd;
+    border-left: 5px solid #ddd;
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 10px 20px;
+  }
+  blockquote {
+    font-family: 'Courier New', Courier, monospace;
+    border: 1px solid #eee;
+    border-left: 5px solid #eee;
+    border-radius: 5px;
+    padding: 10px 20px;
+  }
 }
