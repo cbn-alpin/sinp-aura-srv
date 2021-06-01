@@ -346,7 +346,7 @@ appName = "Biodiv'AURA Expert"
     # Correspondance entre les niveau de sensibilité (nomenclaure SENSIBILITE)
     # et un type de zone géographique utilisée pour le rendu sur les cartes.
     AREA_TYPE_FOR_SENSITIVITY_LEVELS = [
-            {level = "1", area = "M10"},# Commune
-            {level = "2", area = "M10"},# Maille
-            {level = "3", area = "M10"},# Département
+            {level = "1", area = "M5"},# Commune
+            {level = "2", area = "M5"},# Maille
+            {level = "3", area = "M5"},# Département
         ]
