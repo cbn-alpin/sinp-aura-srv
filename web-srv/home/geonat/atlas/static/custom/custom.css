@@ -57,8 +57,14 @@ a.btn.btn-default:hover{
 }
 
 /* FOOTER */
+.footer {
+	margin-left: 0;
+}
 .footer .img-thumbnail {
 	margin: .25rem;
+	height: auto;
+    max-width: 100%;
+	border-color: white;
 }
 .footer .img-thumbnail:hover {
 	border-color: #8031A7;
@@ -66,31 +72,43 @@ a.btn.btn-default:hover{
 .footer .text-muted {
 	text-transform: none !important;
 }
-.footer .pole-panel.col-md-4 {
-	width: 32%;
+.footer .logo-title {
+    font-size: 15px;
+    font-weight: 600;
+	color: #54595F;
 }
-.pole-panel {
+.footer .col-logos {
+	padding: 15px;
+}
+/* Medium devices (desktops, 992px and up) = @screen-md-min */
+@media (min-width: 992px) {
+	.footer .col-pilots {
+		border-left: #8031A7 1px solid;
+		border-right: #8031A7 1px solid;
+	}
+}
+.footer .col-pilots .logo-title {
+	padding: 0 5px;
+}
+.footer .logos-pilots .col-xs-4 {
+	padding-right: 5px !important;
+	padding-left: 5px !important;
+	width: 32%;
+	line-height: 150px;
+}
+.footer .logos-operators .col-xs-2 {
+	padding-right: 5px !important;
+	padding-left: 5px !important;
+	width: 19.6%;
+	line-height: 150px;
+}
+.footer .logos-panel {
 	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 	margin: 5px;
 	border-radius: 5px;
 	padding: 10px;
 	background-color: white;
-	height: 450px;
 }
-.footer .pole-organism, .footer .pole-contact {
-	margin-top: 20px;
-}
-.footer .pole-contact .icon-circle {
-	display: inline-block;
-	border: 3px solid #8031A7;
-	border-radius: 50%;
-	padding: .4rem;
-	font-size: 10px;
-}
-.footer .pole-contact a:hover {
-	border-color: #CC1FD3 !important;
-}
-
 
 /* FICHE ESPECE */
 
