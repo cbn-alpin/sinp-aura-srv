@@ -58,7 +58,10 @@ a.btn.btn-default:hover{
 
 /* FOOTER */
 .footer {
+	padding-left: 75px;
+	padding-right: 15px;
 	margin-left: 0;
+    margin-top: 25px;
 }
 .footer .img-thumbnail {
 	margin: .25rem;

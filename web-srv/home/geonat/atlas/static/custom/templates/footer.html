@@ -138,6 +138,38 @@
 	</div>
 </div>
 
+<!-- Script to avoid map layering on footer -->
+<script>
+	// Check "Commune" Map position to avoid layering on footer
+	function checkFooterOffset() {
+		const footerTopMargin = parseInt($('footer.footer').css('marginTop').replace('px', ''));
+		const footerTopPosition = $('footer.footer').offset().top;
+		const stopFixedPosition = footerTopPosition - footerTopMargin;
+		const mapHeight = $('#mapWrapper').height();
+
+		// Set "absolute" position to avoid layering on footer
+		if (($('#mapContainer').offset().top + mapHeight)  >= stopFixedPosition) {
+			const mapAbsoluteTopPosition = footerTopPosition - footerTopMargin - mapHeight;
+			$('#mapWrapper').css({
+				'position': 'absolute',
+				'top': mapAbsoluteTopPosition + 'px',
+			});
+		}
+
+		// Restore "fixed" position when you scroll up
+		if ($(document).scrollTop() + window.innerHeight < footerTopPosition) {
+			$('#mapWrapper').css({
+				'position': 'fixed',
+				'top': '',
+			});
+		}
+	}
+
+	$(document).scroll(function() {
+		checkFooterOffset();
+	});
+</script>
+
 {% if configuration.ID_GOOGLE_ANALYTICS != "UA-xxxxxxx-xx" %}
 <!-- Script Google Analytics -->
 <script>
