@@ -13,3 +13,5 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 0 2 * * * admin /opt/bkp2dbx/sync2dbx.sh "/home/admin/.dropbox_uploader" "system-web" "/home/admin/backups/system/*.tar.bz2" 2>&1 | mail -s "[Cron] Bkp2dbx - System Web" -r "mailer@silene.eu" adminsys@silene.eu
 # Grafana - First day of each month at 1AM
 0 1 1 * * admin /opt/bkp2dbx/bkp2dbx.sh "grafana" "/home/admin/docker/monitor.silene.eu/grafana/backup/*.tar.gz" "/home/admin/.dropbox_uploader" 2>&1 | mail -s "[Cron] Bkp2dbx - Grafana" -r "mailer@cbn-alpin.fr" adminsys@silene.eu
+
+# An empty line is required at the end of this file for a valid cron file.

@@ -13,3 +13,5 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 1 0 1 * * admin /usr/local/bin/docker-compose run monitor-grafana-backup 2>&1 | mail -s "[Cron] Backups - Grafana" -r "mailer@silene.eu" adminsys@silene.eu
 # System - Each day at 01:00AM
 00 1 * * * admin /home/admin/bin/backup_system.sh 2>&1 | mail -s "[Cron] Backups - System Web" -r "mailer@silene.eu" adminsys@silene.eu
+
+# An empty line is required at the end of this file for a valid cron file.
