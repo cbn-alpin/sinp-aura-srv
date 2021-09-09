@@ -1,0 +1,33 @@
+.container {
+	display: flex;
+	align-items: start;
+	justify-content: start;
+	height: 98vh;
+	background: url('background.jpg') no-repeat center center fixed;
+	background-size: cover;
+}
+main {
+	max-width: 800px;
+	padding: 1rem;
+	margin: 50px;
+	background: linear-gradient(to right,rgba(128,49,167,.5) 0, rgba(245,245,245,.8) 20%,rgba(245,245,245,.8) 65%,rgba(204,31,211,.4) 100%);
+	border: 1px solid rgba(128,49,167,.4);
+	border-radius: 0.4rem;
+}
+h1 {
+	font-size: 1.5rem;
+	text-align: center;
+}
+.logo {
+	float: right;
+}
+.info {
+	font-size: 1.2rem;
+	text-align: center;
+}
+
+@media (min-width: 768px) {
+	main {
+		padding-left: 100px;
+	}
+}
