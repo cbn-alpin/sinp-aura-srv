@@ -3,12 +3,13 @@ body {
 		"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
 		"Fira Sans", "Droid Sans", "Helvetica Neue",
 		sans-serif;
+		margin: 8px;
 }
 .container {
 	display: flex;
 	align-items: start;
 	justify-content: start;
-	height: 98vh;
+	height: calc(100vh - 16px);
 	background: url('background.webp') no-repeat center center fixed;
 	background-size: cover;
 }
@@ -34,10 +35,13 @@ h1 {
 }
 .logo {
 	float: right;
+	background: rgba(255,255,255,.7);
+	height: 150px;
+	border-radius: 50%;
 }
 .info {
 	font-size: 1.2rem;
-	text-align: center;
+	text-align: left;
 }
 .bkg-legend {
 	position: absolute;
