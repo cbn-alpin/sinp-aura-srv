@@ -169,6 +169,12 @@ appName = "Biodiv'AURA Expert"
 
 # Configuration de la Synthese
 [SYNTHESE]
+    # Liste des entités géographiques sur lesquelles les filtres géographiques de la synthese s'appuient 
+    # (id_area = id de l'entité géo, table ref_geo.bib_areas_types).
+    AREA_FILTERS = [ 
+        { label = "Communes", id_type = 25 },
+        { label = "Départements", id_type = 26 },
+    ]
     # Nombre d'observation maximum à afficher sur la carte après une recherche
     NB_MAX_OBS_MAP = 100000
     # Nombre des dernières observations affichées par défaut quand on arrive sur la synthese
