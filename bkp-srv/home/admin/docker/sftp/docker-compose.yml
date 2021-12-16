@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  sftp:
+    image: atmoz/sftp:debian
+    container_name: sftp
+    ports:
+      - "${HOST_SSH_PORT}:22"
+    networks:
+      - nginx-proxy
+    restart: unless-stopped
+    volumes:
+      - ./ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key:ro
+      - ./ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key:ro
+      - /home/provider/data:/home/data
+    command: ${SFTP_USER_NAME}:${SFTP_USER_PWD}:${HOST_USER_UID}:${HOST_USER_GID}
+
+networks:
+  nginx-proxy:
+    external: true
