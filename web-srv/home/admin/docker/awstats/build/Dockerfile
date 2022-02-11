@@ -5,7 +5,7 @@ LABEL	maintainer="Jean-Pascal Milcent <jp.milcent@cbn-alpin.fr>" \
 		source="https://hub.docker.com/r/justb4/awstats/dockerfile"
 
 # Install utils
-RUN apt-get update \
+RUN apt-get update --allow-releaseinfo-change \
 	&& apt-get install -y --no-install-recommends \
 		apt-utils less vim \
 	&& rm -rf /var/lib/apt/lists/*
