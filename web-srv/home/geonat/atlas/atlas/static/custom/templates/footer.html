@@ -114,7 +114,7 @@
 
 	<div id="clear">
 		<p class="text-muted">
-			{{configuration.NOM_APPLICATION}} - {{configuration.STRUCTURE}}, 2019-2021
+			{{configuration.NOM_APPLICATION}} - {{configuration.STRUCTURE}}, 2019-2022
 			<br/>
 			Réalisé avec
 			<a href="https://github.com/PnX-SI/GeoNature-atlas" target="_blank">GeoNature-atlas</a>,
@@ -125,50 +125,20 @@
 </footer>
 
 <div class="modal fade text-center" id="modalCredits">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
+			{% include 'static/custom/templates/credits.html' %}
 		</div>
 	</div>
 </div>
 
 <div class="modal fade text-center" id="modalMentions">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
+			{% include 'static/custom/templates/mentions-legales.html' %}
 		</div>
 	</div>
 </div>
-
-<!-- Script to avoid map layering on footer -->
-<script>
-	// Check "Commune" Map position to avoid layering on footer
-	function checkFooterOffset() {
-		const footerTopMargin = parseInt($('footer.footer').css('marginTop').replace('px', ''));
-		const footerTopPosition = $('footer.footer').offset().top;
-		const stopFixedPosition = footerTopPosition - footerTopMargin;
-		const mapHeight = $('#mapWrapper').height();
-
-		// Set "absolute" position to avoid layering on footer
-		if (($('#mapContainer').offset().top + mapHeight)  >= stopFixedPosition) {
-			const mapAbsoluteTopPosition = footerTopPosition - footerTopMargin - mapHeight;
-			$('#mapWrapper').css({
-				'position': 'absolute',
-				'top': mapAbsoluteTopPosition + 'px',
-			});
-		}
-
-		// Restore "fixed" position when you scroll up
-		if ($(document).scrollTop() + window.innerHeight < footerTopPosition) {
-			$('#mapWrapper').css({
-				'position': 'fixed',
-				'top': '',
-			});
-		}
-	}
-
-	$(document).scroll(function() {
-		checkFooterOffset();
-	});
-</script>
 
 {% if configuration.ID_GOOGLE_ANALYTICS != "UA-xxxxxxx-xx" %}
 <!-- Script Google Analytics -->

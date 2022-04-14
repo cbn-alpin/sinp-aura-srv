@@ -18,6 +18,9 @@ a:hover {
 a.btn.btn-default:hover{
 	background-color: #F7F9EC !important;
 }
+#page {
+	min-height: 93vh;
+}
 
 /* NAVBAR */
 .navbar {

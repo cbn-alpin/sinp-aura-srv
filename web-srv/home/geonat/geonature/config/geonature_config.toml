@@ -1,4 +1,4 @@
-###############################################################################
+##############################################################################
 # NOTES : après toute modification dans ce fichier, il est nécessaire de
 #         mettre à jour GeoNature à l'aide de la commande :
 #         'geonature update_configuration'
@@ -19,9 +19,6 @@ API_TAXHUB = "https://taxons.biodiversite-aura.fr/api"
 # Remplacer par une clé alétoire complexe
 SECRET_KEY = "<secret-key>"
 
-# Code EPSG des geométries dans la BDD
-LOCAL_SRID = "2154"
-
 # Langue principale par défaut
 DEFAULT_LANGUAGE = "fr"
 
@@ -30,6 +27,9 @@ MAIL_ON_ERROR = true
 
 # Nom de l'application dans la page d'accueil.
 appName = "Biodiv'AURA Expert"
+
+[ALEMBIC]
+VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
 
 #######################################################################################
 ###### Si vous souhaitez surcoucher certains paramètres,
@@ -40,20 +40,20 @@ appName = "Biodiv'AURA Expert"
 # TODO: revoir la config pour utiliser le serveur Postfix local
 [MAIL_CONFIG]
     # COnfig with local Postfix SMTP relay to OVH:
-	MAIL_SERVER = "localhost"
+    MAIL_SERVER = "localhost"
     MAIL_PORT = 25
     MAIL_USE_TLS = false
     MAIL_USE_SSL = false
     MAIL_USERNAME = ""
     MAIL_PASSWORD = ""
-	# Config with OVH SMTP:
+    # Config with OVH SMTP:
     # MAIL_SERVER = "ssl0.ovh.net"
     # MAIL_PORT = 587
     # MAIL_USE_TLS = true
     # MAIL_USE_SSL = false
     # MAIL_USERNAME = "<email-username>"
     # MAIL_PASSWORD = "<email-password>"
-    MAIL_DEFAULT_SENDER = "<email-default-sender>"
+    MAIL_DEFAULT_SENDER = "Ne Pas Réponde <email-default-sender>"
     MAIL_ASCII_ATTACHMENTS = false
     # email(s) to the administrator for the email logging
     ERROR_MAIL_TO = ["<email-error>"]
@@ -65,6 +65,12 @@ appName = "Biodiv'AURA Expert"
     ADMIN_APPLICATION_LOGIN = "<user-admin-login>"
     ADMIN_APPLICATION_PASSWORD = "<user-admin-password>"
 
+# Configuration de l'accès sans authentification
+[PUBLIC_ACCESS]
+    ENABLE_PUBLIC_ACCESS = true
+    PUBLIC_LOGIN = "user-public"
+    PUBLIC_PASSWORD = "<mot-de-passe>"
+
 # Gestion des demandes d'inscription
 [ACCOUNT_MANAGEMENT]
     ENABLE_SIGN_UP = true
@@ -72,13 +78,13 @@ appName = "Biodiv'AURA Expert"
     VALIDATOR_EMAIL = [
             "Ornella KRISTO <o.kristo@cbn-alpin.fr>",
             "Lucile VAHE <l.vahe@cbn-alpin.fr>",
-            "Carole HEYD <carole.heyd@cbnmc.fr>",
+            "sinp@cbnmc.fr",
             "Donovan MAILLARD <donovan.maillard@flavia-ape.fr>",
             "Julien GIRARD-CLAUDON <julien.girard-claudon@lpo.fr>",
             "M. CHAUTAN <m.chautan@chasseauvergnerhonealpes.com>",
             "webmaster@biodiversite-aura.fr",
         ]
-	AUTO_DATASET_CREATION = false
+    AUTO_DATASET_CREATION = false
     ENABLE_USER_MANAGEMENT = true
     ADDON_USER_EMAIL = """<p>
         Nous vous rappelons que cette inscription vous donne accès à la consultation
@@ -143,8 +149,15 @@ appName = "Biodiv'AURA Expert"
     # Affiche la carte des 100 obs sur la page d'accueil
     DISPLAY_MAP_LAST_OBS = false
 
+    # Durée de vie du cache des stats de la page d'accueil
+    # 864 000 = 10 jours
+    STAT_BLOC_TTL = 864000
+
     # Affiche le composant 'custom/components/footer' sur la page d'accueil
     DISPLAY_FOOTER = true
+
+    # Activer l'affichage des informations liées aux profils de taxons
+    ENABLE_PROFILES = true
 
 # Configuration cartographique
 [MAPCONFIG]
@@ -169,11 +182,11 @@ appName = "Biodiv'AURA Expert"
 
 # Configuration de la Synthese
 [SYNTHESE]
-    # Liste des entités géographiques sur lesquelles les filtres géographiques de la synthese s'appuient 
+    # Liste des entités géographiques sur lesquelles les filtres géographiques de la synthese s'appuient
     # (id_area = id de l'entité géo, table ref_geo.bib_areas_types).
-    AREA_FILTERS = [ 
-        { label = "Communes", id_type = 25 },
-        { label = "Départements", id_type = 26 },
+    AREA_FILTERS = [
+        { label = "Communes", type_code = "COM" },
+        { label = "Départements", type_code = "DEP" },
     ]
     # Nombre d'observation maximum à afficher sur la carte après une recherche
     NB_MAX_OBS_MAP = 100000
@@ -206,7 +219,6 @@ appName = "Biodiv'AURA Expert"
 
     # Noms des colonnes obligatoires de la vue ``gn_synthese.v_metadata_for_export``
     EXPORT_METADATA_ID_DATASET_COL = "jdd_id"
-    EXPORT_METADATA_ACTOR_COL = "acteurs"
 
     # Champs à afficher dans l'export
     # Voir les noms des champs de la ``vue gn_synthese.v_synthese_for_export``
@@ -236,11 +248,8 @@ appName = "Biodiv'AURA Expert"
     ENABLE_ACCESS_REQUEST = true
     # Activer la possibilité de demander l'accès aux données sensibles.
     ENABLE_SENSITIVE_ACCESS = true
-    # Lien vers les règles d'accès aux observations sensibles propres à
-    # cette instance de GeoNature
-    DATA_ACCESS_RULES_LINK = "https://biodiversite-aura.fr/"
     # Types zones géo formulaire de demande d'accès.
-    AREA_TYPES = [25, 26, 39]
+    AREA_TYPES = ["COM", "DEP", "SINP"]
     # Durée minimum en jour pendant laquelle l'accès est autorisé.
     DEFAULT_ACCESS_DURATION = 30
     # Durée maximum en jour pendant laquelle l'accès peut être autorisé.
@@ -249,7 +258,7 @@ appName = "Biodiv'AURA Expert"
     VALIDATOR_EMAIL = [
             "Ornella KRISTO <o.kristo@cbn-alpin.fr>",
             "Lucile VAHE <l.vahe@cbn-alpin.fr>",
-            "Carole HEYD <carole.heyd@cbnmc.fr>",
+            "sinp@cbnmc.fr",
             "Donovan MAILLARD <donovan.maillard@flavia-ape.fr>",
             "Julien GIRARD-CLAUDON <julien.girard-claudon@lpo.fr>",
             "M. CHAUTAN <m.chautan@chasseauvergnerhonealpes.com>",
@@ -356,3 +365,4 @@ appName = "Biodiv'AURA Expert"
             {level = "2", area = "M5"},# Maille
             {level = "3", area = "M5"},# Département
         ]
+

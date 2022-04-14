@@ -9,9 +9,7 @@ modeDebug = False
 database_connection = "postgresql://<user>:<password>@10.0.1.20:5432/gnatlas"
 
 #################################
-#################################
 ### CUSTOMISATION APPLICATION ###
-#################################
 #################################
 
 # Nom de la structure
@@ -22,8 +20,46 @@ NOM_APPLICATION = "Biodiv'AURA Atlas"
 
 # URL de l'application depuis la racine du domaine
 # ex "/atlas" pour une URL: http://mon-domaine/atlas OU "" si l'application est accessible à la racine du domaine
-URL_APPLICATION = "http://atlas.biodiversite-auvergne-rhone-alpes.fr/"
+URL_APPLICATION = "http://atlas.biodiversite-auvergne-rhone-alpes.fr"
 
+#################################
+###### Modules activation #######
+#################################
+
+# Enable organism module : organism sheet + organism participation on species sheet
+ORGANISM_MODULE = False
+
+###########################
+###### Multilingual #######
+###########################
+
+# Default language, also used when multilingual is disabled
+DEFAULT_LANGUAGE = 'fr'
+
+# Activate multilingual
+MULTILINGUAL = False
+
+# Available languages
+# Don't delete, even if you disable MULTILINGUAL
+# You need to add your own default language (DEFAULT_LANGUAGE) here if it's not present
+# Check documentation to add another language
+LANGUAGES = {
+    'en': {
+        'name' : 'English',
+        'flag_icon' : 'flag-icon-gb',
+        'months' : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        },
+    'fr': {
+        'name' : 'Français',
+        'flag_icon' : 'flag-icon-fr',
+        'months' : ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre']
+        },
+    'it': {
+        'name' : 'Italiano',
+        'flag_icon' : 'flag-icon-it',
+        'months' : ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre']
+        }
+}
 
 ###########################
 ###### CARTOGRAPHIE #######
@@ -68,6 +104,10 @@ TEXT_LAST_OBS = 'Les observations de l\'année écoulée |'
 # Carte de la fiche commune: nombre des 'x' dernières observations affichées
 NB_LAST_OBS=500
 
+# Temps en seconde de la durée du cache
+# utilisé pour les statistiques de la page d'accueil (stats global et rang taxonomique)
+# à synchroniser avec le raffraichissement des VM
+CACHE_TIMEOUT = 31536000
 
 ###########################
 ###### PAGE ACCUEIL #######
@@ -87,6 +127,12 @@ AFFICHAGE_DERNIERES_OBS = False
 
 # Bloc avec espèces à voir en ce moment. Affichage True/False
 AFFICHAGE_EN_CE_MOMENT = True
+
+# Bloc des logos des partenaires
+AFFICHAGE_LOGOS_HOME = False
+
+# Bloc des nouvelles espèces
+AFFICHAGE_NOUVELLES_ESPECES = False
 
 # Bloc stats par rangs
 AFFICHAGE_RANG_STAT = True
@@ -130,6 +176,16 @@ SPLIT_NOM_VERN = True
 # Permet de lister les pages statiques souhaitées et de les afficher dynamiquement dans le menu sidebar
 # Les pictos se limitent au Glyphicon proposés par Bootstrap (https://getbootstrap.com/docs/3.3/components/)
 STATIC_PAGES = {
-    'presentation': {'title': "Présentation", 'picto': 'glyphicon-question-sign', 'order': 0, 'template': 'static/custom/templates/presentation.html'}
+    'presentation': {
+        'title': "Présentation",
+        'picto': 'fa-question-circle',
+        'order': 0,
+        'template': 'static/custom/templates/presentation.html'
+    }
 }
 
+###########################
+#### Security  Config #####
+###########################
+
+SECRET_KEY = '<secret-key>'
