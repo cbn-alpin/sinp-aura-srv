@@ -256,6 +256,10 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
         "sensibilite",
         "confidentialite",
     ]
+    ENABLE_AREA_AGGREGATION = false
+    AREA_AGGREGATION_TYPE = "M10"
+    AREA_AGGREGATION_BY_DEFAULT = false
+
 
 [PERMISSION_MANAGEMENT]
     # Activer (=true) l'affichage du lien vers le formulaire de demande
