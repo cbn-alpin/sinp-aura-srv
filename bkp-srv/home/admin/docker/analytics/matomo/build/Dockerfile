@@ -1,4 +1,4 @@
-FROM matomo:4.8.0-fpm
+FROM matomo:4.12.3-fpm
 # See : https://github.com/matomo-org/docker/blob/master/fpm/Dockerfile
 # Also see : https://github.com/crazy-max/docker-matomo
 
@@ -19,16 +19,19 @@ COPY docker-entrypoint.sh /entrypoint.sh
 
 # Set Cron for Matomo archive
 # DON'T USE dot or dash in cron.d script file name howerer the script will never execute.
+# DON'T USE crontab because it's distinc of use of cron.d directory (service cron) !
 COPY matomo_archive.cron /etc/cron.d/matomo_archive
 RUN  chmod 0644 /etc/cron.d/matomo_archive \
 	&& chown root: /etc/cron.d/matomo_archive \
-	&& crontab -u www-data /etc/cron.d/matomo_archive \
 	&& chmod u+s /usr/sbin/cron \
 	&& mkdir -p /var/www/html/tmp/logs/ \
 	&& touch /var/log/cron.log \
 	&& touch /var/www/html/tmp/logs/matomo-archive.log \
 	&& touch /var/www/html/tmp/logs/matomo-archive-errors.log \
 	&& chown www-data: /var/www/html/tmp/logs/matomo-archive*
+
+# WARNING : to avoid empty matomo-archive.log. Matomo console:archive needs this file to work !
+RUN printenv > /etc/environment
 
 # Create Msmtp config file
 COPY msmtprc.sample.conf /etc/msmtprc

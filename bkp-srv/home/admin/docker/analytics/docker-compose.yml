@@ -1,8 +1,8 @@
-version: "3.7"
+version: "3.9"
 
 services:
   analytics-nginx:
-    image: nginx:1.20.2
+    image: nginx:1.22.1
     # https://hub.docker.com/_/nginx
     container_name: analytics-nginx
     restart: unless-stopped
@@ -18,7 +18,7 @@ services:
     build:
       context: ./matomo/build
       dockerfile: Dockerfile
-    image: matomo:4.8.0-fpm
+    image: matomo:4.12.3-fpm
     # https://hub.docker.com/_/matomo
     container_name: analytics-matomo
     restart: unless-stopped
@@ -40,7 +40,7 @@ services:
       - matomo-storage:/var/www/html
 
   analytics-mariadb:
-    image: mariadb:10.4.24
+    image: mariadb:10.4.27
     # https://hub.docker.com/_/mariadb
     container_name: analytics-mariadb
     restart: unless-stopped
