@@ -1,21 +1,21 @@
-FROM debian:10.9-slim AS builder
+FROM debian:11.5-slim AS builder
 # Builder to avoid to embed develop files
 
 LABEL mainainer="Jean-Pascal MILCENT"
 LABEL source="https://github.com/b3vis/docker-borgmatic"
 
 # Borg releases: https://www.borgbackup.org/releases/
-ARG BORG_VERSION=1.1.16
+ARG BORG_VERSION=1.1.18
 # Borgmatic releases: see https://github.com/witten/borgmatic
-ARG BORGMATIC_VERSION=1.5.12
+ARG BORGMATIC_VERSION=1.5.24
 # LlFuse releases: https://pypi.org/project/llfuse/
-ARG LLFUSE_VERSION=1.4.1
+ARG LLFUSE_VERSION=1.4.2
 
 # Install dev packages
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		apt-utils \
-    	python3 python3-dev python3-pip python-virtualenv \
+    	python3 python3-dev python3-pip python3-virtualenv \
      	libssl-dev openssl \
 		libacl1-dev libacl1 \
 		build-essential \
@@ -29,7 +29,7 @@ RUN apt-get update \
 	&& python3 -m pip install --upgrade ntfy[pid,emoji,xmpp,telegram,instapush,slack,rocketchat]
 
 
-FROM debian:10.9-slim
+FROM debian:11.5-slim
 LABEL mainainer="Jean-Pascal MILCENT"
 
 ARG MAILTO
@@ -42,24 +42,24 @@ ENV LC_ALL fr_FR.UTF-8
 # WARNING: use same postgresql-client package that the host server !
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		apt-utils locales less curl wget vim sudo cron iputils-ping gnupg \
+		lsb-release apt-utils locales less curl wget vim sudo cron iputils-ping gnupg \
 		msmtp msmtp-mta bsd-mailx mailutils \
     	tzdata \
 		sshfs \
 		python3 \
 		openssl \
 		ca-certificates \
-		fuse \
+		fuse3 \
 		lz4 \
 		libacl1 \
 		#mariadb-client \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Add postresql deb package repo
-RUN echo deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main >> /etc/apt/sources.list.d/pgdg.list \
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list \
 	&& wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - \
 	&& apt-get update \
-	&& apt-get install -y --no-install-recommends postgresql-client-12 \
+	&& apt-get install -y --no-install-recommends postgresql-client-15 \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Set the locale
