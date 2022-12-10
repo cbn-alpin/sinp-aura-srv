@@ -99,7 +99,7 @@ COPY ./telegram-send.sh /usr/local/bin/telegram-send
 
 # Copy file from "builder" image
 #COPY --from=builder /usr/lib/python3/dist-packages /usr/lib/python3/
-COPY --from=builder /usr/local/lib/python3.7/dist-packages /usr/local/lib/python3.7/dist-packages
+COPY --from=builder /usr/local/lib/python3.9/dist-packages /usr/local/lib/python3.9/dist-packages
 COPY --from=builder /usr/local/bin/borg /usr/local/bin/
 COPY --from=builder /usr/local/bin/borgfs /usr/local/bin/
 COPY --from=builder /usr/local/bin/borgmatic /usr/local/bin/
