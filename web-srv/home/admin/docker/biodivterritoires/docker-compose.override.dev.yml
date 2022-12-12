@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  biodivterritoires-app:
+    image: lpoaura/geonature-biodivterritoires:orb_aura
+    container_name: biodivterritoires-app
+    env_file:
+      - .env.dev
+    environment:
+      DEBUG: "true"

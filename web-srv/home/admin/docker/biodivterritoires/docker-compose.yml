@@ -1,0 +1,56 @@
+# Usage :
+# - for dev : `docker compose --env-file .env.dev -f docker-compose.yml -f docker-compose.override.dev.yml up` with `.env.dev` file.
+# - for prod : `docker compose -f docker-compose.yml up -d` with `.env` file.
+version: "3.9"
+
+services:
+
+  biodivterritoires-redis:
+    image: redis:7.0.5-bullseye
+    container_name: biodivterritoires-redis
+    restart: always
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      interval: 20s
+      timeout: 60s
+      start_period: 15s
+    networks:
+      - biodivterritoire-net
+    volumes:
+      - redis-storage:/data
+
+  biodivterritoires-app:
+    image: lpoaura/geonature-biodivterritoires:orb_aura
+    build:
+      context: ./build
+      dockerfile: Dockerfile
+    container_name: biodivterritoires-app
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-s", "-f", "-i", "http://localhost:8080/"]
+      interval: 20s
+      timeout: 60s
+      start_period: 15s
+    environment:
+      REDIS_HOST: "biodivterritoires-redis"
+      # Specific parameters for proxy (https://hub.docker.com/r/jwilder/nginx-proxy)
+      VIRTUAL_HOST: ${DOMAINS:-territoires.biodiversite-aura.fr}
+      LETSENCRYPT_HOST: ${DOMAINS:-territoires.biodiversite-aura.fr}
+    ports:
+      - ${APP_PORT:-8080}:8080
+    depends_on:
+      - biodivterritoires-redis
+    networks:
+      - biodivterritoire-net
+      - default
+    volumes:
+      - ./custom:/app/app/static/custom/assets
+
+volumes:
+  redis-storage:
+
+networks:
+  default:
+    name: nginx-proxy
+    external: true
+  biodivterritoire-net:
