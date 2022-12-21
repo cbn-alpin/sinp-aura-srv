@@ -16,6 +16,7 @@ services:
       start_period: 15s
     networks:
       - biodivterritoire-net
+    command: redis-server --save 600 1 --loglevel warning
     volumes:
       - redis-storage:/data
 
@@ -24,18 +25,23 @@ services:
     build:
       context: ./build
       dockerfile: Dockerfile
+      args:
+        - APP_NAME=${APP_NAME:-"gnbt"}
+        - APP_GUNICORN_WORKERS=${APP_GUNICORN_WORKERS:-4}
+        - APP_GUNICORN_TIMEOUT=${APP_GUNICORN_TIMEOUT:-30}
+        - APP_GUNICORN_HOST=${APP_GUNICORN_HOST:-0.0.0.0}
+        - APP_GUNICORN_PORT=${APP_GUNICORN_PORT:-8080}
     container_name: biodivterritoires-app
     restart: always
     healthcheck:
-      test: ["CMD", "curl", "-s", "-f", "-i", "http://localhost:8080/"]
+      test: ["CMD", "curl", "-s", "-f", "-i", "http://${APP_GUNICORN_HOST:-0.0.0.0}:${APP_GUNICORN_PORT:-8080}/"]
       interval: 20s
       timeout: 60s
       start_period: 15s
+    env_file:
+      - .env
     environment:
       REDIS_HOST: "biodivterritoires-redis"
-      # Specific parameters for proxy (https://hub.docker.com/r/jwilder/nginx-proxy)
-      VIRTUAL_HOST: ${DOMAINS:-territoires.biodiversite-aura.fr}
-      LETSENCRYPT_HOST: ${DOMAINS:-territoires.biodiversite-aura.fr}
     ports:
       - ${APP_PORT:-8080}:8080
     depends_on:
