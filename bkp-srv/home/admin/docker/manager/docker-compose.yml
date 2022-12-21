@@ -3,16 +3,28 @@ version: "3.9"
 services:
   manager-portainer:
     # https://hub.docker.com/r/portainer/portainer-ce
-    image: portainer/portainer-ce:2.16.1
+    image: portainer/portainer-ce:2.16.2
     container_name: "manager-portainer"
     restart: unless-stopped
     expose:
       - 8000
     ports:
       - "127.0.0.1:9000:9000"
-    hostname: ${HOSTNAME:-sinp-paca-web}
-    command: --admin-password ${ENCRYPTED_PASSWORD}
-    command: -H unix:///var/run/docker.sock
+    hostname: ${HOSTNAME:-sinp-aura-web}
+    command:
+      - --admin-password
+      - ${ENCRYPTED_PASSWORD}
+      - -H
+      - unix:///var/run/docker.sock
+    deploy:
+      # WARNING: we are trying this config parameters !
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 64M
+        reservations:
+          cpus: '0.1'
+          memory: 32M
     volumes:
       # Try to change timezone for "Display timestamps" in log view => but don't work !
       # See: https://github.com/portainer/portainer/issues/913
@@ -26,5 +38,5 @@ volumes:
 
 networks:
   default:
-    external:
-      name: ${NETWORK:-nginx-proxy}
+    name: ${NETWORK:-nginx-proxy}
+    external: true
