@@ -1,0 +1,24 @@
+body  {
+  --main: rgba(128, 49, 167, 0.8);
+}
+
+.bg-primary-light {
+  background-color: rgba(128, 49, 167, 0.1);
+}
+
+.paralsec3 {
+  background-image: unset;
+  background-color: grey;
+}
+
+.icon-rounded svg {
+  --main: rgba(128, 49, 167, 0.8);
+}
+
+#embedBlocks h1 {
+  --main: rgba(128, 49, 167, 0.8);
+}
+
+.testimonial-quote {
+  --main: rgba(128, 49, 167, 0.8);
+}
