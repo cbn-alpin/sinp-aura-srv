@@ -35,9 +35,9 @@ else
   echo -e "\t gun_port=${gun_port}"
 
   gunicorn wsgi:app --error-log - --access-logfile - \
-        --pid="${app_name}.pid" \
-        -w "${gun_num_workers}" \
-        -t "${gun_timeout}" \
-        -b "${gun_host}:${gun_port}" \
-        -n "${app_name}"
+  	--pid="${app_name}.pid" \
+	-w "${gun_num_workers}" \
+	-t "${gun_timeout}" \
+	-b "${gun_host}:${gun_port}" \
+	-n "${app_name}"
 fi

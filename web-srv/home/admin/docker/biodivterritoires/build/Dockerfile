@@ -21,7 +21,7 @@ ENV gun_port=${APP_GUNICORN_PORT}
 # Install utils
 RUN apt-get update --allow-releaseinfo-change \
 	&& apt-get install -y --no-install-recommends \
-	apt-utils locales less vim curl telnet iputils-ping \
+		apt-utils locales less vim curl telnet iputils-ping \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Set the locale

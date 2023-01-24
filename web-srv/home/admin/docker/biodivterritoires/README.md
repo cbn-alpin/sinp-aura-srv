@@ -2,12 +2,7 @@
 
 ## HowTo
 
-Appliquer successivement les 5 fichiers SQL dans l'ordre (01_..., 02_..., etc) du dossier `sql` :
-```bash
-psql -U geonatadmin -h localhost geonature2db -f sql/01_taxonomy_schema.sql
-```
-
-Configurer BiodivTerritoires pour utiliser la base de donnée dans laquelle les scripts SQL auront été éxécutés, idéalement avec un utilisateur dédié disposant des droits de SELECT sur les tables créées.
+Les scripts SQL nécessaires à l'installation de Biodiv'Territoires sont présent dans le dépôt [sinp-aura-data](https://github.com/cbn-alpin/sinp-aura-data)
 
 ## BDD
 
