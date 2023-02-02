@@ -26,6 +26,7 @@ services:
       context: ./build
       dockerfile: Dockerfile
       args:
+        - TZ=${TZ:-"Europe/Paris"}
         - APP_NAME=${APP_NAME:-"gnbt"}
         - APP_GUNICORN_WORKERS=${APP_GUNICORN_WORKERS:-4}
         - APP_GUNICORN_TIMEOUT=${APP_GUNICORN_TIMEOUT:-30}

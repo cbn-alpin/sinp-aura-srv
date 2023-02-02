@@ -3,13 +3,14 @@ FROM lpoaura/geonature-biodivterritoires:orb_aura
 
 LABEL maintainer="Jean-Pascal Milcent <jp.milcent@cbn-alpin.fr>"
 
+ARG TZ
 ARG APP_NAME
 ARG APP_GUNICORN_WORKERS
 ARG APP_GUNICORN_TIMEOUT
 ARG APP_GUNICORN_HOST
 ARG APP_GUNICORN_PORT
 
-ENV TZ="Europe/Paris"
+ENV TZ="${TZ}"
 # Gunicorn default parameters
 ENV app_name=${APP_NAME}
 ENV gun_num_workers=${APP_GUNICORN_WORKERS}
