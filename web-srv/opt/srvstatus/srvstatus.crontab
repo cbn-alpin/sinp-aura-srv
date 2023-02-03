@@ -1,5 +1,5 @@
 # /etc/cron.d/srvstatus: crontab entries for the srvstatus script
-# Copy this file into /etc/cron.d/ without .cron extension : cp srvstatus.cron /etc/cron.d/srvstatus
+# Copy this file into /etc/cron.d/ without .crontab extension : cp srvstatus.crontab /etc/cron.d/srvstatus
 
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin

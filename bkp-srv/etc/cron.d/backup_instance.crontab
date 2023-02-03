@@ -1,5 +1,5 @@
 # /etc/cron.d/backup_instance: transfert to UK1 all servers images from GRA7
-# Copy this file into /etc/cron.d/ without .cron extension : cp backup_instance.cron /etc/cron.d/backup_instance
+# Copy this file into /etc/cron.d/ without .crontab extension : cp backup_instance.crontab /etc/cron.d/backup_instance
 # WARNING: not use "." or "-" in script filename. With this characters, the script will not be
 # executed by Cron !?
 

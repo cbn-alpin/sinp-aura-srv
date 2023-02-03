@@ -1,5 +1,5 @@
-# /etc/cron.d/goaccess-reports: crontab entries for the goaccess-reports script
-# Copy this file into /etc/cron.d/ without .cron extension : cp goaccess-reports.cron /etc/cron.d/goaccess-reports
+# /etc/cron.d/goaccess_reports: crontab entries for the goaccess-reports script
+# Copy this file into /etc/cron.d/ without .crontab extension : cp goaccess_reports.crontab /etc/cron.d/goaccess_reports
 
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin

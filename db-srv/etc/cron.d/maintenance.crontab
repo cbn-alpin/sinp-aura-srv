@@ -1,0 +1,15 @@
+# /etc/cron.d/maintenance: GeoNature maintenance after adding new data
+# Copy this file into /etc/cron.d/ without .crontab extension : `cp maintenance.crontab /etc/cron.d/maintenance`
+# WARNING: not use "." or "-" in script filename. With this characters, the script will not be
+# executed by Cron !?
+
+SHELL=/bin/bash
+PATH=/home/geonat/.local/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+# MAILFROM doesn't work now, use alternative below
+#MAILTO=adminsys@biodiversite-aura.fr
+#MAILFROM=mailer@biodiversite-aura.fr
+
+# Each wednesday at 20:00
+0 20 * * WED geonat /home/geonat/data/maintenance/bin/upkeep.sh -v
+
+# An empty line is required at the end of this file for a valid cron file.
