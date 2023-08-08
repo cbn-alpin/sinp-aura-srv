@@ -13,6 +13,38 @@ a.btn.btn-default:hover{
 	background-color: #CC1FD3;
 }
 
+/* LOGIN */
+#login-body {
+  background:
+    url(../custom/images/logo-pole-vertebres.png) bottom 10px right 10px no-repeat,
+    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAAkFBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+WABnwAAAAL3RSTlMA+O0h3MnFX/vnkh4W35qJE9fSvIZNOSUaDeSO8KxpVScRgQbxoW1aMS2vPQSuPyP0AGMAAAImSURBVGjezdqJjpswFAXQy04CCZBkIGSb7NNO0t7//7tGnUpIESUsfq89P2DZGNtvQVtpHiSf/sy1Lct2Z/6PJMhTmBS/TyesMdruIhixX7hskC32GCi9enzJuw5ZuGhssRVrGqEf5zFEa+Glz6qVSchOwnGJjt5W7GwUoAtnzl7mUYdp2Oxp84527gkHGJ/QwtLjIF6MlxyXA00KvPB9xcFG39Do55kGnG+N89jQiHPDXJwRDRkV+IvYpTFujFonjwZ5J9QZ06g1arzRsLeaC8qmYbaDZ3MaN8eTDwp4OpLLFQWMyoadJbPDipAiQgeVKYVMqzEii0LCSO6LVMb4I7Yoxkrx5UpBO3zxKMjDb3uK2gMPC4o6Ag8uRWV4WFLYEkBAYR8ALhQ2BTChsAmQUtwBOcXlCCguQEJxC3xS3BY+xfmYUdwME4qbwKY4GxbFWSqDqCyXyodX2cIqP6PKsaJyQKoc9TqX1oHiDhoPCZUnkcrjTuuZioyiMr3QoaCovUI452sGpqloiK2QLFhX6XmLQqylbgIHjkYqCmuKSFTSgxqJTo2UrUryWTONLrjDEoXShn9HrTijMW6sUG5yVApnDW5GRtnc/n0xE3AyDuQWeCn2OIgfo4X7MRxUKv9/iv4P0YD2BeFGjFWAjsp115aSdSndHGNdCvQTJ63bfJboL915fMnfHTBQcczYIDsWxprIXMEmssohDxbbqh1uuwjy1ov0C016lR1N7DFhAAAAAElFTkSuQmCC")
+		bottom 5px right 5px no-repeat,
+	url(../custom/images/logo-pole-flore.png) bottom 10px right 130px no-repeat,
+	url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAAkFBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+WABnwAAAAL3RSTlMA+O0h3MnFX/vnkh4W35qJE9fSvIZNOSUaDeSO8KxpVScRgQbxoW1aMS2vPQSuPyP0AGMAAAImSURBVGjezdqJjpswFAXQy04CCZBkIGSb7NNO0t7//7tGnUpIESUsfq89P2DZGNtvQVtpHiSf/sy1Lct2Z/6PJMhTmBS/TyesMdruIhixX7hskC32GCi9enzJuw5ZuGhssRVrGqEf5zFEa+Glz6qVSchOwnGJjt5W7GwUoAtnzl7mUYdp2Oxp84527gkHGJ/QwtLjIF6MlxyXA00KvPB9xcFG39Do55kGnG+N89jQiHPDXJwRDRkV+IvYpTFujFonjwZ5J9QZ06g1arzRsLeaC8qmYbaDZ3MaN8eTDwp4OpLLFQWMyoadJbPDipAiQgeVKYVMqzEii0LCSO6LVMb4I7Yoxkrx5UpBO3zxKMjDb3uK2gMPC4o6Ag8uRWV4WFLYEkBAYR8ALhQ2BTChsAmQUtwBOcXlCCguQEJxC3xS3BY+xfmYUdwME4qbwKY4GxbFWSqDqCyXyodX2cIqP6PKsaJyQKoc9TqX1oHiDhoPCZUnkcrjTuuZioyiMr3QoaCovUI452sGpqloiK2QLFhX6XmLQqylbgIHjkYqCmuKSFTSgxqJTo2UrUryWTONLrjDEoXShn9HrTijMW6sUG5yVApnDW5GRtnc/n0xE3AyDuQWeCn2OIgfo4X7MRxUKv9/iv4P0YD2BeFGjFWAjsp115aSdSndHGNdCvQTJ63bfJboL915fMnfHTBQcczYIDsWxprIXMEmssohDxbbqh1uuwjy1ov0C016lR1N7DFhAAAAAElFTkSuQmCC")
+		bottom 5px right 125px no-repeat,
+    url(../custom/images/logo-pole-invertebres.png) bottom 10px right 250px no-repeat,
+	url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAAkFBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+WABnwAAAAL3RSTlMA+O0h3MnFX/vnkh4W35qJE9fSvIZNOSUaDeSO8KxpVScRgQbxoW1aMS2vPQSuPyP0AGMAAAImSURBVGjezdqJjpswFAXQy04CCZBkIGSb7NNO0t7//7tGnUpIESUsfq89P2DZGNtvQVtpHiSf/sy1Lct2Z/6PJMhTmBS/TyesMdruIhixX7hskC32GCi9enzJuw5ZuGhssRVrGqEf5zFEa+Glz6qVSchOwnGJjt5W7GwUoAtnzl7mUYdp2Oxp84527gkHGJ/QwtLjIF6MlxyXA00KvPB9xcFG39Do55kGnG+N89jQiHPDXJwRDRkV+IvYpTFujFonjwZ5J9QZ06g1arzRsLeaC8qmYbaDZ3MaN8eTDwp4OpLLFQWMyoadJbPDipAiQgeVKYVMqzEii0LCSO6LVMb4I7Yoxkrx5UpBO3zxKMjDb3uK2gMPC4o6Ag8uRWV4WFLYEkBAYR8ALhQ2BTChsAmQUtwBOcXlCCguQEJxC3xS3BY+xfmYUdwME4qbwKY4GxbFWSqDqCyXyodX2cIqP6PKsaJyQKoc9TqX1oHiDhoPCZUnkcrjTuuZioyiMr3QoaCovUI452sGpqloiK2QLFhX6XmLQqylbgIHjkYqCmuKSFTSgxqJTo2UrUryWTONLrjDEoXShn9HrTijMW6sUG5yVApnDW5GRtnc/n0xE3AyDuQWeCn2OIgfo4X7MRxUKv9/iv4P0YD2BeFGjFWAjsp115aSdSndHGNdCvQTJ63bfJboL915fMnfHTBQcczYIDsWxprIXMEmssohDxbbqh1uuwjy1ov0C016lR1N7DFhAAAAAElFTkSuQmCC")
+		bottom 5px right 245px no-repeat,
+    url(../custom/images/logo-orb.png) bottom 3px right 370px no-repeat,
+    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAAkFBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+WABnwAAAAL3RSTlMA+O0h3MnFX/vnkh4W35qJE9fSvIZNOSUaDeSO8KxpVScRgQbxoW1aMS2vPQSuPyP0AGMAAAImSURBVGjezdqJjpswFAXQy04CCZBkIGSb7NNO0t7//7tGnUpIESUsfq89P2DZGNtvQVtpHiSf/sy1Lct2Z/6PJMhTmBS/TyesMdruIhixX7hskC32GCi9enzJuw5ZuGhssRVrGqEf5zFEa+Glz6qVSchOwnGJjt5W7GwUoAtnzl7mUYdp2Oxp84527gkHGJ/QwtLjIF6MlxyXA00KvPB9xcFG39Do55kGnG+N89jQiHPDXJwRDRkV+IvYpTFujFonjwZ5J9QZ06g1arzRsLeaC8qmYbaDZ3MaN8eTDwp4OpLLFQWMyoadJbPDipAiQgeVKYVMqzEii0LCSO6LVMb4I7Yoxkrx5UpBO3zxKMjDb3uK2gMPC4o6Ag8uRWV4WFLYEkBAYR8ALhQ2BTChsAmQUtwBOcXlCCguQEJxC3xS3BY+xfmYUdwME4qbwKY4GxbFWSqDqCyXyodX2cIqP6PKsaJyQKoc9TqX1oHiDhoPCZUnkcrjTuuZioyiMr3QoaCovUI452sGpqloiK2QLFhX6XmLQqylbgIHjkYqCmuKSFTSgxqJTo2UrUryWTONLrjDEoXShn9HrTijMW6sUG5yVApnDW5GRtnc/n0xE3AyDuQWeCn2OIgfo4X7MRxUKv9/iv4P0YD2BeFGjFWAjsp115aSdSndHGNdCvQTJ63bfJboL915fMnfHTBQcczYIDsWxprIXMEmssohDxbbqh1uuwjy1ov0C016lR1N7DFhAAAAAElFTkSuQmCC")
+		bottom 5px right 372px no-repeat,
+    url(../custom/images/login_background.jpg) center 10% no-repeat
+    !important;
+  background-size: 100px 100px, 110px 110px, 100px 100px, 110px 110px, 100px 100px, 110px 110px, 115px 115px, 110px 110px, cover !important;
+}
+
+#login-body::before {
+  font-weight: bold;
+  color: white;
+  white-space: pre;
+  content: "Lapin de garenne\a© Géraldine Le Duc - LPO";
+  position: absolute;
+  font-style: italic;
+  bottom: 5px;
+  left: 5px;
+}
+
+
 /* TOOLBAR */
 #app-toolbar {
 	background:
