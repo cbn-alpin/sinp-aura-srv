@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+
+  healthcheck-postgres:
+    image: postgres:16.1-bookworm
+    # See: https://hub.docker.com/_/postgres
+    container_name: healthcheck-postgres
+    user: postgres
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s 
+      timeout: 5s
+      retries: 5
+    logging:
+      options:
+        max-size: 10m 
+        max-file: 5
+    volumes:
+      - db-data-storage:/var/lib/postgresql/data
+
+  healthcheck-web:
+    # USAGE :
+    # - Create Healthcheck super user with: `docker compose run healthcheck-web /opt/healthchecks/manage.py createsuperuser`
+    # - Add Telegram integration with: `docker compose run healthcheck-web /opt/healthchecks/manage.py settelegramwebhook`
+    image: healthchecks/healthchecks:v3.1
+    # See: https://hub.docker.com/r/healthchecks/healthchecks
+    container_name: healthcheck-web
+    restart: unless-stopped
+    env_file:
+        - .env
+    environment:
+      VIRTUAL_HOST: healthcheck.biodiversite-aura.net
+      VIRTUAL_PORT: 8000
+      LETSENCRYPT_HOST: healthcheck.biodiversite-aura.net
+    ports:
+        - "127.0.0.1:58000:8000"
+        # To enable SMTP on port 2525, set SMTPD_PORT=2525 in .env and uncomment the following line:
+        - "2525:2525"
+    depends_on:
+        - healthcheck-postgres
+    command: bash -c 'while !</dev/tcp/healthcheck-postgres/5432; do sleep 1; done; uwsgi /opt/healthchecks/docker/uwsgi.ini'
+
+volumes:
+  db-data-storage:
+
+networks:
+  default:
+    name: nginx-proxy
+    external: true
+

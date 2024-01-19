@@ -11,6 +11,9 @@ ARG APP_GUNICORN_HOST
 ARG APP_GUNICORN_PORT
 
 ENV TZ="${TZ}"
+ENV LANG="C.UTF-8"
+ENV LC_ALL="C.UTF-8"
+
 # Gunicorn default parameters
 ENV app_name=${APP_NAME}
 ENV gun_num_workers=${APP_GUNICORN_WORKERS}
@@ -22,11 +25,12 @@ ENV gun_port=${APP_GUNICORN_PORT}
 # Install utils
 RUN apt-get update --allow-releaseinfo-change \
 	&& apt-get install -y --no-install-recommends \
-		apt-utils locales less vim curl telnet iputils-ping \
+		apt-utils locales less vim curl procps grep telnet iputils-ping \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Set the locale
 RUN sed -i 's/# \(fr_FR\.UTF-8 .*\)/\1/' /etc/locale.gen \
+	&& sed -i 's/# \(en_US\.UTF-8 .*\)/\1/' /etc/locale.gen \
 	&& touch /usr/share/locale/locale.alias \
 	&& locale-gen
 

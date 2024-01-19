@@ -1,0 +1,50 @@
+#!/bin/bash
+# Yearly report
+# Parameter : date (format: '%Y-%m-%d) of a day in past month to parse for the report (default : today)
+# Run with cron.d :
+# at 07:00 all first day of each month with : 0 7 1 * * admin /otp/goaccess-reports/yearly-report
+# or
+# at 07:00 each day to generate current yearly report : 0 7 * * * admin /otp/goaccess-reports/yearly-report
+DATE="today"
+if [ -n "$1" ]; then # If first parameter passed
+    DATE=`date -d "$1 -1 day" '+%Y-%m-%d'`
+fi
+YEAR=`date -d "$DATE -1 day" '+%Y'`
+MONTH=`date -d "$DATE -1 day" '+%m'`
+TODAY=`date -d "today" '+%Y-%m-%d'`
+
+# Check date is today
+todayLogFile=""
+if [ $DATE = $TODAY ]; then
+    todayLogFile="--log-file=/goaccess/logs/access.log"
+fi
+
+# Create directories structure
+docker exec web-log-analyser-goaccess mkdir -p /goaccess/reports/${YEAR}/
+
+# Get not gzip files
+notGzFiles=`docker exec web-log-analyser-goaccess sh -c \
+    "find /goaccess/logs/access.log.${YEAR}-* \
+        -regex '.*${YEAR}-[0-1][0-9]-[0-3][0-9]$'"`
+echo "${notGzFiles//[$'\t\r\n']/ }"
+
+# Print URL 
+echo "See report: https://web-log-analyser.silene.eu/${YEAR}/index.html"
+
+# Generate report
+echo "Log parsing:"
+if [ -z $notGzFiles ]; then
+    docker exec web-log-analyser-goaccess sh -c \
+        "zcat /goaccess/logs/access.log.${YEAR}-*.gz | \
+            goaccess --config-file=/goaccess/goaccess.cli.conf \
+                ${todayLogFile} \
+                --output=/goaccess/reports/${YEAR}/index.html -"
+else
+    docker exec web-log-analyser-goaccess sh -c \
+        "zcat /goaccess/logs/access.log.${YEAR}-*.gz | \
+            goaccess --config-file=/goaccess/goaccess.cli.conf \
+                --log-file=${notGzFiles//[$'\t\r\n']/ } \ 
+                ${todayLogFile} \
+                --output=/goaccess/reports/${YEAR}/index.html -"
+fi
+

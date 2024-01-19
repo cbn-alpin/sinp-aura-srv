@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  telegraf:
+    image: telegraf:1.29.2
+    # https://hub.docker.com/_/telegraf
+    container_name: telegraf
+    restart: unless-stopped
+    hostname: ${HOSTNAME:-bkp-paca-sinp}
+    # To authorize telgraf to access to /run/docker.sock set host docker gid
+    # Find docker gid with: stat -c '%g' /var/run/docker.sock
+    user: "telegraf:${DOCKER_GID:-997}"
+    environment:
+      HOSTNAME: ${HOSTNAME:-bkp-aura-sinp}
+      HOST_MOUNT_PREFIX: /host
+      HOST_ETC: /host/etc
+      HOST_PROC: /host/proc
+      HOST_PROC_MOUNTINFO: /host/proc/self/mountinfo
+      HOST_RUN: /host/run
+      HOST_SYS: /host/sys
+      HOST_VAR: /host/var
+      INFLUXDB2_INIT_ORG: ${INFLUXDB2_INIT_ORG}
+      INFLUXDB2_INIT_BUCKET: ${INFLUXDB2_INIT_BUCKET}
+      INFLUXDB2_TELEGRAF_TOKEN: ${INFLUXDB2_TELEGRAF_TOKEN}
+    volumes:
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - /:/host:ro
+      - /run/utmp:/host/var/run/utmp
+      - /run/docker.sock:/var/run/docker.sock:ro
+      - /opt/srvstatus/status.json:/opt/srvstatus/status.json
+
+networks:
+  default:
+    name: nginx-proxy
+    external: true

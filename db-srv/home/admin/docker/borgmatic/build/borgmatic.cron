@@ -2,15 +2,12 @@
 # Copy this file into /etc/cron.d/ without .cron extension
 # WARNING: not use "." or "-" in script filename.
 # With this characters, the script will not be executed by Cron !?
-
-SHELL=/bin/bash
-PATH=$PATH:/usr/bin:/usr/local/bin
-# MAILFROM doesn't work now => so sending email in script.
+#
 #MAILTO=${MAILTO}
-#MAILFROM=${MAILFROM}
-
 
 # m h dom mon dow user  command
 # Run borgmatic all days at 1 AM as root user.
 0 1 * * * root . /etc/environment; PATH=$PATH:/usr/bin:/usr/local/bin /usr/local/bin/borgmatic --verbosity 2 --stats --files > /proc/1/fd/1 2>/proc/1/fd/2
+
 # An empty line is required at the end of this file for a valid cron file.
+

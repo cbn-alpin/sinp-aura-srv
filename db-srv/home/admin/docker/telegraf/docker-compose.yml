@@ -1,26 +1,48 @@
-version: "3.7"
+version: "3.9"
 
 services:
   telegraf:
-    image: telegraf:1.18.1
+    build:
+      context: ./build/
+      dockerfile: Dockerfile
+      args:
+        TZ: ${TZ:-Europe/Paris}
+        TELEGRAF_PGCUSTOM_URL_ZIP: ${TELEGRAF_PGCUSTOM_URL_ZIP}
+        POSTGRESQL_HOST: ${POSTGRESQL_HOST}
+        POSTGRESQL_TELEGRAF_PWD: ${POSTGRESQL_TELEGRAF_PWD}
+    image: biodivaura/telegraf:1.29.2
+    # https://hub.docker.com/_/telegraf
     container_name: telegraf
-    restart: unless-stopped
     hostname: ${HOSTNAME:-sinp-aura-db}
+    restart: unless-stopped
+    # To authorize telgraf to access to /run/docker.sock set host docker gid
+    # Find docker gid with: stat -c '%g' /var/run/docker.sock
+    user: "telegraf:${DOCKER_GID:-998}"
+    group_add:
+      - adm
     environment:
+      HOSTNAME: ${HOSTNAME:-db-aura-sinp}
       HOST_MOUNT_PREFIX: /host
       HOST_ETC: /host/etc
       HOST_PROC: /host/proc
+      HOST_PROC_MOUNTINFO: /host/proc/self/mountinfo
+      HOST_RUN: /host/run
       HOST_SYS: /host/sys
       HOST_VAR: /host/var
-      HOST_RUN: /host/run
-    networks:
-      - nginx-proxy
+      INFLUXDB2_INIT_ORG: ${INFLUXDB2_INIT_ORG}
+      INFLUXDB2_INIT_BUCKET: ${INFLUXDB2_INIT_BUCKET}
+      INFLUXDB2_TELEGRAF_TOKEN: ${INFLUXDB2_TELEGRAF_TOKEN}
     volumes:
       - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
       - /:/host:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /run/docker.sock:/run/docker.sock:ro
+      - /run/utmp:/host/var/run/utmp
       - /opt/srvstatus/status.json:/opt/srvstatus/status.json
+      #- ./certs/ca.pem:/etc/docker/ssl/ca.pem:ro
+      #- ./certs/client-cert.pem:/etc/docker/ssl/client-cert.pem:ro
+      #- ./certs/client-key.pem:/etc/docker/ssl/client-key.pem:ro
 
 networks:
-  nginx-proxy:
+  default:
+    name: nginx-proxy
     external: true

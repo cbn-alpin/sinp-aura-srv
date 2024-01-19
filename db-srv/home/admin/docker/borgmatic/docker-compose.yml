@@ -7,7 +7,8 @@ services:
       dockerfile: Dockerfile
       args:
         - MAILTO=${MAILTO}
-    image: cbn-alpin/borgmatic:1.0.0
+        - PGSQL_MAJOR_VERSION=${PGSQL_MAJOR_VERSION}
+    image: biodivaura/borgmatic:2023.12.18
     # https://hub.docker.com/r/b3vis/borgmatic/
     container_name: borgmatic
     restart: unless-stopped
@@ -15,8 +16,6 @@ services:
     env_file:
       - .env
       - msmtp.env
-    networks:
-      - nginx-proxy
     volumes:
       - ${VOLUME_SOURCE}:/mnt/source:ro                         # backup source
       - ${VOLUME_TARGET}:/mnt/borg-repository                   # backup target
@@ -28,5 +27,6 @@ services:
       - ./config/ntfy.yml:/root/.config/ntfy/ntfy.yml:ro        # Ntfy config file
 
 networks:
-  nginx-proxy:
+  default:
+    name: nginx-proxy
     external: true

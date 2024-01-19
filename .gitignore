@@ -2,6 +2,8 @@
 !**/nginx/*.conf
 !*.sample.conf
 !*.default.conf
+!*.tpl.conf
 !web-srv/etc/**/*.conf
 .env*
 !.env.sample
+*.mmdb

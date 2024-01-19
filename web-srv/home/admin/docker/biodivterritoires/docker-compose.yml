@@ -6,7 +6,7 @@ version: "3.9"
 services:
 
   biodivterritoires-redis:
-    image: redis:7.0.5-bullseye
+    image: redis:7.2.3-bookworm
     container_name: biodivterritoires-redis
     restart: always
     healthcheck:
@@ -43,6 +43,7 @@ services:
       - .env
     environment:
       REDIS_HOST: "biodivterritoires-redis"
+      DEBUG: false
     ports:
       - ${APP_PORT:-8080}:8080
     depends_on:

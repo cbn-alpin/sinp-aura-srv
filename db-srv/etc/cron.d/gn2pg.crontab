@@ -1,5 +1,5 @@
 # /etc/cron.d/gn2pg: all Gn2Pg updates
-# Copy this file into /etc/cron.d/ without .cron extension : `cp gn2pg.cron /etc/cron.d/gn2pg`
+# Copy this file into /etc/cron.d/ without .crontab extension : `cp gn2pg.crontab /etc/cron.d/gn2pg`
 # WARNING: not use "." or "-" in script filename. With this characters, the script will not be
 # executed by Cron !?
 
@@ -10,7 +10,7 @@ PATH=/home/geonat/.local/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin
 #MAILFROM=mailer@biodiversite-aura.fr
 
 # LPO - Each sunday at 20:00
-0 20 * * SUN geonat /home/geonat/data/gn2pg/bin/gn2pg_update.sh -c lpo_config.toml
+#0 20 * * SUN geonat /home/geonat/data/gn2pg/bin/gn2pg_update.sh -c lpo_config.toml
 # FLAVIA - Each sunday at 8:00
 0 8  * * SUN geonat /home/geonat/data/gn2pg/bin/gn2pg_update.sh -c flavia_config.toml
 

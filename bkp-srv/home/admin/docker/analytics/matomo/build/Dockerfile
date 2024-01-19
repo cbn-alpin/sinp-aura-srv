@@ -1,4 +1,4 @@
-FROM matomo:4.12.3-fpm
+FROM matomo:5.0.1-fpm
 # See : https://github.com/matomo-org/docker/blob/master/fpm/Dockerfile
 # Also see : https://github.com/crazy-max/docker-matomo
 
@@ -7,7 +7,7 @@ ARG MSMTP_OVH_PWD
 # Install utils and sendmail
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		apt-utils less vim sudo cron \
+		apt-utils less vim sudo cron libfcgi-bin \
 		msmtp msmtp-mta bsd-mailx mailutils \
 	&& rm -rf /var/lib/apt/lists/*
 
@@ -16,6 +16,13 @@ COPY matomo.ini /usr/local/etc/php/conf.d/matomo.ini
 
 # Set new entry point from :
 COPY docker-entrypoint.sh /entrypoint.sh
+
+# Add healthcheck Bash script
+COPY php-fpm-healthcheck.sh /usr/local/bin/php-fpm-healthcheck
+
+# Setup PHP-FPM config
+RUN echo 'ping.path = /ping' >> /usr/local/etc/php-fpm.d/zz-docker.conf && \
+    echo 'pm.status_path = /status' >> /usr/local/etc/php-fpm.d/zz-docker.conf
 
 # Set Cron for Matomo archive
 # DON'T USE dot or dash in cron.d script file name howerer the script will never execute.
@@ -34,7 +41,7 @@ RUN  chmod 0644 /etc/cron.d/matomo_archive \
 RUN printenv > /etc/environment
 
 # Create Msmtp config file
-COPY msmtprc.sample.conf /etc/msmtprc
+COPY msmtprc.tpl.conf /etc/msmtprc
 RUN sed -i "s/\$MSMTP_OVH_PWD/${MSMTP_OVH_PWD}/g" /etc/msmtprc \
 	&& chmod 600 /etc/msmtprc \
 	&& chown www-data:www-data /etc/msmtprc

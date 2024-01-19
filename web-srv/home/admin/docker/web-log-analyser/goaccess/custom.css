@@ -1,0 +1,4 @@
+.wrap-panels:after {
+    content: "IP Geolocation by DB-IP : https://db-ip.com";
+    color: grey;
+}

@@ -29,7 +29,7 @@ echo "See report: https://web-log-analyser.biodiversite-aura.net/${YEAR}/${MONTH
 # Generate report
 echo "Log parsing:"
 if [ "$isGz" = 'true' ]; then
-    docker exec web-log-analyser-goaccess sh -c "zcat $file | goaccess --config-file=/goaccess/goaccess.cli.conf --output=/goaccess/reports/${YEAR}/${MONTH}/${DAY}/index.html -"
+    docker exec web-log-analyser-goaccess sh -c "zcat -f $file | goaccess --config-file=/goaccess/goaccess.cli.conf --output=/goaccess/reports/${YEAR}/${MONTH}/${DAY}/index.html -"
 else
     docker exec web-log-analyser-goaccess sh -c "goaccess --log-file=$file --config-file=/goaccess/goaccess.cli.conf --output=/goaccess/reports/${YEAR}/${MONTH}/${DAY}/index.html"
 fi

@@ -1,0 +1,3 @@
+# WARNING: up timeout to 300s for Synthese downloading (See bug )
+proxy_read_timeout 300s;
+proxy_connect_timeout 75s; 

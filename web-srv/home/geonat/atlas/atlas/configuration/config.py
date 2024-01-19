@@ -20,7 +20,8 @@ NOM_APPLICATION = "Biodiv'AURA Atlas"
 
 # URL de l'application depuis la racine du domaine
 # ex "/atlas" pour une URL: http://mon-domaine/atlas OU "" si l'application est accessible à la racine du domaine
-URL_APPLICATION = "http://atlas.biodiversite-auvergne-rhone-alpes.fr"
+#URL_APPLICATION = "https://atlas.biodiversite-auvergne-rhone-alpes.fr"
+URL_APPLICATION = ""
 
 #################################
 ###### Modules activation #######
@@ -168,6 +169,9 @@ TAXHUB_URL = "https://taxons.biodiversite-aura.fr"
 
 # Coupe le nom_vernaculaire à la 1ere virgule sur les fiches espèces
 SPLIT_NOM_VERN = True
+
+#### ID DES ATTRIBUTS DESCRIPTIFS DES TAXONS DE LA TABLE vm_cor_taxon_attribut
+DISPLAYED_ATTR=['sinp_description', 'sinp_ecology', 'sinp_uses']
 
 #############################
 #### PAGES STATIQUES #####

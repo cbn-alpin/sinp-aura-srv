@@ -1,4 +1,4 @@
-##############################################################################
+###############################################################################
 # NOTES : après toute modification dans ce fichier, il est nécessaire de
 #         mettre à jour GeoNature à l'aide de la commande :
 #         'geonature update_configuration'
@@ -28,6 +28,9 @@ MAIL_ON_ERROR = true
 # Nom de l'application dans la page d'accueil.
 appName = "Biodiv'AURA Expert"
 
+# Set Sentry DSN
+SENTRY_DSN = "https://<uuid-dsn>@app-monitor.biodiversite-aura.net/1"
+
 [ALEMBIC]
 VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
 
@@ -39,20 +42,12 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
 # Configuration de l'envoie d'emails
 # TODO: revoir la config pour utiliser le serveur Postfix local
 [MAIL_CONFIG]
-    # COnfig with local Postfix SMTP relay to OVH:
-    MAIL_SERVER = "localhost"
-    MAIL_PORT = 25
-    MAIL_USE_TLS = false
+    MAIL_SERVER = "ssl0.ovh.net"
+    MAIL_PORT = 587
+    MAIL_USE_TLS = true
     MAIL_USE_SSL = false
-    MAIL_USERNAME = ""
-    MAIL_PASSWORD = ""
-    # Config with OVH SMTP:
-    # MAIL_SERVER = "ssl0.ovh.net"
-    # MAIL_PORT = 587
-    # MAIL_USE_TLS = true
-    # MAIL_USE_SSL = false
-    # MAIL_USERNAME = "<email-username>"
-    # MAIL_PASSWORD = "<email-password>"
+    MAIL_USERNAME = "<email-username>"
+    MAIL_PASSWORD = "<email-password>"
     MAIL_DEFAULT_SENDER = "Ne Pas Réponde <email-default-sender>"
     MAIL_ASCII_ATTACHMENTS = false
     # email(s) to the administrator for the email logging
@@ -69,7 +64,7 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
 [PUBLIC_ACCESS]
     ENABLE_PUBLIC_ACCESS = true
     PUBLIC_LOGIN = "user-public"
-    PUBLIC_PASSWORD = "<mot-de-passe>"
+    PUBLIC_PASSWORD = "<public-password>"
 
 # Gestion des demandes d'inscription
 [ACCOUNT_MANAGEMENT]
@@ -78,7 +73,7 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
     VALIDATOR_EMAIL = [
             "Ornella KRISTO <o.kristo@cbn-alpin.fr>",
             "Lucile VAHE <l.vahe@cbn-alpin.fr>",
-            "sinp@cbnmc.fr",
+            "Carole HEYD <carole.heyd@cbnmc.fr>",
             "Donovan MAILLARD <donovan.maillard@flavia-ape.fr>",
             "Julien GIRARD-CLAUDON <julien.girard-claudon@lpo.fr>",
             "M. CHAUTAN <m.chautan@chasseauvergnerhonealpes.com>",
@@ -161,11 +156,6 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
 
 # Configuration cartographique
 [MAPCONFIG]
-    BASEMAP = [
-        {"name" = "OpenStreetMap", "layer" = "//{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", "attribution" = "&copy OpenStreetMap"},
-        {"name" = "OpenTopoMap", "layer" = "//a.tile.opentopomap.org/{z}/{x}/{y}.png", "attribution" = "© OpenTopoMap"},
-        {"name" = "GoogleSatellite", "layer" = "//{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", "subdomains" = ["mt0", "mt1", "mt2", "mt3"], "attribution" = "© GoogleMap"}
-    ]
     # Attention : les coordonnées sont au format [Y, X]
     # Cf leaflet configuration (https://leafletjs.com/reference-1.4.0.html#latlng-l-latlng)
     CENTER = [45.29619, 4.66072]
@@ -175,6 +165,16 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
     ZOOM_LEVEL_RELEVE = 15
     # Zoom appliqué sur la carte lorsque l'on clique sur une liste
     ZOOM_ON_CLICK = 16
+    # Configuration des fonds carto
+    BASEMAP = [
+        {"name" = "OpenStreetMap",    "layer" = "//{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", "attribution" = "&copy; OpenStreetMap", "maxZoom" = 22, "maxNativeZoom" = 19},
+        {"name" = "OpenTopoMap",      "layer" = "//a.tile.opentopomap.org/{z}/{x}/{y}.png", "attribution" = "&copy; OpenTopoMap", "maxZoom" = 22, "maxNativeZoom" = 17},
+        {"name" = "GoogleSatellite",  "layer" = "//{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", "subdomains" = ["mt0", "mt1", "mt2", "mt3"], "attribution" = "&copy; GoogleMap", "maxZoom" = 22, "maxNativeZoom" = 22},
+        {"name" = "IGN Ortho",        "layer" = "https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&LAYER=HR.ORTHOIMAGERY.ORTHOPHOTOS&FORMAT=image/jpeg", "attribution" = "&copy; IGN", "maxZoom" = 22, "maxNativeZoom" = 19},
+        {"name" = "IGN Cadastre",     "layer" = "https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&LAYER=CADASTRALPARCELS.PARCELS&FORMAT=image/png", "attribution" = "&copy; IGN", "maxZoom" = 22, "maxNativeZoom" = 19},
+        {"name" = "IGN Plan v2",      "layer" = "https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&FORMAT=image/png", "attribution" = "&copy; IGN", "maxZoom" = 22, "maxNativeZoom" = 19},
+        {"name" = "BRGM Géologie", "url" = "https://geoservices.brgm.fr/WMS-C/?", "service" = "wms", "layers" = "GEOLOGIE", "attribution" = '&copy; BRGM - <a href="https://infoterre.brgm.fr/viewer/" target="_blank">BD Charm-50</a>'}
+    ]
 
 # CRITICAL: 50 ; ERROR: 40 ; WARNING: 30 ; INFO: 20 ; DEBUG: 10 ; NOTSET: 0
 [SERVER]
@@ -256,8 +256,8 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
         "sensibilite",
         "confidentialite",
     ]
-    ENABLE_AREA_AGGREGATION = false
-    AREA_AGGREGATION_TYPE = "M10"
+    ENABLE_AREA_AGGREGATION = true
+    AREA_AGGREGATION_TYPE = "M5"
     AREA_AGGREGATION_BY_DEFAULT = false
 
 
@@ -277,7 +277,7 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
     VALIDATOR_EMAIL = [
             "Ornella KRISTO <o.kristo@cbn-alpin.fr>",
             "Lucile VAHE <l.vahe@cbn-alpin.fr>",
-            "sinp@cbnmc.fr",
+            "Carole HEYD <carole.heyd@cbnmc.fr>",
             "Donovan MAILLARD <donovan.maillard@flavia-ape.fr>",
             "Julien GIRARD-CLAUDON <julien.girard-claudon@lpo.fr>",
             "M. CHAUTAN <m.chautan@chasseauvergnerhonealpes.com>",
@@ -317,7 +317,7 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
         required = true
         help = """Veuillez indiquer le règne des taxons
             concernés par votre étude et pour lesquels vous demandez
-            un accès précis. Pour rappel, les données de faune vertébrée
+            un accès précis.  Pour rappel, les données de faune vertébrée
             sont accessibles à la précision maximale sans demande d'accès."""
     [[PERMISSION_MANAGEMENT.REQUEST_FORM]]
         type_widget = "text"

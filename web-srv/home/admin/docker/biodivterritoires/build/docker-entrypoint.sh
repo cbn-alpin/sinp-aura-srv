@@ -1,9 +1,19 @@
 #!/bin/bash
 
-echo "+-------------------------------------------+"
-echo "|               GeoNature                   |"
-echo "|        Biodiversité des territoires       |"
-echo "+-------------------------------------------+"
+echo ""
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo ""
+echo "   .|||||||||.          .|||||||||."
+echo "  |||||||||||||        |||||||||||||"
+echo " |||||||||||' .\      /. '|||||||||||"
+echo " '||||||||||_,__o    o__,_||||||||||'"
+echo ""
+echo " > GeoNature"
+echo " > Biodiversité des territoires"
+echo " > https://github.com/lpoaura/GeoNature-BiodivTerritoires"
+echo ""
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo ""
 
 # Set default variables values
 app_name="${app_name:-gnbt}"

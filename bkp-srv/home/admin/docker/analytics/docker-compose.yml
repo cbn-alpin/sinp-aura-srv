@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   analytics-nginx:
-    image: nginx:1.22.1
+    image: nginx:1.24.0-bullseye
     # https://hub.docker.com/_/nginx
     container_name: analytics-nginx
     restart: unless-stopped
@@ -10,6 +10,14 @@ services:
       - "127.0.0.1:50083:80"
     depends_on:
       - analytics-matomo
+    environment:
+      VIRTUAL_HOST: analytics.biodiversite-aura.net
+      LETSENCRYPT_HOST: analytics.biodiversite-aura.net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost/ || exit 1"]
+      interval: 3s
+      timeout: 2s
+      retries: 3
     volumes:
       - ./nginx/app.conf:/etc/nginx/conf.d/default.conf:ro
       - matomo-storage:/var/www/html
@@ -18,7 +26,7 @@ services:
     build:
       context: ./matomo/build
       dockerfile: Dockerfile
-    image: matomo:4.12.3-fpm
+    image: cbnalpin:matomo-5.0.1-fpm
     # https://hub.docker.com/_/matomo
     container_name: analytics-matomo
     restart: unless-stopped
@@ -34,13 +42,18 @@ services:
       - MATOMO_DATABASE_USERNAME=${MYSQL_USER}
       - MATOMO_DATABASE_PASSWORD=${MYSQL_PASSWORD}
       - MATOMO_DATABASE_DBNAME=${MYSQL_DATABASE}
+    healthcheck:
+      test: ["CMD-SHELL", "php-fpm-healthcheck || exit 1"]
+      interval: 5s
+      timeout: 1s
+      retries: 3
     volumes:
       # - ./logs:/var/www/html/logs
       #- ./matomo/config/config.ini.php:/var/www/html/config/config.ini.php:rw
       - matomo-storage:/var/www/html
 
   analytics-mariadb:
-    image: mariadb:10.4.27
+    image: mariadb:11.2.2-jammy
     # https://hub.docker.com/_/mariadb
     container_name: analytics-mariadb
     restart: unless-stopped
@@ -54,6 +67,10 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       # See : https://github.com/docker-library/mariadb/issues/160
       MYSQL_INITDB_SKIP_TZINFO: "yes"
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -P 3306 -p${MYSQL_ROOT_PASSWORD} | grep 'mysqld is alive' || exit 1"]
+      interval: 2s
+      retries: 5
     volumes:
       - ./mariadb/my.override.cnf:/etc/mysql/conf.d/matomo.cnf
       - db-storage:/var/lib/mysql
@@ -65,5 +82,5 @@ volumes:
 
 networks:
   default:
-    external:
-      name: nginx-proxy
+    name: nginx-proxy
+    external: true

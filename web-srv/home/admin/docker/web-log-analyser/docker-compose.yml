@@ -1,8 +1,8 @@
-version: "3.7"
+version: "3.9"
 
 services:
   web-log-analyser-nginx:
-    image: nginx:1.18.0
+    image: nginx:1.24.0-bullseye
     # https://hub.docker.com/_/nginx
     container_name: web-log-analyser-nginx
     restart: unless-stopped
@@ -12,29 +12,38 @@ services:
       - web-log-analyser-goaccess
     volumes:
       - ./nginx/app.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./goaccess/custom.css:/goaccess/reports/custom.css:ro
       - report-storage:/goaccess/reports:ro
 
   web-log-analyser-goaccess:
-    image: allinurl/goaccess:1.4.6
+    image: allinurl/goaccess:1.8.1
     # https://hub.docker.com/r/allinurl/goaccess
     container_name: web-log-analyser-goaccess
     restart: unless-stopped
     ports:
       - "127.0.0.1:57890:7890"
+    # WARNING: Set init to true to prevent goaccess reports from creating zombies on the host
+    # See: https://stackoverflow.com/questions/49162358/docker-init-zombies-why-does-it-matter
+    init: true
     volumes:
-      - ./goaccess/goaccess.conf:/goaccess/goaccess.conf
+      - ./goaccess/goaccess.web.conf:/goaccess/goaccess.web.conf
       - ./goaccess/goaccess.cli.conf:/goaccess/goaccess.cli.conf
+      - ./goaccess/custom.css:/goaccess/reports/custom.css:ro
+        # IP Geolocation by DB-IP: downloaded from https://db-ip.com/db/download/ip-to-city-lite
+      - ./goaccess/dbip-city-lite-2023-09.mmdb:/var/lib/GeoIP/GeoLite2-City.mmdb
       - /var/log/nginx:/goaccess/logs:ro
       - report-storage:/goaccess/reports:rw
+      - db-storage:/goaccess/database:rw
     environment:
       LANG: fr
       TZ: "Europe/Paris"
-    entrypoint: sh -c "zcat -f /goaccess/logs/access.log.* /goaccess/logs/access.log.*.gz | goaccess --config-file=/goaccess/goaccess.conf -"
+    entrypoint: sh -c "goaccess --config-file=/goaccess/goaccess.web.conf -f /goaccess/logs/access.log"
 
 volumes:
   report-storage:
+  db-storage:
 
 networks:
   default:
-    external:
-      name: nginx-proxy
+    name: nginx-proxy
+    external: true

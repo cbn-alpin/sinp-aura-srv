@@ -13,3 +13,4 @@ PATH=/home/geonat/.local/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin
 0 20 * * WED geonat /home/geonat/data/maintenance/bin/upkeep.sh -v
 
 # An empty line is required at the end of this file for a valid cron file.
+

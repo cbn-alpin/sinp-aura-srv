@@ -1,0 +1,111 @@
+version: "3.9"
+
+x-environment:
+  &default-environment
+  DATABASE_URL: ${DATABASE_URL}
+  SECRET_KEY: ${SECRET_KEY}
+  PORT: ${PORT}
+  EMAIL_URL: ${EMAIL_URL}
+  EMAIL_USE_TLS: ${EMAIL_USE_TLS}
+  GLITCHTIP_DOMAIN: ${GLITCHTIP_DOMAIN}
+  DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL}
+  CELERY_WORKER_CONCURRENCY: ${CELERY_WORKER_CONCURRENCY}
+  REDIS_URL: ${REDIS_URL}
+
+x-depends_on:
+  &default-depends_on
+  app-monitor-postgres:
+    condition: service_healthy
+  app-monitor-redis:
+    condition: service_healthy
+
+x-logging:
+  &default-logging
+  driver: "json-file"
+  options:
+    max-size: "1m"
+
+services:
+
+  app-monitor-postgres:
+    image: postgres:16.1-bookworm
+    # See: https://hub.docker.com/_/postgres
+    container_name: app-monitor-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_HOST_AUTH_METHOD: "${POSTGRES_HOST_AUTH_METHOD}"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      retries: 5
+    logging: *default-logging
+    volumes:
+      - data-postgres-storage:/var/lib/postgresql/data
+
+  app-monitor-redis:
+    image: redis:7.0.15-bookworm
+    # See: https://hub.docker.com/_/redis
+    container_name: app-monitor-redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 30s
+      retries: 50
+    logging: *default-logging
+
+  app-monitor-web:
+    image: glitchtip/glitchtip:v3.4.5
+    # See: https://hub.docker.com/r/glitchtip/glitchtip
+    container_name: app-monitor-web
+    restart: unless-stopped
+    depends_on: *default-depends_on
+    ports:
+      - "58001:58001"
+    environment:
+      <<: *default-environment
+      ENABLE_USER_REGISTRATION: ${ENABLE_USER_REGISTRATION}
+      VIRTUAL_HOST: app-monitor.biodiversite-aura.net
+      VIRTUAL_PORT: 58001
+      LETSENCRYPT_HOST: app-monitor.biodiversite-aura.net
+    logging: *default-logging
+    volumes:
+      - uploads-storage:/code/uploads
+
+  app-monitor-worker:
+    image: glitchtip/glitchtip:v3.4.5
+    # See: https://hub.docker.com/r/glitchtip/glitchtip
+    container_name: app-monitor-worker
+    restart: unless-stopped
+    depends_on: *default-depends_on
+    environment: *default-environment
+    logging: *default-logging
+    volumes:
+      - uploads-storage:/code/uploads
+    command: ./bin/run-celery-with-beat.sh
+
+  app-monitor-migrate:
+    # USAGE:
+    # apply migrations: `docker compose run --rm app-monitor-migrate ./manage.py migrate`
+    # create super-user: `docker compose run --rm app-monitor-migrate ./manage.py createsuperuser`
+    image: glitchtip/glitchtip:v3.4.5
+    # See: https://hub.docker.com/r/glitchtip/glitchtip
+    container_name: app-monitor-migrate
+    restart: "no"
+    profiles: ["migrate"]
+    depends_on: *default-depends_on
+    environment: *default-environment
+    logging: *default-logging
+    command: "./manage.py migrate"
+
+volumes:
+  data-postgres-storage:
+  uploads-storage:
+
+networks:
+  default:
+    name: nginx-proxy
+    external: true

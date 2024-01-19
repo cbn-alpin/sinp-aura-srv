@@ -7,3 +7,4 @@ MAILTO="webmaster@biodiversite-aura.fr"
 5 * * * * www-data /usr/local/bin/php /var/www/html/console core:archive --url=https://analytics.biodiversite-aura.net/ > /var/www/html/tmp/logs/matomo-archive.log 2> /var/www/html/tmp/logs/matomo-archive-errors.log
 
 # An empty line is required at the end of this file for a valid cron file.
+

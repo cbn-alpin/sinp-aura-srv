@@ -1,5 +1,5 @@
-# /etc/cron.d/goaccess_reports: crontab entries for the goaccess-reports script
-# Copy this file into /etc/cron.d/ without .crontab extension : cp goaccess_reports.crontab /etc/cron.d/goaccess_reports
+# /etc/cron.d/goaccess-reports: crontab entries for the goaccess-reports script
+# Copy this file into /etc/cron.d/ without .cron extension : cp goaccess-reports.cron /etc/cron.d/goaccess_reports
 
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
@@ -10,5 +10,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 0 3 * * * admin /opt/goaccess-reports/daily-report 2>&1 | mail -s "[Cron] <admin@sinp-aura-web> /opt/goaccess-reports/daily-report" -r "mailer@biodiversite-aura.fr" adminsys@biodiversite-aura.fr
 0 4 * * 1 admin /opt/goaccess-reports/weekly-report 2>&1 | mail -s "[Cron] <admin@sinp-aura-web> /opt/goaccess-reports/weekly-report" -r "mailer@biodiversite-aura.fr" adminsys@biodiversite-aura.fr
 0 5 * * * admin /opt/goaccess-reports/monthly-report 2>&1 | mail -s "[Cron] <admin@sinp-aura-web> /opt/goaccess-reports/monthly-report" -r "mailer@biodiversite-aura.fr" adminsys@biodiversite-aura.fr
+1 0 1 1 * admin /opt/goaccess-reports/yearly-report 2>&1 | mail -s "[Cron] <admin@sinp-paca-web> /opt/goaccess-reports/monthly-report" -r "mailer@biodiversite-aura.fr" adminsys@biodiversite-aura.fr
 
 # An empty line is required at the end of this file for a valid cron file.
+

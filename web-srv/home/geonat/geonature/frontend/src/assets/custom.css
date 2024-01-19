@@ -38,12 +38,11 @@ a.btn.btn-default:hover{
   color: white;
   white-space: pre;
   content: "Lapin de garenne\a© Géraldine Le Duc - LPO";
-  position: absolute;
   font-style: italic;
+  position: absolute;
   bottom: 5px;
   left: 5px;
 }
-
 
 /* TOOLBAR */
 #app-toolbar {

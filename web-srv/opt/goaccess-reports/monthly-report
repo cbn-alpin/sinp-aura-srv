@@ -35,13 +35,13 @@ echo "See report: https://web-log-analyser.biodiversite-aura.net/${YEAR}/${MONTH
 echo "Log parsing:"
 if [ -z $notGzFiles ]; then
 	docker exec web-log-analyser-goaccess sh -c \
-		"zcat /goaccess/logs/access.log.${YEAR}-${MONTH}-*.gz | \
+		"zcat -f /goaccess/logs/access.log.${YEAR}-${MONTH}-*.gz | \
 			goaccess --config-file=/goaccess/goaccess.cli.conf \
 				${todayLogFile} \
 				--output=/goaccess/reports/${YEAR}/${MONTH}/index.html -"
 else
 	docker exec web-log-analyser-goaccess sh -c \
-		"zcat /goaccess/logs/access.log.${YEAR}-${MONTH}-*.gz | \
+		"zcat -f /goaccess/logs/access.log.${YEAR}-${MONTH}-*.gz | \
 			goaccess --config-file=/goaccess/goaccess.cli.conf \
 			    --log-file=${notGzFiles//[$'\t\r\n']/ } \
 				${todayLogFile} \
