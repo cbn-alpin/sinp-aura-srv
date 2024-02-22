@@ -1,0 +1,8 @@
+{
+  "Permissions": {
+    "accessRequest": {
+      "formTitle": "Request for access to specific sensitive data",
+      "sensitiveAccessText" : "<a href=\"https://www.biodiversite-auvergne-rhone-alpes.fr/pifh/#pifh-les-donnees\" target=\"_blank\">I confirm that I have read the terms of access to precise sensitive data</a>."
+    }
+  }
+}

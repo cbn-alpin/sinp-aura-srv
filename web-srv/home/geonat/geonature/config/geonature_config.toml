@@ -315,10 +315,9 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
                 "Végétal et Animal (Invertébrés)",
             ]
         required = true
-        help = """Veuillez indiquer le règne des taxons
-            concernés par votre étude et pour lesquels vous demandez
-            un accès précis.  Pour rappel, les données de faune vertébrée
-            sont accessibles à la précision maximale sans demande d'accès."""
+        help = """Veuillez indiquer le règne des taxons concernés
+            par votre étude et pour lesquels vous demandez un accès
+            précis aux données sensibles."""
     [[PERMISSION_MANAGEMENT.REQUEST_FORM]]
         type_widget = "text"
         attribut_label = "Organisme"
@@ -358,12 +357,11 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
         icon = "text_snippet"
         required = false
         rows = 10
-        help = """Précisez si vous êtes adhérents à l'un au moins des Pôles thématiques.<br/>
-            Précisez le calendrier, la finalité, l'objet de l'étude
+        help = """Précisez le calendrier, la finalité, l'objet de l'étude
             scientifique et le cadre réglementaire dans lequel s'inscrit
             la demande (Étude d'impact, étude d'incidence Natura 2000,
-            étude d'incidence Eau, demande d'autorisation au titre de la
-            loi sur l'eau, demande d'autorisation au titre des ICPE,
+            étude d'incidence Eau, demande d'autorisation au titre de
+            la loi sur l'eau, demande d'autorisation au titre des ICPE,
             demande d'autorisation de destruction d'espèces protégées)."""
 
 [DATA_BLURRING]
