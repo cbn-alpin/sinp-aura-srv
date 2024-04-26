@@ -3,7 +3,7 @@ version: "3.9"
 services:
 
   healthcheck-postgres:
-    image: postgres:16.1-bookworm
+    image: postgres:16.2-bookworm
     # See: https://hub.docker.com/_/postgres
     container_name: healthcheck-postgres
     user: postgres
@@ -27,7 +27,7 @@ services:
     # USAGE :
     # - Create Healthcheck super user with: `docker compose run healthcheck-web /opt/healthchecks/manage.py createsuperuser`
     # - Add Telegram integration with: `docker compose run healthcheck-web /opt/healthchecks/manage.py settelegramwebhook`
-    image: healthchecks/healthchecks:v3.1
+    image: healthchecks/healthchecks:v3.3
     # See: https://hub.docker.com/r/healthchecks/healthchecks
     container_name: healthcheck-web
     restart: unless-stopped

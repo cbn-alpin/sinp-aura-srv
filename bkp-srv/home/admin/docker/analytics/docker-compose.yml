@@ -2,12 +2,10 @@ version: "3.9"
 
 services:
   analytics-nginx:
-    image: nginx:1.24.0-bullseye
+    image: nginx:1.26.0-bookworm
     # https://hub.docker.com/_/nginx
     container_name: analytics-nginx
     restart: unless-stopped
-    ports:
-      - "127.0.0.1:50083:80"
     depends_on:
       - analytics-matomo
     environment:
@@ -26,7 +24,7 @@ services:
     build:
       context: ./matomo/build
       dockerfile: Dockerfile
-    image: cbnalpin:matomo-5.0.1-fpm
+    image: cbna/matomo:5.0.3-fpm
     # https://hub.docker.com/_/matomo
     container_name: analytics-matomo
     restart: unless-stopped
@@ -53,7 +51,7 @@ services:
       - matomo-storage:/var/www/html
 
   analytics-mariadb:
-    image: mariadb:11.2.2-jammy
+    image: mariadb:11.3.2-jammy
     # https://hub.docker.com/_/mariadb
     container_name: analytics-mariadb
     restart: unless-stopped

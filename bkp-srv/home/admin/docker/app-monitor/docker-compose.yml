@@ -28,7 +28,7 @@ x-logging:
 services:
 
   app-monitor-postgres:
-    image: postgres:16.1-bookworm
+    image: postgres:16.2-bookworm
     # See: https://hub.docker.com/_/postgres
     container_name: app-monitor-postgres
     restart: unless-stopped
@@ -58,7 +58,7 @@ services:
     logging: *default-logging
 
   app-monitor-web:
-    image: glitchtip/glitchtip:v3.4.5
+    image: glitchtip/glitchtip:v4.0.7
     # See: https://hub.docker.com/r/glitchtip/glitchtip
     container_name: app-monitor-web
     restart: unless-stopped
@@ -76,7 +76,7 @@ services:
       - uploads-storage:/code/uploads
 
   app-monitor-worker:
-    image: glitchtip/glitchtip:v3.4.5
+    image: glitchtip/glitchtip:v4.0.7
     # See: https://hub.docker.com/r/glitchtip/glitchtip
     container_name: app-monitor-worker
     restart: unless-stopped
@@ -91,7 +91,7 @@ services:
     # USAGE:
     # apply migrations: `docker compose run --rm app-monitor-migrate ./manage.py migrate`
     # create super-user: `docker compose run --rm app-monitor-migrate ./manage.py createsuperuser`
-    image: glitchtip/glitchtip:v3.4.5
+    image: glitchtip/glitchtip:v4.0.7
     # See: https://hub.docker.com/r/glitchtip/glitchtip
     container_name: app-monitor-migrate
     restart: "no"

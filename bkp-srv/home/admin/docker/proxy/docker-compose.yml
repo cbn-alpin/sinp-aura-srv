@@ -1,8 +1,15 @@
 version: "3.9"
 
+x-logging:
+  &default-logging
+  driver: json-file
+  options:
+    max-size: 4m
+    max-file: 10
+
 services:
   nginx-proxy:
-    image: nginx:1.24.0-bullseye
+    image: nginx:1.26.0-bookworm
     # https://hub.docker.com/_/nginx/
     container_name: nginx-proxy
     hostname: "${HOSTNAME}_nginx-proxy"
@@ -10,8 +17,11 @@ services:
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
+      - "[::]:80:80"
+      - "[::]:443:443"
     labels:
       com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
+    logging: *default-logging
     volumes:
       - certs-storage:/etc/nginx/certs
       - conf-storage:/etc/nginx/conf.d
@@ -20,14 +30,9 @@ services:
       - ./docker-gen/vhost.d/location/:/etc/nginx/vhost.d/location/
       - ./docker-gen/vhost.d/server/:/etc/nginx/vhost.d/server/
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-    logging:
-      driver: json-file
-      options:
-        max-size: 4m
-        max-file: 10
 
   docker-gen:
-    image: nginxproxy/docker-gen:0.11.1-debian
+    image: nginxproxy/docker-gen:0.12.0-debian
     # https://hub.docker.com/r/nginxproxy/docker-gen
     container_name: nginx-proxy-gen
     hostname: "${HOSTNAME}_nginx-proxy-gen"
@@ -37,6 +42,9 @@ services:
     labels:
       com.github.jrcs.letsencrypt_nginx_proxy_companion.docker_gen: "true"
     command: -notify-sighup nginx-proxy -watch -wait 5s:30s /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
+    logging: *default-logging
+    environment:
+      ENABLE_IPV6: true
     volumes:
       - certs-storage:/etc/nginx/certs
       - conf-storage:/etc/nginx/conf.d
@@ -46,14 +54,9 @@ services:
       - ./docker-gen/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
       - ./docker-gen/vhost.d/location/:/etc/nginx/vhost.d/location/
       - ./docker-gen/vhost.d/server/:/etc/nginx/vhost.d/server/
-    logging:
-      driver: json-file
-      options:
-        max-size: 4m
-        max-file: 10
 
   nginx-proxy-letsencrypt:
-    image: nginxproxy/acme-companion:2.2.9
+    image: nginxproxy/acme-companion:2.2.10
     # https://hub.docker.com/r/nginxproxy/acme-companion
     container_name: nginx-proxy-letsencrypt
     hostname: "${HOSTNAME}_nginx-proxy-letsencrypt"
@@ -61,11 +64,12 @@ services:
       - docker-gen
     restart: unless-stopped
     environment:
-      DEFAULT_EMAIL: adminsys@silene.eu
+      DEFAULT_EMAIL: adminsys@biodiversite-aura.fr
       NGINX_DOCKER_GEN_CONTAINER: nginx-proxy-gen
       NGINX_PROXY_CONTAINER: nginx-proxy-gen
       # For debug uncomment and set DEBUG value to 1
       #DEBUG: 1
+    logging: *default-logging
     volumes:
       - certs-storage:/etc/nginx/certs
       - conf-storage:/etc/nginx/conf.d
@@ -73,11 +77,6 @@ services:
       - vhost-storage:/etc/nginx/vhost.d
       - acme-storage:/etc/acme.sh
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    logging:
-      driver: json-file
-      options:
-        max-size: 4m
-        max-file: 10
 
 volumes:
   acme-storage:

@@ -1,4 +1,4 @@
-FROM matomo:5.0.1-fpm
+FROM matomo:5.0.3-fpm
 # See : https://github.com/matomo-org/docker/blob/master/fpm/Dockerfile
 # Also see : https://github.com/crazy-max/docker-matomo
 
