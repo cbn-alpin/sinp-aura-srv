@@ -9,7 +9,7 @@
 <p>
 	En Auvergne-Rhône-Alpes, Biodiv’AURA Expert est le portail public d’accès
 	aux données naturalistes. Biodiv’AURA Expert est ainsi la plateforme
-	régionale d’occurrence taxon du Système d’Information de l’Inventaire
+	régionale d’occurrence taxon du Système d’Information de l’iNventaire
 	du Patrimoine naturel (SINP) en Auvergne-Rhône-Alpes.
 </p>
 <p>
@@ -17,7 +17,7 @@
 	l’Environnement et conçu comme une organisation collaborative pour la
 	production, la gestion, le traitement, la valorisation et la diffusion
 	des données sur la nature et les paysages. Son organisation est décrite
-	dans un protocole national (circulaire du 15 mai 2013 en cours d’actualisation).
+	dans le schéma métier du SINP (publié par décision du 30 août 2022).
 </p>
 <p>
 	En facilitant l’accès à l’information, Biodiv’AURA Expert a pour objectif
@@ -27,9 +27,22 @@
 </p>
 <p>
 	Les données de Biodiv’AURA Expert sont librement consultables à la précision
-	de la commune ou de la maille 5x5 km sur Biodiv’AURA Atlas. L’accès à
-	l’information plus détaillée est autorisé en réponse à des demandes
-	ponctuelles et motivées, selon les principes validés par le comité de pilotage.
+	maximale connue, sauf pour les données sensibles. Les données sensibles au
+	titre de l’article L.124-4 du code de l’environnement tiennent lieu
+	d’exception à la diffusion publique des données (publication en ligne et
+	téléchargement). Il s’agit des données de localisation ne devant pas être
+	largement diffusées pour éviter de porter atteinte aux éléments qu’elles
+	concernent.
+</p>
+<p>
+	L’accès à l’information plus détaillée s’agissant des données sensibles, est
+	autorisé en réponse à des demandes ponctuelles et motivées, selon les
+	<a
+	href="https://www.biodiversite-auvergne-rhone-alpes.fr/documents/acces-aux-donnees-sensibles-du-sinp-auvergne-rhone-alpes/"
+	target="_blank">
+		principes validés
+	</a>
+	par le comité de pilotage.
 </p>
 <p>
 	Les données et informations qui sont fournies dans le cadre de Biodiv’AURA
@@ -40,10 +53,10 @@
 
 <h3>Article 1. Objet de la Convention</h3>
 <p>
-	Cette convention établit les droits d’accès aux données précises de
+	Cette convention établit les droits d’accès aux données sensibles précises de
 	Biodiv’AURA Expert pour l’utilisateur identifié signataire de la présente
 	convention, et les engagements liés à cet accord. Elle traite des aspects
-	relatifs à la consultation et l’exportation des données.
+	relatifs à la consultation, à l’exportation et à la réutilisation des données.
 </p>
 
 <h3>Article 2. Droits d’accès</h3>
@@ -60,10 +73,6 @@
 	sous la responsabilité de « l’utilisateur identifié ».
 </p>
 <p>
-  « l’utilisateur identifié » signataire de la présente convention déclare avoir pris connaissance et
-  approuver les chartes en vigueur.
-</p>
-<p>
 	Biodiv’AURA Expert met à disposition l'ensemble des données validées
 	contenues dans Biodiv’AURA Expert pour les droits de consultation suivants :
 </p>
@@ -74,7 +83,6 @@
       <span *ngIf="accessRequest.taxa ; else allTaxa" [innerHtml]="accessRequest.taxa | safeHTML"></span>
       <ng-template #allTaxa><i>tous</i></ng-template>
     </li>
-    <li *ngIf="accessRequest.sensitiveAccess">accés données sensibles : <i>oui</i></li>
     <li>
       date de fin de mise à disposition :
       <span *ngIf="accessRequest.endAccessDate ; else unlimitedAccess">{{accessRequest.endAccessDate}}</span>
@@ -84,47 +92,49 @@
 
 <h3>Article 3. Utilisation des données de Biodiv’AURA Expert</h3>
 <p>
-	L’ouverture de droits d’accès pour Biodiv’AURA Expert est strictement
-	subordonnée au respect des conditions suivantes :
+	L’ouverture de droits d’accès aux données sensibles précises de Biodiv’AURA
+	Expert est strictement subordonnée au respect des conditions suivantes :
 </p>
 <ul>
 	<li>
-		respecter strictement les Chartes en vigueur notamment au sujet de la réutilisation des données et de la citation des sources,
+		mentionner la paternité des données « Système d’Information de l’iNventaire
+		du Patrimoine naturel - Biodiv’AURA Expert – date de l’extraction - sources
+		(fournisseurs de données) » ou dans la mesure du raisonnable mentionner les
+		cadres d'acquisition et/ou jeux de données mobilisés,
 	</li>
 	<li>
-		ne pas diffuser les données à un tiers sans autorisation,
+		ne pas rediffuser les données qui lui ont été communiquées quel que soit
+		le support de diffusion (fichiers, web-service, site internet…)
 	</li>
 	<li>
 		ne pas diffuser les codes d’accès qui sont nominatifs et sous sa responsabilité,
-	</li>
-	<li>
-		toujours citer la source des données dans toute valorisation de leur
-		exploitation : « Biodiv’AURA Expert – date de consultation - sources
-		(fournisseurs de données) »
 	</li>
 </ul>
 <p>
 	Si ces droits d’accès sont accordés dans le cadre d’une étude faisant l’objet
 	d’une commande spécifique d’un maître d’ouvrage, l’utilisateur identifié
 	certifie sur l’honneur être effectivement missionné par le commanditaire,
-	et s’engage à :
+	et :
 </p>
 <ul>
 	<li>
-		n’utiliser les données de Biodiv’AURA Expert que dans le cadre de la
-		mission ayant donné lieu à l’autorisation d’accès de la présente convention
+		s’engage à n’utiliser les données de Biodiv’AURA Expert que dans le cadre de la mission
+		ayant donné lieu à l’autorisation d’accès de la présente convention et à les
+		détruire une fois le délai d’usage mentionné dépassé
 	</li>
 	<li>
-		fournir les données recueillies dans le cadre de l’étude en s’assurant
-		de l’autorisation du commanditaire de l’étude pour leur mise à disposition
-		dans Biodiv’AURA Expert
-		(<a href="https://www.biodiversite-auvergne-rhone-alpes.fr/transmettre-ses-donnees/" target="_blank">
+		est invité à partager en retour les données qu’il aura acquises dans le
+		cadre de son projet pour leur mise à disposition dans Biodiv’AURA Expert
+		(<a
+			href="https://www.biodiversite-auvergne-rhone-alpes.fr/transmettre-ses-donnees/"
+			target="_blank">
 			plus d’informations relatives à la transmission de données
 		</a>).
 	</li>
 </ul>
 <p>
-	L’usage des données par l’utilisateur n’engage pas la responsabilité de Biodiv’AURA Expert.
+	L’usage des données par l’utilisateur n’engage pas la responsabilité des
+	animateurs ni des pilotes du SINP régional.
 </p>
 
 <h3>Résiliation de la convention</h3>

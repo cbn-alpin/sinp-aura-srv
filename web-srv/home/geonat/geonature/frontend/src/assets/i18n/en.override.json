@@ -1,8 +1,9 @@
 {
   "Permissions": {
     "accessRequest": {
+      "link": "Request access to sensitive data",
       "formTitle": "Request for access to specific sensitive data",
-      "sensitiveAccessText" : "<a href=\"https://www.biodiversite-auvergne-rhone-alpes.fr/pifh/#pifh-les-donnees\" target=\"_blank\">I confirm that I have read the terms of access to precise sensitive data</a>."
+      "sensitiveAccessText" : "<a href=\"https://www.biodiversite-auvergne-rhone-alpes.fr/documents/acces-aux-donnees-sensibles-du-sinp-auvergne-rhone-alpes\" target=\"_blank\">I confirm that I have read the terms of access to precise sensitive data</a>."
     }
   }
 }

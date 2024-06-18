@@ -73,7 +73,7 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
     VALIDATOR_EMAIL = [
             "Ornella KRISTO <o.kristo@cbn-alpin.fr>",
             "Lucile VAHE <l.vahe@cbn-alpin.fr>",
-            "Carole HEYD <carole.heyd@cbnmc.fr>",
+            "Mélanie PIROUX <melanie.piroux@cbnmc.fr>",
             "Donovan MAILLARD <donovan.maillard@flavia-ape.fr>",
             "Julien GIRARD-CLAUDON <julien.girard-claudon@lpo.fr>",
             "M. CHAUTAN <m.chautan@chasseauvergnerhonealpes.com>",
@@ -82,61 +82,41 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
     AUTO_DATASET_CREATION = false
     ENABLE_USER_MANAGEMENT = true
     ADDON_USER_EMAIL = """<p>
-        Nous vous rappelons que cette inscription vous donne accès à la consultation
-        des données versées dans Biodiv'AURA Expert à l'échelle de la maille 5x5km.</br>
-        L'accès aux données précises nécessite de compléter un «
-        <a href="https://donnees.biodiversite-auvergne-rhone-alpes.fr/\u0023/permissions/requests/add">
-            formulaire de demande d'accès aux données précises
+        Nous vous rappelons que les données de Biodiv'AURA sont diffusées en accès
+        libre avec leur précision géographique maximale, hors données sensibles,
+        via le bouton "accès public". La création de compte est nécessaire uniquement
+        pour demander un
+        <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/wp-content/uploads/2024/05/acces_aux_donnees_sensibles_SINP_AURA-_VF2024.pdf">
+            accès à la localisation précise des données sensibles
         </a> ».<br/>
-        L'accord sera formalisé par l'acceptation d'
-        <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/">
-            une convention « droit d'accès aux données précises »
-        </a>
-        et donnera lieu à l'attribution d'un accès direct à ces données.</br>
-        La convention engage le titulaire au bon usage des données et à l'alimentation
-        de Bioviv'AURA Expert en retour.
+        L'accès aux données sensibles précises nécessite de compléter un «
+        <a href="https://donnees.biodiversite-auvergne-rhone-alpes.fr/\u0023/permissions/requests/add">
+            formulaire de demande d'accès aux données sensibles précises
+        </a> ».<br/>
+        L'accord sera formalisé par l'acceptation d'une convention
+        « droit d'accès aux données sensibles précises »
+        et donnera lieu à l'attribution d'un accès direct à ces données.
         </p>"""
     # Gestion du formulaire de demande d'inscription
-    [[ACCOUNT_MANAGEMENT.ACCOUNT_FORM]]
-        type_widget = "checkbox"
-        attribut_label = """<a target="_blank" href="https://www.biodiversite-auvergne-rhone-alpes.fr/">
-                J'accepte les conditions d'utilisation et les chartes des Pôles thématiques
-            </a>"""
-        attribut_name = "validate_charte"
-        values = [true]
-        required = true
     [[ACCOUNT_MANAGEMENT.ACCOUNT_FORM]]
         type_widget = "html"
         attribut_name = "conditions"
         class = "alert alert-primary"
         html = """
             <p>
-                Merci pour votre demande d'inscription. Après validation par l'administrateur,
-                vous pourrez accéder à l'ensemble des données à l'échelle de la maille 5x5km.
-            </p>
-            <p>
-                L'accès aux données avec leur précision maximale nécessite, dans Biodiv'AURA Expert,
-                de compléter un « formulaire de demande d'accès aux données précises ».
-                L'accord sera formalisé par l’acceptation d'
-                <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/" target="_blank">
-                    une convention « droit d'accès aux données précises »
-                </a>
-                et donnera lieu à l'attribution d'un accès direct à ces données.
-                La convention engage le titulaire à un bon usage des données et à
-                <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/" target="_blank">
-                    une alimentation de Biodiv'AURA Expert en retour
+                Les données de Biodiv'AURA sont diffusées en accès libre avec leur précision
+                géographique maximale, hors données sensibles, via le bouton "accès public".
+                La création de compte est nécessaire uniquement pour demander
+                <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/wp-content/uploads/2024/05/acces_aux_donnees_sensibles_SINP_AURA-_VF2024.pdf" target="_blank">
+                    un accès à la localisation précise des données sensibles
                 </a>.
             </p>
             <p>
-                Les autorisations d'accès sont gérées par les animateurs des Pôles thématiques
-                s'appuyant sur le Comité de pilotage de l'ORB (ou de nom SINP AURA).
-            </p>
-            <p>
-                Les données et informations qui vous sont fournies dans le cadre de Biodiv'AURA Expert
-                ne sont pas exhaustives et peuvent donc s'avérer insuffisantes pour les besoins
-                spécifiques de votre étude. Une réactualisation de ces données dans le cadre
-                d'inventaires complémentaires est nécessaire.
-            <p>"""
+                Les données et informations qui vous sont fournies dans le cadre de Biodiv'AURA
+                Expert ne sont pas exhaustives et peuvent donc s'avérer insuffisantes pour les
+                besoins spécifiques de votre étude. Une réactualisation de ces données dans le
+                cadre d'inventaires complémentaires est nécessaire.
+            </p>"""
         required = false
 
 # Configuration générale du frontend
@@ -277,7 +257,7 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
     VALIDATOR_EMAIL = [
             "Ornella KRISTO <o.kristo@cbn-alpin.fr>",
             "Lucile VAHE <l.vahe@cbn-alpin.fr>",
-            "Carole HEYD <carole.heyd@cbnmc.fr>",
+            "Mélanie PIROUX <melanie.piroux@cbnmc.fr>",
             "Donovan MAILLARD <donovan.maillard@flavia-ape.fr>",
             "Julien GIRARD-CLAUDON <julien.girard-claudon@lpo.fr>",
             "M. CHAUTAN <m.chautan@chasseauvergnerhonealpes.com>",
@@ -287,7 +267,7 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
     # Activer la validation de la convention suite à une demande d'accès
     ENABLE_CONVENTION = true
     # Titre de la fenêtre modale affichant la convention
-    CONVENTION_TITLE = "Convention « Droit d'accès ponctuel aux données précises de Biodiv’AURA Expert »"
+    CONVENTION_TITLE = "Convention « Droit d'accès ponctuel aux données sensibles précises de Biodiv’AURA Expert »"
     # Libellé du bouton permettant d'accepter la convention
     CONVENTION_VALIDATE = "J'accepte les termes de la convention « droit d'accès »."
 
