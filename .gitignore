@@ -4,6 +4,7 @@
 !*.default.conf
 !*.tpl.conf
 !web-srv/etc/**/*.conf
+!db-srv/etc/**/*.conf
 .env*
 !.env.sample
 *.mmdb
