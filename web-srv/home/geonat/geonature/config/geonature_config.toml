@@ -23,7 +23,7 @@ SECRET_KEY = "<secret-key>"
 DEFAULT_LANGUAGE = "fr"
 
 # Enable logging email error (must fill the mail config section bellow if true)
-MAIL_ON_ERROR = true
+MAIL_ON_ERROR = false
 
 # Nom de l'application dans la page d'accueil.
 appName = "Biodiv'AURA Expert"
@@ -247,6 +247,8 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
     ENABLE_ACCESS_REQUEST = true
     # Activer la possibilité de demander l'accès aux données sensibles.
     ENABLE_SENSITIVE_ACCESS = true
+    # Rend obligatoire la coche de l'accès aux données sensibles.
+    ENABLE_MANDATORY_SENSITIVE_ACCESS = true
     # Types zones géo formulaire de demande d'accès.
     AREA_TYPES = ["COM", "DEP", "SINP"]
     # Durée minimum en jour pendant laquelle l'accès est autorisé.
@@ -295,9 +297,9 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
                 "Végétal et Animal (Invertébrés)",
             ]
         required = true
-        help = """Veuillez indiquer le règne des taxons concernés
-            par votre étude et pour lesquels vous demandez un accès
-            précis aux données sensibles."""
+        help = """Veuillez indiquer le règne des taxons
+            concernés par votre étude et pour lesquels vous demandez
+            un accès précis."""
     [[PERMISSION_MANAGEMENT.REQUEST_FORM]]
         type_widget = "text"
         attribut_label = "Organisme"
@@ -361,5 +363,12 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
             {level = "1", area = "M5"},# Commune
             {level = "2", area = "M5"},# Maille
             {level = "3", area = "M5"},# Département
+            {level = "2.1", area = "M1"},
+            {level = "2.2", area = "M2"},
+            {level = "2.3", area = "M5"},
+            {level = "2.4", area = "M10"},
+            {level = "2.5", area = "M20"},
+            {level = "2.6", area = "M50"},
+            {level = "2.7", area = "M50"},
         ]
 
