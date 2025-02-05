@@ -1,0 +1,23 @@
+## Nombre de jours après lequel les fichiers exportés sont supprimés automatiquement sur le serveur
+nb_days_keep_file = 2
+
+## Emplacement des exports
+## {GN_HOME} est à remplacer par l'emplacement du dossier racine de GeoNature
+export_schedules_dir = '/home/geonat/www/geonature/backend/static/exports/schedules/'
+export_dsw_dir = '/home/geonat/www/geonature/backend/static/exports/dsw/'
+export_dsw_filename = 'export_dsw.ttl'
+
+
+## URL des exports générés par les utilisateurs
+# export_web_url : paramètre optionel. Correspond à une url pour les fichiers générés lors des exports utilisateurs
+# cette adresse doit être reliée au répertoire '{GN_HOME}/backend/static/exports/usr_generated/'
+# La configuration Apache pour GeoNature doit être modifiée avec les directives '<Directory>' et 'Alias' pour créer ce lien.
+export_web_url = 'https://donnees.biodiversite-auvergne-rhone-alpes.fr/exports/users'
+
+# Indique si la route appel à l'api du Darwin SW est active ou non
+expose_dsw_api = false
+
+[export_format_map.csv]
+mime = 'text/csv'
+geofeature = false
+label = 'CSV'
