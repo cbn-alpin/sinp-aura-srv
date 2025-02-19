@@ -77,22 +77,27 @@ MAP = {
             'attribution' : '&copy OpenStreetMap',
             'tileName' : 'OSM'
     },
-    'SECOND_MAP' : {'url' :'//a.tile.opentopomap.org/{z}/{x}/{y}.png',
-            'attribution' : '&copy OpenStreetMap-contributors, SRTM | Style: &copy OpenTopoMap (CC-BY-SA)',
-            'tileName' : 'OTM'
+    'SECOND_MAP' : {'url' : '//data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&LAYER=HR.ORTHOIMAGERY.ORTHOPHOTOS&FORMAT=image/jpeg',
+            'attribution' : '&copy IGN',
+            'tileName' : 'IGN Ortho'
     },
-    #'SECOND_MAP' : {'url' :'https://gpp3-wxs.ign.fr/'+IGNAPIKEY+'/geoportail/wmts?LAYER=ORTHOIMAGERY.ORTHOPHOTOS&EXCEPTIONS=text/xml&FORMAT=image/jpeg&SERVICE=WMTS&VERSION=1.0.0&REQUEST=GetTile&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}',
-    #        'attribution' : '&copy; <a href="http://www.ign.fr/">IGN</a>',
-    #        'tileName' : 'Ortho IGN'
-    #},
     'ZOOM' : 7,
+    'MIN_ZOOM' : 7,
+    'MAX_BOUNDS' : [[44.13,1.48],[46.89,7.41]],
     # Pas du slider sur les annees d'observations: 1 = pas de 1 an sur le slider
     'STEP': 1,
     # Couleur et épaisseur des limites du territoire
     'BORDERS_COLOR': '#000000',
     'BORDERS_WEIGHT': 3,
-    'ENABLE_SLIDER': True
+    'MASK_STYLE': {
+        "fill": False,
+        "fillColor": '#020202',
+        "fillOpacity": 0.3
+    },
+    'ENABLE_SLIDER': True,
+    'ENABLE_SCALE': True
 }
+
 
 # Affichage des observations par maille ou point
 # True = maille / False = point
