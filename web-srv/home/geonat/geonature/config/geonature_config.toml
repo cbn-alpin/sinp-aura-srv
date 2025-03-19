@@ -82,21 +82,21 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
     AUTO_DATASET_CREATION = false
     ENABLE_USER_MANAGEMENT = true
     ADDON_USER_EMAIL = """<p>
-        Nous vous rappelons que les données de Biodiv'AURA sont diffusées en accès
-        libre avec leur précision géographique maximale, hors données sensibles,
-        via le bouton "accès public". La création de compte est nécessaire uniquement
-        pour demander un
-        <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/wp-content/uploads/2024/05/acces_aux_donnees_sensibles_SINP_AURA-_VF2024.pdf">
-            accès à la localisation précise des données sensibles
-        </a> ».<br/>
-        L'accès aux données sensibles précises nécessite de compléter un «
-        <a href="https://donnees.biodiversite-auvergne-rhone-alpes.fr/\u0023/permissions/requests/add">
-            formulaire de demande d'accès aux données sensibles précises
-        </a> ».<br/>
-        L'accord sera formalisé par l'acceptation d'une convention
-        « droit d'accès aux données sensibles précises »
-        et donnera lieu à l'attribution d'un accès direct à ces données.
-        </p>"""
+	    Nous vous rappelons que les données de Biodiv'AURA sont diffusées en accès
+            libre avec leur précision géographique maximale, hors données sensibles,
+            via le bouton "accès public". La création de compte est nécessaire uniquement
+            pour demander un
+            <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/wp-content/uploads/2024/05/acces_aux_donnees_sensibles_SINP_AURA-_VF2024.pdf">
+                accès à la localisation précise des données sensibles
+            </a> ».<br/>
+            L'accès aux données sensibles précises nécessite de compléter un «
+            <a href="https://donnees.biodiversite-auvergne-rhone-alpes.fr/\u0023/permissions/requests/add">
+                formulaire de demande d'accès aux données sensibles précises
+            </a> ».<br/>
+            L'accord sera formalisé par l'acceptation d'une convention
+            « droit d'accès aux données sensibles précises »
+            et donnera lieu à l'attribution d'un accès direct à ces données.
+            </p>"""
     # Gestion du formulaire de demande d'inscription
     [[ACCOUNT_MANAGEMENT.ACCOUNT_FORM]]
         type_widget = "html"
@@ -240,6 +240,11 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
     AREA_AGGREGATION_TYPE = "M5"
     AREA_AGGREGATION_BY_DEFAULT = false
 
+    # Liste de 'id_attribut' TaxHub à afficher dans :
+    # - la modale du détail d'une observation
+    # - les filtres taxonomique avancés
+    ID_ATTRIBUT_TAXHUB = [109]
+
 
 [PERMISSION_MANAGEMENT]
     # Activer (=true) l'affichage du lien vers le formulaire de demande
@@ -342,8 +347,8 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
         help = """Précisez le calendrier, la finalité, l'objet de l'étude
             scientifique et le cadre réglementaire dans lequel s'inscrit
             la demande (Étude d'impact, étude d'incidence Natura 2000,
-            étude d'incidence Eau, demande d'autorisation au titre de
-            la loi sur l'eau, demande d'autorisation au titre des ICPE,
+            étude d'incidence Eau, demande d'autorisation au titre de la
+            loi sur l'eau, demande d'autorisation au titre des ICPE,
             demande d'autorisation de destruction d'espèces protégées)."""
 
 [DATA_BLURRING]
@@ -352,7 +357,7 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
     # Correspondance entre les niveau de diffusion (nomenclaure NIV_PRECIS)
     # et un type de zone géographique utilisée pour le rendu sur les cartes.
     AREA_TYPE_FOR_DIFFUSION_LEVELS = [
-            {level = "0", area = "M5"},# Standard
+            #{level = "0", area = "M5"},# Standard => pas de floutage ! 2025-03-19 -- jpmilcent
             {level = "1", area = "M5"},# Commune
             {level = "2", area = "M5"},# Maille
             {level = "3", area = "M5"},# Département
@@ -371,4 +376,3 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
             {level = "2.6", area = "M50"},
             {level = "2.7", area = "M50"},
         ]
-
