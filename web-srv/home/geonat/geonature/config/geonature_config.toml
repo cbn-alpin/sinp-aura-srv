@@ -147,8 +147,8 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
     ZOOM_ON_CLICK = 16
     # Configuration des fonds carto
     BASEMAP = [
-        {"name" = "OpenStreetMap",    "layer" = "//{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", "attribution" = "&copy; OpenStreetMap", "maxZoom" = 22, "maxNativeZoom" = 19},
-        {"name" = "OpenTopoMap",      "layer" = "//a.tile.opentopomap.org/{z}/{x}/{y}.png", "attribution" = "&copy; OpenTopoMap", "maxZoom" = 22, "maxNativeZoom" = 17},
+        {"name" = "OpenStreetMap",    "layer" = "//tile.openstreetmap.org/{z}/{x}/{y}.png", "attribution" = 'Fond de carte & données par <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; les contributeurs & contributrices OpenStreetMap</a>, sous <a href="https://opendatacommons.org/licenses/odbl/1.0/" target="_blank">licence ODbL</a>.', "maxZoom" = 22, "maxNativeZoom" = 19},
+        {"name" = "OpenTopoMap", "layer" = "//{s}.tile.opentopomap.org/{z}/{x}/{y}.png", "attribution" = 'Fond de carte par <a href="https://opentopomap.org" target="_blank">OpenTopoMap</a>, sous <a href="https://creativecommons.org/licenses/by-sa/2.0/fr/" target="_blank">licence CC BY-SA</a>. Données <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; les contributeurs & contributrices OpenStreetMap</a>, sous <a href="https://opendatacommons.org/licenses/odbl/1.0/" target="_blank">licence ODbL</a> ; <a href="http://viewfinderpanoramas.org">SRTM</a>.', "maxZoom" = 22, "maxNativeZoom" = 17},
         {"name" = "GoogleSatellite",  "layer" = "//{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", "subdomains" = ["mt0", "mt1", "mt2", "mt3"], "attribution" = "&copy; GoogleMap", "maxZoom" = 22, "maxNativeZoom" = 22},
         {"name" = "IGN Ortho",        "layer" = "https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&LAYER=HR.ORTHOIMAGERY.ORTHOPHOTOS&FORMAT=image/jpeg", "attribution" = "&copy; IGN", "maxZoom" = 22, "maxNativeZoom" = 19},
         {"name" = "IGN Cadastre",     "layer" = "https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&LAYER=CADASTRALPARCELS.PARCELS&FORMAT=image/png", "attribution" = "&copy; IGN", "maxZoom" = 22, "maxNativeZoom" = 19},
@@ -209,6 +209,7 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
         "jdd_uuid",
         "fournisseur",
         "observateurs",
+        "determinateurs",
         "cd_ref",
         "nom_valide",
         "nom_vernaculaire",
@@ -235,16 +236,32 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
         "type_precision",
         "sensibilite",
         "confidentialite",
+        "floutage",
+        "statut_validation",
+        "statut_pn",
+        "statut_pr",
+        "statut_pd",
+        "statut_lrn",
+        "statut_lrr",
+        "statut_lrd",
+        "statut_zdet",
+        "statut_dh",
+        "statut_do",
     ]
     ENABLE_AREA_AGGREGATION = true
     AREA_AGGREGATION_TYPE = "M5"
     AREA_AGGREGATION_BY_DEFAULT = false
-
     # Liste de 'id_attribut' TaxHub à afficher dans :
     # - la modale du détail d'une observation
     # - les filtres taxonomique avancés
     ID_ATTRIBUT_TAXHUB = [109]
 
+[SYNTHESE.DEFAULT_FILTERS]
+    # Statuts de validation : Certain, Probable
+    # Il faut bien les renseigner en tant que chaîne de caractère (et non en tant que nombre)
+    cd_nomenclature_valid_status = ['0', '1', '2']
+    # Seulement les données de présence
+    cd_nomenclature_observation_status = ['Pr']
 
 [PERMISSION_MANAGEMENT]
     # Activer (=true) l'affichage du lien vers le formulaire de demande
@@ -376,3 +393,9 @@ VERSION_LOCATIONS = "/home/geonat/www/usershub/app/migrations/versions/"
             {level = "2.6", area = "M50"},
             {level = "2.7", area = "M50"},
         ]
+    # Nom de la colonne du fichier d'export de la Synthese contenant les informations
+    # de la nomenclature DEE_FLOU. La présence de cette colonne n'est pas obligatoire.
+    # Si présente, sa valeur est forcée a OUI si la donnée a été floutée par le niveau de
+    # sensibilité.
+    EXPORT_FIELD_BLURRING = "floutage"
+
