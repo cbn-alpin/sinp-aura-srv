@@ -1,0 +1,112 @@
+services:
+
+  preprod-nginx:
+    build:
+      context: ./nginx/
+      dockerfile: Dockerfile
+    image: cbna/preprod/nginx:1.28.0-bookworm
+    # https://hub.docker.com/_/nginx
+    container_name: preprod-nginx
+    hostname: preprod-nginx
+    restart: unless-stopped
+    expose:
+      - 80
+    environment:
+      TZ: Europe/Paris
+      VIRTUAL_HOST: gnpp.biodiversite-aura.net,uhpp.biodiversite-aura.net,thpp.biodiversite-aura.net,gnapp.biodiversite-aura.net
+      LETSENCRYPT_HOST: gnpp.biodiversite-aura.net,uhpp.biodiversite-aura.net,thpp.biodiversite-aura.net,gnapp.biodiversite-aura.net
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:9090/nginx_status || exit 1"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/.htpasswd:/etc/nginx/htpasswd:ro
+      - ./nginx/conf.d/:/etc/nginx/conf.d/:ro
+      - ./nginx/sites-available/:/etc/nginx/sites-available/:ro
+      - ./nginx/sites-enabled/:/etc/nginx/sites-enabled/:ro
+      # WARNING: Check if we can use ":ro" for /home/geonat/www/.
+      - /home/geonat/www/:/home/geonat/www:ro
+
+  preprod-postgres:
+    build:
+      context: ./postgres/build/
+      dockerfile: Dockerfile
+      args:
+        - TZ=${TZ:-Europe/Paris}
+    image: cbna/preprod/postgis:18-3.6
+    # See: https://hub.docker.com/r/postgis/postgis
+    container_name: preprod-postgres
+    hostname: preprod-postgres
+    restart: unless-stopped
+    logging:
+      options:
+        max-size: 10m
+        max-file: 5
+    #user: "${HOST_USER_ID}:${HOST_USER_GID}"
+    environment:
+      - TZ=${TZ:-Europe/Paris}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_HOST-127.0.0.1}:${POSTGRES_PORT-5432}:5432"
+    #healthcheck:
+    #  test: ["CMD-SHELL", "pg_isready"]
+    #  interval: 10s
+    #  timeout: 5s
+    #  retries: 5
+    volumes:
+      - ${POSTGRES_INIT_DB_DIR-./postgres/initdb}:/docker-entrypoint-initdb.d/
+      - ./postgres/postgresql.conf:/etc/postgresql/postgresql.conf
+      - /home/geonat/data/:/home/geonat/data/:ro
+      # For PG < v18:
+      #- data-postgres-storage:/var/lib/postgresql/data
+      # See https://github.com/docker-library/postgres/issues/37
+      # For PG >= 18:
+      - data-postgres-storage:/var/lib/postgresql
+      - /var/log/postgresql:/var/log/postgresql
+      - /run/postgresql:/var/run/postgresql
+      #- socket-postgres-storage:/var/run/postgresql
+    shm_size: 2gb
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf -c logging_collector=on
+
+  preprod-postgres-restore:
+    # Usage: docker compose run --rm preprod-postgres-restore /restore/restore.sh -d "2024-02-09_geonature2db.custom" 
+    image: ${POSTGRES_IMAGE:-cbna/preprod/postgis:18-3.6}
+    container_name: preprod-postgres-restore
+    restart: "no"
+    profiles: ["restore"]
+    depends_on:
+      preprod-postgres:
+        condition: service_started
+    #user: "${HOST_USER_ID}:${HOST_USER_GID}"
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_HOST=preprod-postgres
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_RESTORE_FILE=${POSTGRES_RESTORE_FILE}
+      - POSTGRES_RESTORE_ATLAS_DB_NAME=${POSTGRES_RESTORE_ATLAS_DB_NAME}
+      - POSTGRES_RESTORE_ATLAS_DB_USER=${POSTGRES_RESTORE_ATLAS_DB_USER}
+      - POSTGRES_RESTORE_ATLAS_DB_PASSWORD=${POSTGRES_RESTORE_ATLAS_DB_PASSWORD}
+    volumes:
+      - ${POSTGRES_RESTORE_DIR-./postgres/restore}:/restore/
+      - /data/tmp/restore/:/data/tmp/restore/
+      - /tmp/restore:/tmp/restore
+      - /var/log/postgresql:/var/log/postgresql
+      - /run/postgresql:/var/run/postgresql
+      #- socket-postgres-storage:/var/run/postgresql
+    command: /restore/restore.sh -d "${POSTGRES_RESTORE_FILE}"
+
+volumes:
+  data-postgres-storage:
+  #socket-postgres-storage:
+
+networks:
+  default:
+    name: nginx-proxy
+    external: true
+
