@@ -4,7 +4,6 @@
 # Remplacer user, monpassachanger, IPADRESSE (localhost si la BDD est sur le même serveur que l'application),
 # eventuellement le port de la BDD et le nom de la BDD avec l'utilisateur qui a des droits de lecture sur les vues de l'atlas (user_pg dans settings.ini)
 SQLALCHEMY_DATABASE_URI = "postgresql://geonatatlas:<password>@0.0.0.0:5432/gnatlas"
-#SQLALCHEMY_DATABASE_URI = "postgresql://geonatatlas:S4dWkkRE_BnsA%nZP53LeW@0.0.0.0:5432/gnatlas"
 
 
 # Ce paramètre permet de configurer la connexion de SQLAlchemy avec la base de données
