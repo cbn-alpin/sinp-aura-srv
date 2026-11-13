@@ -1,0 +1,22 @@
+/**
+ * Custom CSS for the legal notice page and other external pages.
+ */
+.legal-notice address {
+    border: 1px solid #ddd;
+    border-left: 5px solid #ddd;
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 10px 20px;
+}
+.legal-notice blockquote {
+    font-family: "Courier New", Courier, monospace;
+    border: 1px solid #eee;
+    border-left: 5px solid #eee;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+.legal-notice-container {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

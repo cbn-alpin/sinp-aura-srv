@@ -1,0 +1,611 @@
+#############################################
+# GeoNature backend global configuration file
+#############################################
+
+# Database
+SQLALCHEMY_DATABASE_URI = "postgresql://geonatadmin:<user_pg_pass>@10.0.1.40:5432/geonature2db"
+URL_APPLICATION = 'https://gn.biodiversite-aura.net'
+API_ENDPOINT = 'https://gn.biodiversite-aura.net/api'
+
+# Remplacer par une clé alétoire complexe
+SECRET_KEY = '<secret_key>'
+
+# Langue principale par défaut
+DEFAULT_LANGUAGE='fr'
+
+# Enable logging email error (must fill the mail config section bellow if true)
+MAIL_ON_ERROR = false
+
+appName = "GeoNature STAGING - SINP AURA"
+
+# Configuration de l'accès sans authentification
+PUBLIC_ACCESS_USERNAME = "user-public"
+
+# Set Sentry DSN
+SENTRY_DSN = "https://<sentry_dsn>@app-monitor.biodiversite-aura.net/3"
+
+[ALEMBIC]
+VERSION_LOCATIONS = "/home/geostaging/www/usershub/app/migrations/versions/"
+
+
+#######################################################################################
+###### Si vous souhaitez surcoucher certains paramètres,
+###### compléter les sections ci-dessous à partir du modèle default_config.toml.example
+#######################################################################################
+
+# Configuration liée à la page d’accueil
+[HOME]
+TITLE = "GeoNature STAGING - SINP AURA"
+INTRODUCTION = '''
+<p>
+  Biodiv'AURA Expert est <strong>la plateforme régionale du SINP en Auvergne-Rhône-Alpes</strong>.
+  Ce portail est dédié aux utilisateurs expérimentés (services de l’Etat, collectivités, associations, bureaux d’étude, etc.).
+  En facilitant l’accès à l’information, <strong>Biodiv’AURA Expert a pour objectif la connaissance et la conservation du patrimoine naturel régional</strong>.
+  C’est un outil public et collectif au service de la prise en compte de la biodiversité, financé et piloté de façon partenariale.
+</p>
+
+<p>
+  Les données mises à disposition ont été collectées par le réseau des partenaires des Pôles thématiques d’Auvergne-Rhône-Alpes.
+  Elles s’enrichissent de jour en jour mais <strong>ne peuvent être considérées comme exhaustives</strong> et nécessitent la consultation d’autres sources, une réactualisation et des inventaires complémentaires dans le cadre de l’expertise.
+</p>
+
+<p>
+  Les données de Biodiv’AURA Expert sont librement consultables à la précision maximale connue, <strong>sauf pour les données sensibles</strong>.
+  En effet, <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/documents/acces-aux-donnees-sensibles-du-sinp-auvergne-rhone-alpes" target="_blank">les données sensibles</a> au titre de l’article L.124-4 du code de l’environnement tiennent lieu d’exception à la diffusion publique des données (publication en ligne et téléchargement).
+  Il s’agit des données de localisation ne devant pas être largement diffusées pour éviter de porter atteinte aux éléments qu’elles concernent.
+</p>
+
+<p>
+  Dans le cadre de l’Observatoire Régional de la Biodiversité, les Pôles thématiques sont là pour vous accompagner techniquement et scientifiquement, selon leurs domaines de compétences.
+</p>
+
+<p>
+  Pour en savoir plus sur l’ORB, les Pôles thématiques ou encore sur la mutualisation des données, rendez-vous sur <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/" target="_blank">le portail internet de l’Observatoire Régional de la Biodiversité</a>.
+</p>
+
+<p>
+  La plateforme Biodiv'AURA Expert s'appuie sur les technologies <a href="https://geonature.fr/" target="_blank">GeoNature</a> pour proposer un outil en amélioration continue.
+  Afin de vous orienter dans la prise en main des fonctionnalités de Biodiv'AURA Expert, nous vous invitons à <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/foire-aux-questions" target="_blank">consulter la Foire Aux Questions</a>.
+</p>
+'''
+FOOTER = '''
+<footer class="container-fluid footer">
+  <div class="row row-0">
+    <div class="col-xs-12 padding-sm">
+      <div class="panel panel-default">
+       	<div class="panel-body">
+          <div class="row  align-items-center">
+            <div class="col-md-12 col-lg-2 col-logos col-orb">
+              <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/"
+                target="_blank"
+                title="Accéder au site de l'Observatoire de la Biodiversité en Auvergne-Rhône-Alpes">
+                <img class="img-thumbnail"
+                  src="custom/images/logo-orb.png"
+                  alt="Logo ORB Auvergne-Rhône-Alpes" />
+              </a>
+            </div>
+            <div class="col-md-12 col-lg-4 col-logos col-pilots">
+              <div class="row logo-title">
+                Piloté par la DREAL, la Région Auvergne-Rhône-Alpes et l'Office Français de la Biodiversité
+              </div>
+
+              <div class="row align-items-center logos-pilots">
+                <a	href="http://www.auvergne-rhone-alpes.developpement-durable.gouv.fr/"
+                  class="col-sm-12 col-md-4"
+                  target="_blank"
+                  title="Accéder au site de la DREAL Auvergne-Rhône-Alpes">
+                  <img class="img-thumbnail"
+                    src="custom/images/logo-dreal.png"
+                    alt="Logo DREAL Auvergne-Rhône-Alpes" />
+                </a>
+
+                <a	href="https://www.auvergnerhonealpes.fr/"
+                  class="col-sm-12 col-md-4"
+                  target="_blank"
+                  title="Accéder au site de la Région Auvergne-Rhône-Alpes">
+                  <img class="img-thumbnail"
+                    src="custom/images/logo-aura.png"
+                    alt="Logo AURA" />
+                </a>
+
+                <a	href="https://ofb.gouv.fr/"
+                  class="col-sm-12 col-md-4"
+                  target="_blank"
+                  title="Accéder au site de l'Office Français de la Biodiversité">
+                  <img class="img-thumbnail"
+                    src="custom/images/logo-ofb.png"
+                    alt="Logo OFB" />
+                </a>
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-6 col-logos col-operators">
+              <p class="logo-title">Opéré par les animateurs thématiques :</p>
+
+              <div class="row align-items-center logos-operators">
+                <a href="https://cbn-alpin.fr/"
+                  class="col-sm-12 col-md-2"
+                  target="_blank"
+                  title="Accéder au site du CBN Alpin">
+                  <img class="img-thumbnail"
+                    src="custom/images/logo-cbna.png"
+                    alt="Logo CBN Alpin" />
+                </a>
+
+                <a href="https://www.cbnmc.fr/"
+                  class="col-sm-12 col-md-2"
+                  target="_blank"
+                  title="Accéder au site du CBN du Massif Central">
+                  <img class="img-thumbnail"
+                    src="custom/images/logo-cbnmc.png"
+                    alt="Logo CBN du Massif Central" />
+                </a>
+
+                <a href="http://www.flavia-ape.fr/"
+                  class="col-sm-12 col-md-2"
+                  target="_blank"
+                  title="Accéder au site de Flavia APE">
+                  <img class="img-thumbnail"
+                    src="custom/images/logo-flavia.png"
+                    alt="Logo Flavia APE" />
+                </a>
+
+                <a href="https://auvergne-rhone-alpes.lpo.fr/"
+                  class="col-sm-12 col-md-2"
+                  target="_blank"
+                  title="Accéder au site de la LPO Auvergne-Rhône-Alpes">
+                  <img class="img-thumbnail"
+                    src="custom/images/logo-lpo.png"
+                    alt="Logo LPO AURA" />
+                </a>
+
+                <a href="http://www.chasseauvergnerhonealpes.com/"
+                  class="col-sm-12 col-md-2"
+                  target="_blank"
+                  title="Accéder au site de la FRC Auvergne-Rhône-Alpes">
+                  <img class="img-thumbnail"
+                    src="custom/images/logo-frc.png"
+                    alt="Logo FRC AURA" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <p class="text-muted">
+        <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/" target="_blank">Site de l'ORB AURA</a>
+        |
+        <a href="custom/html/legal-notice.html" target="_blank">Mentions légales</a>
+        <br/>
+        Biodiv'AURA Expert - ORB AURA, 2026
+        <br/>
+        Réalisé avec <a href="https://github.com/PnX-SI/GeoNature" target="_blank">GeoNature</a>,
+        déployé par le <a href="https://cbn-alpin.fr/" target="_blank">Conservatoire Botanique National Alpin (CBNA)</a>
+      </p>
+    </div>
+  </div>
+</footer>
+'''
+
+# Configuration de l'envoie d'emails
+# TODO: revoir la config pour utiliser le serveur Postfix local
+[MAIL_CONFIG]
+    # COnfig with local Postfix SMTP relay to OVH:
+    MAIL_SERVER = "localhost"
+    MAIL_PORT = 25
+    MAIL_USE_TLS = false
+    MAIL_USE_SSL = false
+    MAIL_USERNAME = "mailer@biodiversite-aura.fr"
+    MAIL_PASSWORD = "<mailer_pass>"
+    MAIL_DEFAULT_SENDER = "Ne Pas Réponde <mailer@biodiversite-aura.fr>"
+    MAIL_ASCII_ATTACHMENTS = false
+    # email(s) to the administrator for the email logging
+    ERROR_MAIL_TO = ["adminsys@biodiversite-aura.fr"]
+
+# Gestion des demandes d'inscription
+[ACCOUNT_MANAGEMENT]
+    ENABLE_SIGN_UP = true
+    AUTO_ACCOUNT_CREATION = false
+    VALIDATOR_EMAIL = [
+            "jp.milcent@cbn-alpin.fr",
+            "o.kristo@cbn-alpin.fr",
+            "m.isenmann@cbn-alpin.fr",
+        ]
+    AUTO_DATASET_CREATION = false
+    ENABLE_USER_MANAGEMENT = true
+    ADDON_USER_EMAIL = """<p>
+	    Nous vous rappelons que les données de Biodiv'AURA sont diffusées en accès
+            libre avec leur précision géographique maximale, hors données sensibles,
+            via le bouton "accès public". La création de compte est nécessaire uniquement
+            pour demander un
+            <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/wp-content/uploads/2024/05/acces_aux_donnees_sensibles_SINP_AURA-_VF2024.pdf">
+                accès à la localisation précise des données sensibles
+            </a> ».<br/>
+            L'accès aux données sensibles précises nécessite de compléter un «
+            <a href="https://donnees.biodiversite-auvergne-rhone-alpes.fr/\u0023/permissions/requests/add">
+                formulaire de demande d'accès aux données sensibles précises
+            </a> ».<br/>
+            L'accord sera formalisé par l'acceptation d'une convention
+            « droit d'accès aux données sensibles précises »
+            et donnera lieu à l'attribution d'un accès direct à ces données.
+            </p>"""
+    # Gestion du formulaire de demande d'inscription
+    [[ACCOUNT_MANAGEMENT.ACCOUNT_FORM]]
+        type_widget = "html"
+        attribut_name = "conditions"
+        class = "alert alert-primary"
+        html = """
+            <p>
+                Les données de Biodiv'AURA sont diffusées en accès libre avec leur précision
+                géographique maximale, hors données sensibles, via le bouton "accès public".
+                La création de compte est nécessaire uniquement pour demander
+                <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/wp-content/uploads/2024/05/acces_aux_donnees_sensibles_SINP_AURA-_VF2024.pdf" target="_blank">
+                    un accès à la localisation précise des données sensibles
+                </a>.
+            </p>
+            <p>
+                Les données et informations qui vous sont fournies dans le cadre de Biodiv'AURA
+                Expert ne sont pas exhaustives et peuvent donc s'avérer insuffisantes pour les
+                besoins spécifiques de votre étude. Une réactualisation de ces données dans le
+                cadre d'inventaires complémentaires est nécessaire.
+            </p>"""
+        required = false
+
+# Configuration générale du frontend
+[FRONTEND]
+    # Affiche la carte des 100 obs sur la page d'accueil
+    DISPLAY_MAP_LAST_OBS = false
+
+    # Durée de vie du cache des stats de la page d'accueil
+    # 864 000 = 10 jours
+    STAT_BLOC_TTL = 864000
+
+    # Affiche le composant 'custom/components/footer' sur la page d'accueil
+    DISPLAY_FOOTER = true
+
+    # Activer l'affichage des informations liées aux profils de taxons
+    ENABLE_PROFILES = true
+
+# Configuration cartographique
+[MAPCONFIG]
+    # Attention : les coordonnées sont au format [Y, X]
+    # Cf leaflet configuration (https://leafletjs.com/reference-1.4.0.html#latlng-l-latlng)
+    CENTER = [45.29619, 4.66072]
+    # Zoom par défaut
+    ZOOM_LEVEL = 8
+    # Zoom à partir duquel on peut pointer un relevé
+    ZOOM_LEVEL_RELEVE = 15
+    # Zoom appliqué sur la carte lorsque l'on clique sur une liste
+    ZOOM_ON_CLICK = 16
+    # Afficher la légende des couches de référence (WMS) dans le panneau de configuration de la carte
+    REF_LAYERS_LEGEND = true
+    # Configuration des fonds carto
+    [[MAPCONFIG.BASEMAP]]
+        name = "OpenStreetMap"
+        url = "//tile.openstreetmap.org/{z}/{x}/{y}.png"
+
+        [MAPCONFIG.BASEMAP.options]
+            attribution = 'Fond de carte & données par <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; les contributeurs & contributrices OpenStreetMap</a>, sous <a href="https://opendatacommons.org/licenses/odbl/1.0/" target="_blank">licence ODbL</a>.'
+            maxZoom = 22
+            maxNativeZoom = 19
+
+    [[MAPCONFIG.BASEMAP]]
+        name = "OpenTopoMap"
+        url = "//{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+
+        [MAPCONFIG.BASEMAP.options]
+            attribution = 'Fond de carte par <a href="https://opentopomap.org" target="_blank">OpenTopoMap</a>, sous <a href="https://creativecommons.org/licenses/by-sa/2.0/fr/" target="_blank">licence CC BY-SA</a>. Données <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; les contributeurs & contributrices OpenStreetMap</a>, sous <a href="https://opendatacommons.org/licenses/odbl/1.0/" target="_blank">licence ODbL</a> ; <a href="http://viewfinderpanoramas.org">SRTM</a>.'
+            maxZoom = 22
+            maxNativeZoom = 17
+
+    [[MAPCONFIG.BASEMAP]]
+        name = "IGN Ortho"
+        url = "https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&LAYER=HR.ORTHOIMAGERY.ORTHOPHOTOS&FORMAT=image/jpeg"
+        service = "wmts"
+
+        [MAPCONFIG.BASEMAP.options]
+            attribution = "&copy; IGN"
+            maxZoom = 22
+            maxNativeZoom = 19
+
+    [[MAPCONFIG.BASEMAP]]
+        name = "IGN Plan v2"
+        url = "https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&STYLE=normal&TILEMATRIXSET=PM&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&LAYER=GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2&FORMAT=image/png"
+        service = "wmts"
+
+        [MAPCONFIG.BASEMAP.options]
+            attribution = "&copy; IGN"
+            maxZoom = 22
+            maxNativeZoom = 19
+
+    # Couches cartographiques additionnelles
+    [[MAPCONFIG.REF_LAYERS]]
+        code = "relief_ombre_ign"
+        label = "Relief ombré (IGN)"
+        type = "wms"
+        activate = false
+        url = "https://data.geopf.fr/wms-r"
+        [MAPCONFIG.REF_LAYERS.params]
+            service = "WMS"
+            version = "1.3.0"
+            request = "GetMap"
+            layers = "ELEVATION.ELEVATIONGRIDCOVERAGE.SHADOW"
+            format = "image/png"
+            style= ""
+            transparent = true
+            crs = "EPSG:3857"
+
+    [[MAPCONFIG.REF_LAYERS]]
+        code = "limites_admin_ign"
+        label = "Limites administratives (IGN)"
+        type = "wms"
+        url = "https://data.geopf.fr/wms-r"
+        activate = false
+        [MAPCONFIG.REF_LAYERS.params]
+            service = "WMS"
+            version = "1.3.0"
+            request = "GetMap"
+            layers = "ADMINEXPRESS-COG.LATEST"
+            style = "normal"
+            format = "image/png"
+            crs = "CRS:84"
+            dpiMode = 7
+
+    [[MAPCONFIG.REF_LAYERS]]
+        code = "ign_cadastre"
+        label = "Cadastre (IGN)"
+        type = "wms"
+        activate = false
+        url = "https://data.geopf.fr/wms-r"
+        [MAPCONFIG.REF_LAYERS.params]
+            service = "WMS"
+            version = "1.3.0"
+            request = "GetMap"
+            layers = "CADASTRALPARCELS.PARCELLAIRE_EXPRESS"
+            format = "image/png"
+            transparent = true
+            crs = "EPSG:3857"
+
+    [[MAPCONFIG.REF_LAYERS]]
+        code = "brgm_geologie"
+        label = "Carte géologique (BRGM)"
+        type = "wms"
+        activate = false
+        url = "https://geoservices.brgm.fr/WMS-C/?"
+        [MAPCONFIG.REF_LAYERS.params]
+            layers = "GEOLOGIE"
+            format = "image/png"
+            transparent = true
+            opacity = 0.65
+
+    [[MAPCONFIG.REF_LAYERS]]
+        code = "ign_foret"
+        label = "Forêts (IGN BD Forêt)"
+        type = "wms"
+        activate = false
+        url = "https://data.geopf.fr/wms-v"
+        [MAPCONFIG.REF_LAYERS.params]
+            service = "WMS"
+            version = "1.3.0"
+            request = "GetMap"
+            layers = "LANDCOVER.FORESTINVENTORY.V2"
+            format = "image/png"
+            crs = "EPSG:3857"
+            transparent = true
+            opacity = 0.5
+
+    [[MAPCONFIG.REF_LAYERS]]
+        code = "hydro_sandre"
+        label = "Réseau hydrographique (Sandre/EauFrance)"
+        type = "wms"
+        activate = false
+        url = "https://services.sandre.eaufrance.fr/geo/sandre"
+        [MAPCONFIG.REF_LAYERS.params]
+            service = "WMS"
+            version = "1.3.0"
+            request = "GetMap"
+            layers = "CoursEau,PlanEau"
+            format = "image/png"
+            crs = "EPSG:3857"
+            transparent = true
+
+    # Zonages issus de la BDD locale GeoNature (type = "area")
+    [[MAPCONFIG.REF_LAYERS]]
+        code = "SINP"
+        label = "Territoire couvert (SINP)"
+        type = "area"
+        activate = false
+        [MAPCONFIG.REF_LAYERS.style]
+            color = "#000000"
+            fill = false
+            weight = 3
+
+    [[MAPCONFIG.REF_LAYERS]]
+        code = "APB"
+        label = "Arrêtés de Protection de Biotope (APB)"
+        type = "area"
+        activate = false
+        [MAPCONFIG.REF_LAYERS.style]
+            color = "#e6194b"
+            fill = true
+            fillOpacity = 0.1
+            weight = 2
+
+    [[MAPCONFIG.REF_LAYERS]]
+        code = "RNN"
+        label = "Réserves Naturelles Nationales (RNN)"
+        type = "area"
+        activate = false
+        [MAPCONFIG.REF_LAYERS.style]
+            color = "#911eb4"
+            fill = true
+            fillOpacity = 0.15
+            weight = 2
+
+    [[MAPCONFIG.REF_LAYERS]]
+        code = "RNR"
+        label = "Réserves Naturelles Régionales (RNR)"
+        type = "area"
+        activate = false
+        [MAPCONFIG.REF_LAYERS.style]
+            color = "#46f0f0"
+            fill = true
+            fillOpacity = 0.15
+            weight = 2
+
+    [[MAPCONFIG.REF_LAYERS]]
+        code = "SIC"
+        label = "Natura 2000 (SIC / DHFF)"
+        type = "area"
+        activate = false
+        [MAPCONFIG.REF_LAYERS.style]
+            color = "#3cb44b"
+            fill = true
+            fillOpacity = 0.1
+            weight = 2
+
+    [[MAPCONFIG.REF_LAYERS]]
+        code = "ZPS"
+        label = "Natura 2000 (ZPS / Oiseaux)"
+        type = "area"
+        activate = false
+        [MAPCONFIG.REF_LAYERS.style]
+            color = "#ffe119"
+            fill = true
+            fillOpacity = 0.1
+            weight = 2
+
+#   [[MAPCONFIG.REF_LAYERS]]
+#        code = "ZNIEFF1"
+#        label = "ZNIEFF Type 1"
+#        type = "area"
+#        activate = false
+#        [MAPCONFIG.REF_LAYERS.style]
+#            color = "#f58231"
+#            fill = false
+#            weight = 2
+#
+#    [[MAPCONFIG.REF_LAYERS]]
+#        code = "ZNIEFF2"
+#        label = "ZNIEFF Type 2"
+#        type = "area"
+#        activate = false
+#        [MAPCONFIG.REF_LAYERS.style]
+#            color = "#f032e6"
+#            fill = false
+#            weight = 1.5
+#            dashArray = "5, 5"
+
+# CRITICAL: 50 ; ERROR: 40 ; WARNING: 30 ; INFO: 20 ; DEBUG: 10 ; NOTSET: 0
+[SERVER]
+    LOG_LEVEL = 20
+
+# Configuration de la Synthese
+[SYNTHESE]
+    # Liste des entités géographiques sur lesquelles les filtres géographiques de la synthese s'appuient
+    # (id_area = id de l'entité géo, table ref_geo.bib_areas_types).
+    AREA_FILTERS = [
+        { label = "Communes", type_code = "COM" },
+        { label = "Départements", type_code = "DEP" },
+    ]
+    # Nombre d'observation maximum à afficher sur la carte après une recherche
+    NB_MAX_OBS_MAP = 100000
+    # Nombre des dernières observations affichées par défaut quand on arrive sur la synthese
+    NB_LAST_OBS = 0
+    # Colonne à afficher par défaut sur la liste des résultats de la synthese
+    # Choisir le champ 'prop' parmis les colonnes suivante
+    # (id_synthese, date_min, cd_nom, lb_nom, nom_vern_or_lb_nom, st_asgeojson, observers, dataset_name, url_source)
+    LIST_COLUMNS_FRONTEND = [
+        { prop = "lb_nom", name = "Taxon" },
+        { prop = "date_min", name = "Date début" },
+        { prop = "observers", name = "Observateurs" },
+        { prop = "dataset_name", name = "Jeu de données" }
+    ]
+    # Affiche (=true) ou masque (=false) l'arbre de recherche taxonomique
+    # dans la recherche taxonomique avancée.
+    DISPLAY_TAXON_TREE = false
+
+    # Nombre max d'observation dans les exports
+    # WARNING : Au 2020-11-12, un bug empêche d'avoir une valeur différente pour les export.
+    NB_MAX_OBS_EXPORT = 100000
+
+    # Noms des colonnes obligatoires de la vue ``gn_synthese.v_synthese_for_export``
+    # EXPORT_ID_SYNTHESE_COL = "id_synthese"
+    # EXPORT_ID_DATASET_COL = "jdd_id"
+    # EXPORT_ID_DIGITISER_COL = "id_digitiser"
+    # EXPORT_OBSERVERS_COL = "observateurs"
+    # EXPORT_GEOJSON_4326_COL = "geojson_4326"
+    # EXPORT_GEOJSON_LOCAL_COL = "geojson_local"
+
+    # Noms des colonnes obligatoires de la vue ``gn_synthese.v_metadata_for_export``
+    EXPORT_METADATA_ID_DATASET_COL = "jdd_id"
+
+    # Champs à afficher dans l'export
+    # Voir les noms des champs de la ``vue gn_synthese.v_synthese_for_export``
+    EXPORT_COLUMNS = [
+        "uuid_perm_sinp",
+        "uuid_perm_grp_sinp",
+        "jdd_nom",
+        "jdd_uuid",
+        "fournisseur",
+        "observateurs",
+        "determinateurs",
+        "cd_ref",
+        "nom_valide",
+        "nom_vernaculaire",
+        "classe",
+        "famille",
+        "ordre",
+        "statut_observation",
+        "nombre_min",
+        "nombre_max",
+        "date_debut",
+        "date_fin",
+        "geojson_4326",
+        "x_centroid_4326",
+        "y_centroid_4326",
+        "precision_geographique",
+        "communes",
+        "alti_min",
+        "technique_observation",
+        "stade_vie",
+        "statut_biologique",
+        "sexe",
+        "comportement",
+        "type_source",
+        "type_precision",
+        "sensibilite",
+        "confidentialite",
+        "floutage",
+        "statut_validation",
+        "statut_pn",
+        "statut_pr",
+        "statut_pd",
+        "statut_lrn",
+        "statut_lrr",
+        "statut_lrd",
+        "statut_zdet",
+        "statut_dh",
+        "statut_do",
+    ]
+    AREA_AGGREGATION_ENABLED = true
+    AREA_AGGREGATION_TYPE = "M5"
+    AREA_AGGREGATION_BY_DEFAULT = false
+    # Liste de 'id_attribut' TaxHub à afficher dans :
+    # - la modale du détail d'une observation
+    # - les filtres taxonomique avancés
+    # 109: Listes flore thématiques
+    # 110: Flore forestière prioritaire
+    # 111: Espèces exotiques envahissantes
+    ID_ATTRIBUT_TAXHUB = [109,111]
+
+[SYNTHESE.DEFAULT_FILTERS]
+    # Statuts de validation : Certain, Probable
+    # Il faut bien les renseigner en tant que chaîne de caractère (et non en tant que nombre)
+    cd_nomenclature_valid_status = ['0', '1', '2']
+    # Seulement les données de présence
+    cd_nomenclature_observation_status = ['Pr']

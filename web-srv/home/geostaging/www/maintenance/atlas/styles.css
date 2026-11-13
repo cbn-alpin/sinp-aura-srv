@@ -1,0 +1,4 @@
+.container {
+	background: url('background-atlas.webp') no-repeat center center fixed;
+	background-size: cover;
+}

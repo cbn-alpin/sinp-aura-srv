@@ -1,0 +1,133 @@
+{% block logohome %}
+    <!-- Carousel avec logos en page d'accueil -->
+    <div class="card mt-4">
+        <div class="card-body">
+            <h3 class="card-title">
+                <i class="fas fa-handshake icon-color-title">&nbsp;</i>
+                {{ _('home.partners') }}
+            </h3>
+        </div>
+        <div class="panel-body" style="background-color: white;">
+            <div class="row" style="padding: 1%;">
+                <div class="container-fluid" style="padding: 0px 2% 0px 2%;">
+                    <section class="partner-logos slidepartenaireindexr">
+                        <a href="http://www.auvergne-rhone-alpes.developpement-durable.gouv.fr/"
+                            class="slidepartenaireindex"
+                            target="_blank"
+                            title="Accéder au site de l'Observatoire de la Biodiversité en Auvergne-Rhône-Alpes">
+                            <img
+                                src="{{url_for('static', filename='custom/images/logo-orb.png') }}"
+                                alt="Logo ORB Auvergne-Rhône-Alpes" />
+                        </a>
+
+                        <a href="http://www.auvergne-rhone-alpes.developpement-durable.gouv.fr/"
+                            class="slidepartenaireindex"
+                            target="_blank"
+                            title="Accéder au site de la DREAL Auvergne-Rhône-Alpes">
+                            <img
+                                src="{{url_for('static', filename='custom/images/logo-dreal.png') }}"
+                                alt="Logo DREAL Auvergne-Rhône-Alpes" />
+                        </a>
+
+                        <a href="https://www.auvergnerhonealpes.fr/"
+                            class="slidepartenaireindex"
+                            target="_blank"
+                            title="Accéder au site de la Région Auvergne-Rhône-Alpes">
+                            <img
+                                src="{{url_for('static', filename='custom/images/logo-aura.png') }}"
+                                alt="Logo AURA" />
+                        </a>
+
+                        <a href="https://ofb.gouv.fr/"
+                            class="slidepartenaireindex"
+                            target="_blank"
+                            title="Accéder au site de l'Office Français de la Biodiversité">
+                            <img
+                                src="{{url_for('static', filename='custom/images/logo-ofb.png') }}"
+                                alt="Logo OFB" />
+                        </a>
+
+                        <a href="https://cbn-alpin.fr/"
+                            class="slidepartenaireindex"
+                            target="_blank"
+                            title="Accéder au site du CBN Alpin">
+                            <img
+                                src="{{url_for('static', filename='custom/images/logo-cbna.png') }}"
+                                alt="Logo CBN Alpin" />
+                        </a>
+
+                        <a href="https://cbnmc.fr/"
+                            class="slidepartenaireindex"
+                            target="_blank"
+                            title="Accéder au site du CBN du Massif Central">
+                            <img
+                                src="{{url_for('static', filename='custom/images/logo-cbnmc.png') }}"
+                                alt="Logo CBN du Massif Central" />
+                        </a>
+
+                        <a href="https://flavia-ape.fr/"
+                            class="slidepartenaireindex"
+                            target="_blank"
+                            title="Accéder au site de Flavia APE">
+                            <img
+                                src="{{url_for('static', filename='custom/images/logo-flavia.png') }}"
+                                alt="Logo Flavia APE" />
+                        </a>
+
+                        <a href="https://auvergne-rhone-alpes.lpo.fr/"
+                            class="slidepartenaireindex"
+                            target="_blank"
+                            title="Accéder au site de la LPO Auvergne-Rhône-Alpes">
+                            <img
+                                src="{{url_for('static', filename='custom/images/logo-lpo.png') }}"
+                                alt="Logo LPO AURA" />
+                        </a>
+
+                        <a href="https://www.chasseauvergnerhonealpes.com/"
+                            class="slidepartenaireindex"
+                            target="_blank"
+                            title="Accéder au site de la FRC Auvergne-Rhône-Alpes">
+                            <img
+                                src="{{url_for('static', filename='custom/images/logo-frc.png') }}"
+                                alt="Logo FRC AURA" />
+                        </a>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.partner-logos').slick({
+                infinite: true,
+                dots: false,
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                centerMode: false,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+{% endblock %}
