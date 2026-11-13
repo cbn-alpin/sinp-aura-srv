@@ -1,0 +1,151 @@
+/* GÉNÉRAL */
+:root {
+	--green: #97BF0D;
+	--blue: #30a5ff;
+	--cyan: #1ebfae;
+	--orange: #ffb53e;
+	--cyan: #30a5ff;
+	--red: red;
+	--main-color: #8031A7;
+	--second-color: #CC1FD3;
+}
+a {
+	color: #8031A7;
+}
+a:hover {
+	color: #CC1FD3;
+}
+a.btn.btn-default:hover{
+	background-color: #F7F9EC !important;
+}
+body[page-name="photos"] .container-fluid {
+	min-height: 93vh;
+}
+
+/* NAVBAR */
+.navbar {
+	background: #323233 !important;
+	border-bottom-color: #8031A7;
+}
+.navbar-brand {
+	color: white !important;
+    /*font-family: 'Baloo Bhaina', cursive;*/
+}
+.navbar .navbar-brand .logoStructure {
+	height: 60px;
+	margin: -5px 0;
+}
+/* SIDEBAR */
+.sidebar {
+	background: #323233 !important;
+}
+#sidebar_menu li:hover {
+	background-color: #8031A7;
+}
+
+/* INTRODUCTION */
+.textIntroduction h1 {
+    /*font-family: 'Arima Madurai', cursive;*/
+    color: #8031A7;
+	line-height: 40px;
+}
+
+/* PRESENTATION */
+.presentation .panel.panel-default {
+	padding: 0 15px 15px 15px;
+}
+.presentation h2, .presentation h3 {
+    /*font-family: 'Arima Madurai', cursive;*/
+    color: #8031A7;
+}
+
+/* FOOTER */
+.footer {
+	padding-left: 75px;
+	padding-right: 15px;
+	margin-left: 0;
+    margin-top: 25px;
+}
+.footer .img-thumbnail {
+	margin: .25rem;
+	height: auto;
+    max-width: 100%;
+	border-color: white;
+}
+.footer .img-thumbnail:hover {
+	border-color: #8031A7;
+}
+.footer .text-muted {
+	text-transform: none !important;
+}
+.footer .logo-title {
+    font-size: 15px;
+    font-weight: 600;
+	color: #54595F;
+}
+.footer .col-logos {
+	padding: 15px;
+}
+/* Medium devices (desktops, 992px and up) = @screen-md-min */
+@media (min-width: 992px) {
+	.footer .col-pilots {
+		border-left: #8031A7 1px solid;
+		border-right: #8031A7 1px solid;
+	}
+}
+.footer .col-pilots .logo-title {
+	padding: 0 5px;
+}
+.footer .logos-pilots .col-xs-4 {
+	padding-right: 5px !important;
+	padding-left: 5px !important;
+	width: 32%;
+	line-height: 150px;
+}
+.footer .logos-operators .col-xs-2 {
+	padding-right: 5px !important;
+	padding-left: 5px !important;
+	width: 19.6%;
+	line-height: 150px;
+}
+.footer .logos-panel {
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+	margin: 5px;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: white;
+}
+
+/* FICHE ESPECE */
+
+/* Infobulles graphiques */
+.morris-hover-point {
+	color: #8031A7 !important;
+}
+.glossarizer_replaced {
+	color: #8031A7;
+}
+.affix {
+    top: 60px; /* Set the top position of pinned element */
+}
+
+/* Modales pied de page */
+#modalCredits, #modalMentions {
+    max-width: none;
+    text-align: left;
+}
+
+#modalMentions address {
+    border: 1px solid #ddd;
+    border-left: 5px solid #ddd;
+    border-radius: 5px;
+    background-color: #eee;
+    padding: 10px 20px;
+}
+#modalMentions blockquote {
+    font-family: 'Courier New', Courier, monospace;
+    border: 1px solid #eee;
+    border-left: 5px solid #eee;
+    border-radius: 5px;
+    padding: 10px 20px;
+}

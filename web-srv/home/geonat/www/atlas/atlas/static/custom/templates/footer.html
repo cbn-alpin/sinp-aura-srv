@@ -1,0 +1,212 @@
+<footer class="footer">
+    <p>
+        <a href="{{url_for('main.index')}}">
+            {{ _('home') }}
+        </a> |
+        <a href="https://www.biodiversite-auvergne-rhone-alpes.fr/" target="_blank">
+            Site du SINP AURA
+        </a> |
+        <a role="button"
+            href="{{url_for('static', filename='custom/templates/credits.html') }}"
+            data-bs-toggle="modal"
+            data-bs-target="#modalCredits"
+        >
+            {{ _('credits') }}
+        </a> |
+        <a role="button"
+            href="{{url_for('static', filename='custom/templates/mentions-legales.html') }}"
+            data-bs-toggle="modal"
+            data-bs-target="#modalMentions"
+        >
+            {{ _('legal') }}
+        </a>
+        {% if configuration.AFFICHAGE_RGPD and configuration.OREJIME_APPS | length > 0 %}
+            |
+            <a href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#modalPersonalData"
+            >
+                {{ _('personal_data') }}
+            </a>
+            |
+            <a id="preferences-cookies" href="#" onclick="orejime.show()">
+                {{ _('preferences_cookies') }}
+            </a>
+        {% endif %}
+    </p>
+
+    <div class="logos-panel">
+        <div class="row">
+            <div class="col-xs-12 col-md-2 col-logos col-orb">
+                <a href="https://www.auvergne-rhone-alpes.developpement-durable.gouv.fr/"
+                    target="_blank"
+                    title="Accéder au site de l'Observatoire de la Biodiversité en Auvergne-Rhône-Alpes">
+                    <img class="img-thumbnail"
+                        src="{{url_for('static', filename='custom/images/logo-orb.png') }}"
+                        alt="Logo ORB Auvergne-Rhône-Alpes" />
+                </a>
+            </div>
+            <div class="col-xs-12 col-md-4 col-logos col-pilots">
+                <div class="row logo-title">
+                    Piloté par la DREAL, la Région Auvergne-Rhône-Alpes et l'Office Français de la Biodiversité
+                </div>
+
+                <div class="row logos-pilots">
+                    <a href="https://www.auvergne-rhone-alpes.developpement-durable.gouv.fr/"
+                        class="col-xs-4"
+                        target="_blank"
+                        title="Accéder au site de la DREAL Auvergne-Rhône-Alpes">
+                        <img class="img-thumbnail"
+                            src="{{url_for('static', filename='custom/images/logo-dreal.png') }}"
+                            alt="Logo DREAL Auvergne-Rhône-Alpes" />
+                    </a>
+
+                    <a href="https://www.auvergnerhonealpes.fr/"
+                        class="col-xs-4"
+                        target="_blank"
+                        title="Accéder au site de la Région Auvergne-Rhône-Alpes">
+                        <img class="img-thumbnail"
+                            src="{{url_for('static', filename='custom/images/logo-aura.png') }}"
+                            alt="Logo AURA" />
+                    </a>
+
+                    <a href="https://ofb.gouv.fr/"
+                        class="col-xs-4"
+                        target="_blank"
+                        title="Accéder au site de l'Office Français de la Biodiversité">
+                        <img class="img-thumbnail"
+                            src="{{url_for('static', filename='custom/images/logo-ofb.png') }}"
+                            alt="Logo OFB" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 col-logos col-operators">
+                <p class="logo-title">Opéré par les animateurs thématiques :</p>
+
+                <div class="row logos-operators">
+                    <a href="https://cbn-alpin.fr/"
+                        class="col-xs-2"
+                        target="_blank"
+                        title="Accéder au site du CBN Alpin">
+                        <img class="img-thumbnail"
+                            src="{{url_for('static', filename='custom/images/logo-cbna.png') }}"
+                            alt="Logo CBN Alpin" />
+                    </a>
+                    <a href="https://www.cbnmc.fr/"
+                        class="col-xs-2"
+                        target="_blank"
+                        title="Accéder au site du CBN du Massif Central">
+                        <img class="img-thumbnail"
+                            src="{{url_for('static', filename='custom/images/logo-cbnmc.png') }}"
+                            alt="Logo CBN du Massif Central" />
+                    </a>
+                    <a href="https://www.flavia-ape.fr/"
+                        class="col-xs-2"
+                        target="_blank"
+                        title="Accéder au site de Flavia APE">
+                        <img class="img-thumbnail"
+                            src="{{url_for('static', filename='custom/images/logo-flavia.png') }}"
+                            alt="Logo Flavia APE" />
+                    </a>
+                    <a href="https://auvergne-rhone-alpes.lpo.fr/"
+                        class="col-xs-2"
+                        target="_blank"
+                        title="Accéder au site de la LPO Auvergne-Rhône-Alpes">
+                        <img class="img-thumbnail"
+                            src="{{url_for('static', filename='custom/images/logo-lpo.png') }}"
+                            alt="Logo LPO AURA" />
+                    </a>
+                    <a href="https://www.chasseauvergnerhonealpes.com/"
+                        class="col-xs-2"
+                        target="_blank"
+                        title="Accéder au site de la FRC Auvergne-Rhône-Alpes">
+                        <img class="img-thumbnail"
+                            src="{{url_for('static', filename='custom/images/logo-frc.png') }}"
+                            alt="Logo FRC AURA" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="clear">
+        <p class="text-muted">
+            {{configuration.NOM_APPLICATION}} - {{configuration.STRUCTURE}},
+            2019-{{ now.year }}
+            <br/>
+            {{ _('powered.by') }}
+            <a href="https://github.com/PnX-SI/GeoNature-atlas" target="_blank">GeoNature-atlas</a>,
+            déployé par le
+            <a href="https://cbn-alpin.fr/" target="_blank">
+                Conservatoire Botanique National Alpin (CBNA)
+            </a>
+        </p>
+    </div>
+</footer>
+
+<!-- Modal: Crédits -->
+<div class="modal fade text-justify" id="modalCredits" tabindex="-1" aria-labelledby="modalCreditsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalCreditsLabel">{{ _('credits') }}</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body credits">
+                {% include 'static/custom/templates/credits.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Mentions légales -->
+<div class="modal fade text-justify" id="modalMentions" tabindex="-1" aria-labelledby="modalMentionsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalMentionsLabel">{{ _('legal') }}</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body legal-notices">
+                {% include 'static/custom/templates/mentions-legales.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Données personnelles -->
+{% if configuration.AFFICHAGE_RGPD %}
+    <div class="modal fade text-justify" id="modalPersonalData" tabindex="-1" aria-labelledby="modalPersonalDataLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalPersonalDataLabel">{{ _('personal_data') }}</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body personal-data">
+                    {% include 'static/custom/templates/personal-data.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<!-- BLOC TRACEURS / ANALYSES VIZA COOKIES -->
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setExcludedQueryParams", ["account","accountnum","address","address1","address2","address3","addressline1","addressline2","adres","adresse","adresse1","adresse2","adresse3","adresse_email","adresseemail","adressepostale","age","alter","auth","authpw","bic","billingaddress","billingaddress1","billingaddress2","calle","cardnumber","carte","cartebancaire","carteidentite","cb","cc","ccc","cccsc","cccvc","cccvv","ccexpiry","ccexpmonth","ccexpyear","ccname","ccnumber","cctype","cell","cellphone","city","civilite","civilit\u00e9","cle","clientid","clientsecret","cl\u00e9","codepostal","company","consumerkey","consumersecret","contrasenya","contrase\u00f1a","courriel","cp","creditcard","creditcardnumber","cvc","cvv","datedenaissance","dateexpiration","datenaissance","dateofbirth","debitcard","departement","direcci\u00f3n","dob","domain","d\u00e9partement","ebost","email","emailaddress","emailadresse","entreprise","epos","epost","eposta","exp","expiration","familyname","firma","firstname","formlogin","fullname","gender","genre","geschlecht","gst","gstnumber","handynummer","has\u0142o","heslo","iban","ibanaccountnum","ibanaccountnumber","id","identifiant","identifier","identitenationale","indirizzo","kartakredytowa","kennwort","keyconsumerkey","keyconsumersecret","konto","kontonr","kontonummer","kredietkaart","kreditkarte","kreditkort","lastname","login","mail","mdp","mobiili","mobile","mobilne","mot_de_passe","motdepasse","nachname","name","nationalite","nickname","nom","nomcomplet","nomdefamille","nomfamille","nss","numero_fiscal","numerocarte","numerocarteidentite","numerocompte","numerodecarte","numerofiscal","numeroidentite","numeromobile","numeropasseport","numerosecuritesociale","numerotelephone","numerotva","numfiscal","numsecu","numtva","osoite","parole","pass","passeport","passord","password","passwort","pasword","paswort","paword","pays","phone","pin","plz","portable","postalcode","postcode","postleitzahl","prenom","privatekey","pr\u00e9nom","publickey","pw","pwd","pword","pwrd","questionsecrete","region","reponsesecrete","rib","rue","secret","secretcl\u00e9","secretq","secretquestion","securitesociale","sexe","shippingaddress","shippingaddress1","shippingaddress2","signature","siren","siret","socialsec","socialsecuritynumber","societe","socsec","sokak","ssn","steuernummer","strasse","street","surname","swift","tax","taxnumber","tel","telefon","telefonnr","telefonnummer","telefono","telephone","titre","token","token_auth","tokenauth","tva","t\u00e9l\u00e9phone","ulica","user","username","utilisateur","vat","vatnumber","via","ville","voie","vorname","wachtwoord","wagwoord","webhooksecret","website","zip","zipcode"]]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://analytics.biodiversite-aura.net/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
